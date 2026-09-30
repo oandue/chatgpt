@@ -1,0 +1,10 @@
+{
+  "name": "fde-demo",
+  "version": "0.1.0",
+  "private": true,
+  "description": "FDE 특허·연구 작업공간 — 가상 데이터 의뢰인 시연 (단일 HTML, 설치 불필요)",
+  "scripts": {
+    "test": "node tests.cjs",
+    "e2e": "node e2e.cjs"
+  }
+}

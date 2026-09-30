@@ -1,0 +1,1531 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FDE 가상 데이터 시연</title>
+<style>
+:root{
+  --bg:#f5f6f8; --panel:#ffffff; --ink:#1d2330; --muted:#5b6474; --line:#dde1e8;
+  --accent:#2753c7; --accent-soft:#e8eefc; --warn:#9a5b00; --warn-soft:#fff4e0;
+  --ok:#1f7a4d; --ok-soft:#e5f5ec; --risk:#a8323e; --risk-soft:#fbe9eb;
+  --violet:#6b3fb5; --violet-soft:#f1eafb; --bar:#4a74e0; --bar2:#9aa9c8;
+  --radius:10px; --shadow:0 1px 3px rgba(20,30,50,.08);
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font:15px/1.55 -apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo","Malgun Gothic","Noto Sans KR",sans-serif;}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+a{color:var(--accent)}
+:focus-visible{outline:3px solid #8fb0ff;outline-offset:2px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* 상단 */
+header.top{position:sticky;top:0;z-index:20;background:var(--panel);border-bottom:1px solid var(--line)}
+.top-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 16px}
+.brand{font-weight:700;font-size:16px;margin-right:auto}
+.brand small{display:block;font-weight:400;color:var(--muted);font-size:12px}
+.baseline-badge{background:var(--accent-soft);color:var(--accent);border-radius:999px;padding:4px 12px;font-size:13px;font-weight:600;white-space:nowrap}
+.role-switch{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.role-switch button{border:0;background:transparent;padding:6px 10px;font-size:13px}
+.role-switch button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.demo-banner{background:var(--warn-soft);color:var(--warn);font-size:13px;padding:6px 16px;border-top:1px solid #f1dfbd}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:7px 12px;font-size:14px}
+.btn:hover{border-color:#b9c1cf}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.btn.primary:hover{background:#1f45a8}
+.btn.small{padding:4px 9px;font-size:13px}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.link{border:0;background:none;color:var(--accent);padding:0;text-decoration:underline;font-size:inherit}
+
+/* 레이아웃 */
+.layout{display:grid;grid-template-columns:210px minmax(0,1fr);gap:0;min-height:calc(100vh - 100px)}
+nav.side{background:var(--panel);border-right:1px solid var(--line);padding:12px 8px;position:sticky;top:var(--head-h,98px);align-self:start;height:calc(100vh - var(--head-h,98px));overflow-y:auto}
+nav.side button{display:flex;justify-content:space-between;align-items:center;width:100%;text-align:left;border:0;background:transparent;padding:9px 12px;border-radius:8px;margin-bottom:2px}
+nav.side button[aria-current="page"]{background:var(--accent-soft);color:var(--accent);font-weight:600}
+nav.side .fde-only{margin-top:10px;border-top:1px dashed var(--line);padding-top:10px}
+.count{background:var(--risk);color:#fff;border-radius:999px;font-size:11px;padding:0 7px;min-width:18px;text-align:center}
+main{padding:20px 24px 120px;max-width:1080px;width:100%}
+h1{font-size:22px;margin:0 0 4px}
+h2{font-size:17px;margin:24px 0 10px}
+h3{font-size:15px;margin:0 0 6px}
+.lead{color:var(--muted);margin:0 0 16px}
+.panel{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);margin-bottom:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.spacer{flex:1}
+.note{background:#f7f8fa;border-left:3px solid #c3cad6;padding:8px 12px;font-size:13px;color:var(--muted);border-radius:4px;margin:8px 0}
+.note.warn{background:var(--warn-soft);border-color:#e0b25e;color:var(--warn)}
+.note.risk{background:var(--risk-soft);border-color:#d88891;color:var(--risk)}
+.note.ok{background:var(--ok-soft);border-color:#7cc39f;color:var(--ok)}
+
+/* 배지 */
+.badge{display:inline-block;border-radius:6px;padding:1px 8px;font-size:12px;font-weight:600;white-space:nowrap}
+.b-calc{background:var(--ok-soft);color:var(--ok)}
+.b-explain{background:var(--violet-soft);color:var(--violet)}
+.b-review{background:var(--risk-soft);color:var(--risk)}
+.b-pending{background:var(--warn-soft);color:var(--warn)}
+.b-neutral{background:#eef0f4;color:var(--muted)}
+.b-info{background:var(--accent-soft);color:var(--accent)}
+.chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:#fafbfc;border-radius:999px;padding:2px 10px;font-size:12.5px}
+.chip button{border:0;background:none;padding:0 0 0 2px;color:var(--muted);font-size:14px;line-height:1}
+.doc-chip{border:1px solid #c9d5f3;background:var(--accent-soft);color:var(--accent);border-radius:6px;padding:2px 8px;font-size:12.5px;font-family:ui-monospace,Menlo,Consolas,monospace}
+
+/* 카드 목록 */
+.card-item{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px;box-shadow:var(--shadow)}
+.card-item:hover{border-color:#a9b6d3}
+.card-item .q{font-weight:600;margin:6px 0}
+
+/* 물어보기 */
+.condbar{position:sticky;top:var(--head-h,98px);z-index:5;background:var(--bg);padding:8px 0}
+.thread{display:flex;flex-direction:column;gap:12px}
+.msg-user{align-self:flex-end;background:var(--ink);color:#fff;border-radius:14px 14px 2px 14px;padding:8px 14px;max-width:80%}
+.msg-bot{background:var(--panel);border:1px solid var(--line);border-radius:var(--radius);padding:14px 16px;box-shadow:var(--shadow)}
+.msg-bot .sec{margin-top:10px}
+.msg-bot .sec-title{font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.02em;margin-bottom:4px}
+.askbox{position:sticky;bottom:0;background:var(--bg);padding:12px 0 8px}
+.askbox form{display:flex;gap:8px}
+.askbox input{flex:1;border:1px solid #c7ceda;border-radius:10px;padding:10px 12px;background:var(--panel)}
+.examples{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.examples button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:3px 11px;font-size:13px}
+
+/* 표·차트 */
+table{border-collapse:collapse;width:100%;font-size:13.5px}
+th,td{border-bottom:1px solid var(--line);padding:5px 8px;text-align:left;vertical-align:top}
+th{background:#f7f8fa;font-weight:600}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+.tablewrap{overflow-x:auto}
+.chart{width:100%;max-width:640px;height:auto;display:block}
+.chart text{font-size:11px;fill:var(--muted)}
+.chart .val{fill:var(--ink);font-weight:600}
+.mcell{text-align:center}
+.mcell.zero{background:#fdf1e2;color:var(--warn);font-weight:700}
+.mcell.low{background:#fff9ef}
+.diff-up{color:var(--ok);font-weight:600}
+.diff-down{color:var(--risk);font-weight:600}
+
+/* 서랍 */
+.drawer-bg{position:fixed;inset:0;background:rgba(15,20,30,.35);z-index:40}
+.drawer{position:fixed;top:0;right:0;bottom:0;width:min(560px,100%);background:var(--panel);z-index:41;overflow-y:auto;padding:18px 20px 40px;box-shadow:-4px 0 18px rgba(0,0,0,.15)}
+.drawer .close{position:sticky;top:0;float:right}
+.quote{background:#fbfaf6;border:1px solid #ece6d6;border-radius:8px;padding:10px 12px;font-size:13.5px;margin:6px 0}
+dl.kv{display:grid;grid-template-columns:120px 1fr;gap:4px 10px;margin:8px 0;font-size:13.5px}
+dl.kv dt{color:var(--muted)}
+dl.kv dd{margin:0}
+
+/* 가이드 */
+.guide{position:fixed;right:16px;bottom:16px;z-index:30;width:min(380px,calc(100% - 32px));background:var(--ink);color:#fff;border-radius:12px;padding:14px 16px;box-shadow:0 8px 28px rgba(0,0,0,.25)}
+.guide h3{color:#fff}
+.guide p{margin:6px 0 10px;font-size:13.5px;color:#d6dbe6}
+.guide .btn{background:transparent;color:#fff;border-color:#56607a}
+.guide .btn.primary{background:#fff;color:var(--ink);border-color:#fff}
+.guide .steps{font-size:12px;color:#aab3c5}
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:20px;z-index:50;background:#222a38;color:#fff;padding:9px 16px;border-radius:8px;font-size:14px;max-width:calc(100% - 32px)}
+textarea,input[type=text],input[type=date],select{border:1px solid #c7ceda;border-radius:8px;padding:7px 9px;background:var(--panel);width:100%}
+label.f{display:block;font-size:13px;color:var(--muted);margin:8px 0 3px}
+
+@media (max-width:820px){
+  .layout{grid-template-columns:1fr}
+  header.top{position:static}
+  nav.side{display:flex;overflow-x:auto;gap:4px;border-right:0;border-bottom:1px solid var(--line);padding:6px 8px;position:sticky;top:0;z-index:15;height:auto;align-self:auto}
+  nav.side button{width:auto;white-space:nowrap;margin:0;padding:7px 10px}
+  nav.side .fde-only{margin:0;border:0;padding:0;display:flex}
+  main{padding:14px 16px 140px}
+  .grid2,.grid3{grid-template-columns:1fr}
+  .condbar{position:static}
+  .brand{width:100%}
+  dl.kv{grid-template-columns:96px 1fr}
+}
+</style>
+</head>
+<body>
+<div id="app" aria-live="polite"></div>
+<div id="overlay"></div>
+
+<!-- ===================================================================
+     1. 가상 데이터 (모든 문헌·출원인·과제·보고서·검토 의견은 가상입니다)
+     =================================================================== -->
+<script id="fde-data">
+(function (global) {
+  'use strict';
+  const SUBS = { T1: '무공구 상판 교체', T2: '흔들림 억제', T3: '모듈 결합' };
+  const MECHS = ['레버', '쐐기', '탄성', '자석'];
+  const COUNTRIES = { KR: '한국', US: '미국', JP: '일본', EP: '유럽', CN: '중국' };
+  const LEVELS = { H: '높음', M: '보통', L: '낮음' };
+  const APPLICANTS = {
+    NURI: '누리가구(가상)', HANG: '한결모듈(가상)', DAON: '다온하드웨어(가상)',
+    ORBI: 'Orbis Furniture(가상)', MIRE: '미래리빙(가상)', KEST: 'Kestrel Home(가상)'
+  };
+
+  // [패밀리ID, 세부분류, 결합수단, 출원인, 벤치마킹가치, 개발관련성, 권리검토필요도, 제목, 문헌[[ID, 공개연도, 'C'=후보]]]
+  const FAMILY_TABLE = [
+    ['VF-01', 'T1', '레버', 'NURI', 'H', 'H', 'M', '레버 회동으로 상판 걸림을 해제하는 무공구 교체형 테이블', [['DEMO-KR-0001', 2020], ['DEMO-US-0001', 2021]]],
+    ['VF-02', 'T1', '쐐기', 'HANG', 'M', 'H', 'H', '쐐기 삽입식 상판 고정 구조', [['DEMO-KR-0002', 2020], ['DEMO-JP-0001', 2021]]],
+    ['VF-03', 'T2', '쐐기', 'DAON', 'H', 'H', 'H', '경사 쐐기로 프레임 유격을 메우는 흔들림 억제 장치', [['DEMO-KR-0003', 2021], ['DEMO-US-0002', 2022], ['DEMO-EP-0003', 2025, 'C']]],
+    ['VF-04', 'T3', '자석', 'ORBI', 'M', 'M', 'L', '자석 정렬부를 갖는 확장형 수납 모듈', [['DEMO-KR-0004', 2021], ['DEMO-EP-0001', 2022]]],
+    ['VF-05', 'T1', '탄성', 'MIRE', 'M', 'M', 'L', '탄성 클립으로 상판을 착탈하는 책상', [['DEMO-KR-0005', 2022], ['DEMO-CN-0001', 2023]]],
+    ['VF-06', 'T2', '탄성', 'DAON', 'H', 'H', 'M', '탄성 패드로 다리 진동을 흡수하는 가구 프레임', [['DEMO-KR-0006', 2022], ['DEMO-US-0003', 2023]]],
+    ['VF-07', 'T3', '레버', 'HANG', 'M', 'M', 'M', '레버 잠금식 모듈 연결 브래킷', [['DEMO-KR-0007', 2023], ['DEMO-JP-0002', 2024]]],
+    ['VF-08', 'T2', '쐐기', 'NURI', 'M', 'H', 'H', '조절 쐐기를 이용한 선반 흔들림 방지 구조', [['DEMO-KR-0008', 2023], ['DEMO-US-0004', 2024]]],
+    ['VF-09', 'T1', '자석', 'ORBI', 'L', 'L', 'L', '자석 흡착식 교체 상판', [['DEMO-US-0005', 2020]]],
+    ['VF-10', 'T3', '쐐기', 'KEST', 'M', 'L', 'M', '쐐기 슬롯으로 결합되는 조립식 모듈 가구', [['DEMO-EP-0002', 2022]]],
+    ['VF-11', 'T2', '레버', 'KEST', 'L', 'M', 'L', '레버 조임식 프레임 강성 보강 장치', [['DEMO-CN-0002', 2024]]],
+    ['VF-12', 'T3', '자석', 'ORBI', 'M', 'M', 'L', '자석 커넥터를 갖는 모듈형 벽면 수납', [['DEMO-US-0006', 2025]]],
+    ['VF-13', 'T1', '레버', 'NURI', 'H', 'H', 'H', '원터치 레버를 갖는 상판 교체형 작업대', [['DEMO-KR-0009', 2023], ['DEMO-KR-0010', 2024], ['DEMO-KR-0011', 2025]]],
+    ['VF-14', 'T2', '쐐기', 'DAON', 'H', 'H', 'H', '이중 쐐기 구조를 갖는 흔들림 억제 테이블 다리', [['DEMO-KR-0012', 2024], ['DEMO-KR-0013', 2025], ['DEMO-KR-0014', 2025], ['DEMO-KR-0027', 2026, 'C']]],
+    ['VF-15', 'T1', '쐐기', 'HANG', 'M', 'H', 'M', '슬라이드 쐐기로 고정되는 교체 상판', [['DEMO-KR-0015', 2024], ['DEMO-KR-0016', 2025], ['DEMO-KR-0017', 2025]]],
+    ['VF-16', 'T3', '레버', 'MIRE', 'M', 'M', 'L', '캠 레버로 모듈을 연결하는 확장 가구', [['DEMO-KR-0018', 2023], ['DEMO-KR-0019', 2024], ['DEMO-KR-0020', 2025]]],
+    ['VF-17', 'T2', '탄성', 'MIRE', 'M', 'H', 'L', '탄성 부시를 이용한 가구 흔들림 저감 구조', [['DEMO-KR-0021', 2025], ['DEMO-KR-0022', 2025]]],
+    ['VF-18', 'T1', '레버', 'NURI', 'L', 'M', 'L', '힌지 레버식 상판 착탈 기구', [['DEMO-KR-0023', 2024], ['DEMO-KR-0024', 2025]]],
+    // 이하 후보 영역(신규 도착, 승인 전 집계 제외)
+    ['VF-19', 'T2', '자석', 'KEST', 'H', 'H', 'M', '자석 댐퍼를 이용한 프레임 흔들림 억제 구조', [['DEMO-KR-0025', 2025, 'C'], ['DEMO-US-0007', 2026, 'C']]],
+    ['VF-20', 'T2', '쐐기', 'DAON', 'M', 'H', 'H', '자동 조정 쐐기를 갖는 흔들림 방지 가구', [['DEMO-KR-0026', 2026, 'C']]],
+    ['VF-21', 'T1', '레버', 'MIRE', 'L', 'M', 'L', '레버 해제식 교체 상판 프레임', [['DEMO-CN-0003', 2025, 'C']]]
+  ];
+
+  const MECH_PART = {
+    '레버': ['프레임에 회동 가능하게 결합되어 상판 걸림부를 가압하거나 해제하는 레버', '레버를 젖히면 걸림이 풀리고 되돌리면 잠기는 동작'],
+    '쐐기': ['결합면 사이에 삽입되어 경사면으로 틈새를 메우는 쐐기 부재', '쐐기가 경사면을 따라 밀려 들어가며 유격을 없애는 동작'],
+    '탄성': ['결합 방향으로 복원력을 제공하여 유격을 흡수하는 탄성 부재', '탄성 부재가 눌렸다가 되돌아오며 흔들림과 유격을 흡수하는 동작'],
+    '자석': ['접촉면에 배치되어 위치를 정렬하고 흡착력을 제공하는 자석 부재', '자석이 정해진 위치로 끌어당겨 정렬하고 붙잡는 동작']
+  };
+  const SUB_PURPOSE = {
+    T1: '상판을 공구 없이 프레임에 착탈하기 위한',
+    T2: '가구 프레임의 흔들림을 억제하기 위한',
+    T3: '수납 모듈을 서로 연결하고 분리하기 위한'
+  };
+  const SUFFIX = ['', ' — 개량형', ' — 제조방법 포함', ' — 분할출원'];
+
+  const DOCS = [];
+  FAMILY_TABLE.forEach(function (f, fi) {
+    const [familyId, sub, mech, appKey, bench, rel, rights, title, docs] = f;
+    let krIndex = 0;
+    docs.forEach(function (entry, di) {
+      const [id, year, stage] = entry;
+      const country = id.split('-')[1];
+      const suffix = country === 'KR' ? SUFFIX[Math.min(krIndex++, 3)] : ' (대응 출원)';
+      const para = 10 + ((fi * 7 + di * 3) % 40);
+      DOCS.push({
+        id: id, familyId: familyId, country: country, year: year,
+        sub: sub, mech: mech, applicant: APPLICANTS[appKey],
+        bench: bench, rel: rel, rights: rights,
+        title: title + suffix,
+        stage: stage === 'C' ? 'candidate' : 'V1',
+        claim: '[청구항 1 · 가상] ' + SUB_PURPOSE[sub] + ' 결합부로서, ' + MECH_PART[mech][0] + '; 및 상기 부재를 수용하는 안내부를 포함하는 가구 결합 구조.',
+        paragraph: '[' + String(para).padStart(4, '0') + ' · 가상 문단] 본 예시에서 ' + MECH_PART[mech][1] + '으로 ' + SUBS[sub] + ' 기능을 구현한다. 이 문장은 시연을 위해 작성한 가상 원문이며 실제 특허 문헌이 아니다.',
+        paragraphNo: para
+      });
+    });
+  });
+
+  const TASKS = [
+    { id: 'TASK-1', title: '무공구 상판 교체', sub: 'T1', mechs: ['레버', '쐐기'],
+      problem: '사용자가 공구 없이 1분 안에 상판을 바꿀 수 있어야 한다.',
+      components: ['상판 걸림부', '해제 손잡이'],
+      constraints: ['상판 두께 18mm', '착탈 500회 이상 반복', '부품 추가 원가 최소화'],
+      decisionDate: '2026-11-30', owner: '연구원 김(가상)' },
+    { id: 'TASK-2', title: '흔들림 억제', sub: 'T2', mechs: ['쐐기', '탄성'],
+      problem: '바닥이 고르지 않아도 테이블 다리의 흔들림을 줄여야 한다.',
+      components: ['다리-프레임 접합부', '유격 보정 부재'],
+      constraints: ['외관 노출 최소화', '공구 없는 조정', '하중 80kg'],
+      decisionDate: '2026-12-15', owner: '연구원 이(가상)' },
+    { id: 'TASK-3', title: '모듈 결합', sub: 'T3', mechs: ['자석', '레버'],
+      problem: '수납 모듈을 옆·위로 이어 붙이고 다시 분리할 수 있어야 한다.',
+      components: ['모듈 연결부', '정렬 가이드'],
+      constraints: ['반복 분리 100회', '아동 끼임 방지'],
+      decisionDate: '2027-01-31', owner: '연구원 박(가상)' }
+  ];
+
+  // 질문형 카드 6개. 수치는 카드에 적지 않고 실행조건(spec)으로 계산한다.
+  const CARDS = [
+    { id: 'CARD-01', type: '벤치마킹', layer: 'explain', tasks: ['TASK-1'],
+      title: '공구 없이 상판을 바꾸는 구조는 어떤 결합 수단을 주로 쓰나요?',
+      spec: { groupBy: 'mech', unit: 'doc', filters: { sub: 'T1' } },
+      evidence: ['DEMO-KR-0001', 'DEMO-KR-0009', 'DEMO-KR-0015', 'DEMO-KR-0005'],
+      report: '가상 IP-R&D 보고서(2025) 3장 벤치마킹 · p.41–44 · 그림 3-2',
+      recheck: '무공구 상판 교체 분류에 새 문헌이 승인되면 다시 계산합니다.' },
+    { id: 'CARD-02', type: '벤치마킹', layer: 'explain', tasks: ['TASK-2'],
+      title: '흔들림을 줄이는 방식에는 무엇이 있고, 무엇이 많이 쓰이나요?',
+      spec: { groupBy: 'mech', unit: 'doc', filters: { sub: 'T2' } },
+      evidence: ['DEMO-KR-0003', 'DEMO-KR-0006', 'DEMO-KR-0012', 'DEMO-KR-0021'],
+      report: '가상 IP-R&D 보고서(2025) 3장 벤치마킹 · p.45–49 · 표 3-5',
+      recheck: '흔들림 억제 분류의 신규 문헌, 특히 권리검토 필요도 높음 문헌이 승인되면 확인합니다.' },
+    { id: 'CARD-03', type: '정량 그래프', layer: 'calc', tasks: ['TASK-1', 'TASK-2', 'TASK-3'],
+      title: '교체형 가구 결합부 출원은 해마다 늘고 있나요?',
+      spec: { groupBy: 'year', unit: 'doc', filters: {} },
+      evidence: ['DEMO-KR-0001', 'DEMO-KR-0013', 'DEMO-US-0006'],
+      report: '가상 IP-R&D 보고서(2025) 2장 정량분석 · p.18 · 그림 2-1',
+      recheck: '기준선이 바뀌면 다시 계산합니다. 공개연도 기준이며 최근 연도는 미공개분이 있을 수 있습니다.' },
+    { id: 'CARD-04', type: '정량 그래프', layer: 'calc', tasks: ['TASK-3'],
+      title: '모듈 결합 기술은 누가 출원하고 있나요?',
+      spec: { groupBy: 'applicant', unit: 'family', filters: { sub: 'T3' } },
+      evidence: ['DEMO-KR-0004', 'DEMO-KR-0007', 'DEMO-KR-0018', 'DEMO-EP-0002'],
+      report: '가상 IP-R&D 보고서(2025) 2장 정량분석 · p.24 · 그림 2-6',
+      recheck: '모듈 결합 분류의 출원인 구성이 바뀌면 다시 계산합니다.' },
+    { id: 'CARD-05', type: '공백 후보', layer: 'explain', tasks: ['TASK-2', 'TASK-3'],
+      title: '어떤 분류·결합 수단 조합이 적게 관측되나요?',
+      spec: { groupBy: 'matrix', unit: 'family', filters: {} },
+      evidence: ['DEMO-KR-0004', 'DEMO-US-0006', 'DEMO-CN-0002'],
+      report: '가상 IP-R&D 보고서(2025) 4장 공백 분석 · p.63 · 표 4-1',
+      recheck: '저밀도 조합에 새 문헌이 승인되면 확인합니다. 공백은 연구 후보(가설)이며 등록 가능성을 뜻하지 않습니다.' },
+    { id: 'CARD-06', type: '권리 검토 대상', layer: 'review', tasks: ['TASK-1', 'TASK-2'],
+      title: '쐐기 구조 가운데 권리 검토가 필요한 문헌은 무엇인가요?',
+      spec: { groupBy: 'sub', unit: 'doc', filters: { mech: '쐐기', rights: 'H' } },
+      evidence: ['DEMO-KR-0002', 'DEMO-KR-0003', 'DEMO-KR-0008', 'DEMO-KR-0012'],
+      report: '가상 IP-R&D 보고서(2025) 5장 핵심특허 · p.78–85 · 표 5-2',
+      recheck: '대상 문헌의 청구범위 변경·분할출원이 확인되면 재검토합니다. 이 카드는 목록이며 침해 여부 결론이 아닙니다.' }
+  ];
+
+  const GLOSSARY = [
+    { term: '흔들림', expand: ['흔들림', '진동', '유격', '요동', '강성'] },
+    { term: '상판', expand: ['상판', '교체', '착탈', '무공구'] },
+    { term: '교체', expand: ['교체', '착탈', '상판', '무공구'] },
+    { term: '모듈', expand: ['모듈', '연결', '확장', '결합'] },
+    { term: '쐐기', expand: ['쐐기', '경사', '웨지'] },
+    { term: '자석', expand: ['자석', '자력', '흡착', '마그넷'] },
+    { term: '레버', expand: ['레버', '캠', '회동', '잠금'] },
+    { term: '탄성', expand: ['탄성', '스프링', '클립', '패드', '부시'] }
+  ];
+
+  global.FDE_DATA = {
+    PROJECT: { name: '교체형 가구 결합부', group: '가상 연구그룹 A', fde: '담당 FDE(가상)' },
+    SUBS: SUBS, MECHS: MECHS, COUNTRIES: COUNTRIES, LEVELS: LEVELS,
+    DOCS: DOCS, TASKS: TASKS, CARDS: CARDS, GLOSSARY: GLOSSARY,
+    V1_DATE: '2026-06-30'
+  };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+<!-- ===================================================================
+     2. 계산·질문 분기·상태 엔진 (DOM을 쓰지 않음. tests.cjs가 이 부분을 직접 검증)
+     =================================================================== -->
+<script id="fde-core">
+(function (global) {
+  'use strict';
+  const D = global.FDE_DATA;
+  const SCHEMA = 3;
+  const DOC_BY_ID = {};
+  D.DOCS.forEach(function (d) { DOC_BY_ID[d.id] = d; });
+
+  function clone(x) { return JSON.parse(JSON.stringify(x)); }
+  function pad(n, w) { return String(n).padStart(w, '0'); }
+  function nowIso() { return new Date().toISOString(); }
+  function today() { return nowIso().slice(0, 10); }
+
+  function esc(s) {
+    return String(s == null ? '' : s)
+      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
+  }
+
+  function getDoc(id) { return DOC_BY_ID[id] || null; }
+
+  // ---------- 기준선 ----------
+  function baselineOf(state, id) { return state.baselines.find(function (b) { return b.id === id; }) || null; }
+  function docsInBaseline(state, baselineId) {
+    const b = baselineOf(state, baselineId || state.currentBaseline);
+    if (!b) return [];
+    return b.docIds.map(getDoc).filter(Boolean);
+  }
+  function uniqueFamilies(docs) {
+    const s = new Set(); docs.forEach(function (d) { s.add(d.familyId); }); return s.size;
+  }
+  function candidateDocs(state) { return state.candidates.map(function (c) { return getDoc(c.docId); }); }
+
+  // ---------- 필터·집계 ----------
+  function matchFilters(d, f) {
+    f = f || {};
+    if (f.country === 'KR' && d.country !== 'KR') return false;
+    if (f.country === 'FOREIGN' && d.country === 'KR') return false;
+    if (f.sub && d.sub !== f.sub) return false;
+    if (f.mech && d.mech !== f.mech) return false;
+    if (f.rights && d.rights !== f.rights) return false;
+    return true;
+  }
+
+  function groupValue(d, groupBy) {
+    if (groupBy === 'year') return d.year;
+    if (groupBy === 'mech') return d.mech;
+    if (groupBy === 'sub') return d.sub;
+    if (groupBy === 'applicant') return d.applicant;
+    if (groupBy === 'country') return d.country;
+    return null;
+  }
+
+  function groupKeys(groupBy, scopeDocs, baselineDocs) {
+    if (groupBy === 'year') {
+      const ys = baselineDocs.map(function (d) { return d.year; });
+      const out = []; for (let y = Math.min.apply(null, ys); y <= Math.max.apply(null, ys); y++) out.push(y);
+      return out;
+    }
+    if (groupBy === 'mech') return D.MECHS.slice();
+    if (groupBy === 'sub') return Object.keys(D.SUBS);
+    if (groupBy === 'country') return Object.keys(D.COUNTRIES);
+    if (groupBy === 'applicant') {
+      const counts = {};
+      scopeDocs.forEach(function (d) { counts[d.applicant] = (counts[d.applicant] || 0) + 1; });
+      return Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+    }
+    return [];
+  }
+
+  function keyLabel(groupBy, k) {
+    if (groupBy === 'year') return k + '년';
+    if (groupBy === 'sub') return D.SUBS[k] || k;
+    if (groupBy === 'country') return D.COUNTRIES[k] || k;
+    return String(k);
+  }
+
+  function countOf(docs, unit) { return unit === 'family' ? uniqueFamilies(docs) : docs.length; }
+
+  // 순수 함수: 문헌 배열 + 조건 → 결과. 수치는 오직 여기서 나온다.
+  function aggregate(baselineDocs, spec) {
+    const scope = baselineDocs.filter(function (d) { return matchFilters(d, spec.filters); });
+    const result = {
+      totals: { docs: scope.length, families: uniqueFamilies(scope) },
+      docIds: scope.map(function (d) { return d.id; }),
+      rows: [], matrix: null
+    };
+    if (spec.groupBy === 'matrix') {
+      const subs = Object.keys(D.SUBS);
+      result.matrix = { rows: subs, cols: D.MECHS.slice(), cells: {} };
+      subs.forEach(function (s) {
+        D.MECHS.forEach(function (m) {
+          const ds = scope.filter(function (d) { return d.sub === s && d.mech === m; });
+          result.matrix.cells[s + '|' + m] = { count: countOf(ds, spec.unit), docIds: ds.map(function (d) { return d.id; }) };
+        });
+      });
+      return result;
+    }
+    const keys = groupKeys(spec.groupBy, scope, baselineDocs);
+    result.rows = keys.map(function (k) {
+      const ds = scope.filter(function (d) { return groupValue(d, spec.groupBy) === k; });
+      return { key: k, label: keyLabel(spec.groupBy, k), count: countOf(ds, spec.unit), docIds: ds.map(function (d) { return d.id; }) };
+    });
+    result.rowSum = result.rows.reduce(function (a, r) { return a + r.count; }, 0);
+    return result;
+  }
+
+  function normalizeSpec(spec) {
+    const f = spec.filters || {};
+    const filters = {};
+    ['country', 'sub', 'mech', 'rights'].forEach(function (k) { if (f[k]) filters[k] = f[k]; });
+    return { groupBy: spec.groupBy || 'year', unit: spec.unit === 'family' ? 'family' : 'doc', filters: filters };
+  }
+
+  // 분석 실행: 실행 번호·기준선·조건·문헌·수치를 함께 고정해 기록한다.
+  function runAnalysis(state, spec, origin) {
+    const s = normalizeSpec(spec);
+    const baseline = state.currentBaseline;
+    const res = aggregate(docsInBaseline(state, baseline), s);
+    state.runSeq += 1;
+    const run = {
+      id: 'RUN-' + pad(state.runSeq, 4), baseline: baseline, spec: s,
+      createdAt: nowIso(), origin: origin || '질문', engine: 'fde-core/' + SCHEMA,
+      totals: res.totals, docIds: res.docIds, rows: res.rows, rowSum: res.rowSum, matrix: res.matrix
+    };
+    state.runs[run.id] = deepFreeze(clone(run));
+    return state.runs[run.id];
+  }
+
+  function deepFreeze(o) {
+    if (o && typeof o === 'object' && !Object.isFrozen(o)) {
+      Object.freeze(o); Object.keys(o).forEach(function (k) { deepFreeze(o[k]); });
+    }
+    return o;
+  }
+
+  const GROUP_LABEL = { year: '공개연도별', mech: '결합 수단별', sub: '세부 분류별', applicant: '출원인별', country: '국가별', matrix: '분류 × 결합 수단' };
+  const FILTER_LABEL = {
+    country: function (v) { return '국가: ' + (v === 'KR' ? '국내(한국)만' : '해외만'); },
+    sub: function (v) { return '분류: ' + D.SUBS[v]; },
+    mech: function (v) { return '결합 수단: ' + v; },
+    rights: function (v) { return '권리검토 필요도: ' + D.LEVELS[v]; }
+  };
+
+  function specChips(spec) {
+    const out = [GROUP_LABEL[spec.groupBy] || spec.groupBy, '집계 단위: ' + (spec.unit === 'family' ? '패밀리' : '문헌')];
+    Object.keys(spec.filters).forEach(function (k) { out.push(FILTER_LABEL[k](spec.filters[k])); });
+    if (!Object.keys(spec.filters).length) out.push('필터 없음(전체)');
+    return out;
+  }
+
+  function unitWord(spec) { return spec.unit === 'family' ? '개 패밀리' : '건'; }
+
+  // 결과 설명: 계산된 수치를 그대로 읽어 문장으로 만든다(새 수치를 만들지 않음).
+  function describeRun(run) {
+    const u = unitWord(run.spec);
+    const lines = [];
+    const base = '기준선 ' + run.baseline + ' · 조건에 포함된 문헌 ' + run.totals.docs + '건(고유 패밀리 ' + run.totals.families + '개)';
+    lines.push(base + '.');
+    if (run.spec.groupBy === 'matrix') {
+      const zero = [], low = [];
+      Object.keys(run.matrix.cells).forEach(function (k) {
+        const c = run.matrix.cells[k].count; const p = k.split('|');
+        const name = D.SUBS[p[0]] + ' × ' + p[1];
+        if (c === 0) zero.push(name); else if (c === 1) low.push(name);
+      });
+      lines.push(zero.length ? '관측되지 않은 조합: ' + zero.join(', ') + '.' : '관측되지 않은 조합은 없습니다.');
+      if (low.length) lines.push('1' + u + '만 관측된 조합: ' + low.join(', ') + '.');
+      lines.push('적게 관측된 조합은 연구 후보(가설)일 뿐이며, 신규성·등록 가능성을 뜻하지 않습니다.');
+      return lines;
+    }
+    if (!run.rows.length || run.totals.docs === 0) { lines.push('조건에 맞는 문헌이 없습니다.'); return lines; }
+    if (run.spec.groupBy === 'year') {
+      const first = run.rows[0], last = run.rows[run.rows.length - 1];
+      const max = run.rows.reduce(function (a, r) { return r.count > a.count ? r : a; }, run.rows[0]);
+      lines.push(first.label + ' ' + first.count + u + ' → ' + last.label + ' ' + last.count + u + '. 가장 많은 해는 ' + max.label + '(' + max.count + u + ')입니다.');
+      if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) {
+        lines.push('연도별 패밀리 수의 합(' + run.rowSum + ')은 전체 고유 패밀리 수(' + run.totals.families + ')와 다릅니다. 한 패밀리의 문헌이 여러 해에 공개되면 각 연도에 한 번씩 셉니다.');
+      }
+      lines.push('공개연도 기준이므로 최근 연도는 아직 공개되지 않은 출원이 빠져 있을 수 있습니다.');
+      return lines;
+    }
+    const sorted = run.rows.slice().sort(function (a, b) { return b.count - a.count; });
+    const nz = sorted.filter(function (r) { return r.count > 0; });
+    lines.push('가장 많이 관측된 것은 ' + nz.slice(0, 2).map(function (r) { return r.label + '(' + r.count + u + ')'; }).join(', 다음은 ') + '입니다.');
+    const zeros = run.rows.filter(function (r) { return r.count === 0; });
+    if (zeros.length) lines.push(zeros.map(function (r) { return r.label; }).join(', ') + ': 0' + u + ' — 이 가상 배열에서 관측되지 않았다는 뜻입니다.');
+    if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) {
+      lines.push('항목별 패밀리 수의 합(' + run.rowSum + ')과 전체 고유 패밀리 수(' + run.totals.families + ')는 다를 수 있습니다.');
+    }
+    return lines;
+  }
+
+  // 결합 수단별 가상 설명(벤치마킹). 가상 원문의 동작 서술만 요약한다.
+  const MECH_EXPLAIN = {
+    '레버': '레버를 젖혀 걸림을 풀고 되돌려 잠그는 방식(가상 문헌 서술 요약).',
+    '쐐기': '쐐기 경사면을 밀어 넣어 틈새와 유격을 메우는 방식(가상 문헌 서술 요약).',
+    '탄성': '탄성 부재의 복원력으로 유격과 진동을 흡수하는 방식(가상 문헌 서술 요약).',
+    '자석': '자석의 흡착력으로 위치를 정렬하고 붙잡는 방식(가상 문헌 서술 요약).'
+  };
+
+  // ---------- 질문 분기 ----------
+  const DEFAULT_SPEC = { groupBy: 'year', unit: 'doc', filters: {} };
+
+  function parseQuestion(raw, prevSpec) {
+    const text = String(raw == null ? '' : raw).trim();
+    const q = text.replace(/\s+/g, '');
+    if (!q) return { kind: 'empty' };
+    const idm = text.toUpperCase().match(/DEMO-[A-Z]{2}-\d{4}/);
+    if (idm) return { kind: 'doc', docId: idm[0] };
+    const mechIn = D.MECHS.find(function (m) { return q.indexOf(m) >= 0; }) || null;
+    if (/걸리|걸릴|침해|회피|무효|등록가능|특허받|권리|문제없|써도되/.test(q)) return { kind: 'review', mech: mechIn };
+    if (/조건초기화|처음부터|조건해제|조건을모두|모든조건/.test(q)) return { kind: 'resetCtx' };
+
+    let topic = null;
+    if (/공백|빈곳|빈칸|적게관측|비어/.test(q)) topic = { groupBy: 'matrix', unit: 'family', filters: {}, name: '공백 후보' };
+    else if (/흔들|진동|유격/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T2' }, name: '흔들림 억제' };
+    else if (/상판|무공구/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T1' }, name: '무공구 상판 교체' };
+    else if (/모듈/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T3' }, name: '모듈 결합' };
+
+    let groupBy = null;
+    if (/연도|추세|해마다|년도|증가|늘고/.test(q)) groupBy = 'year';
+    else if (/출원인|누가/.test(q)) groupBy = 'applicant';
+    else if (/분류별/.test(q)) groupBy = 'sub';
+    else if (/국가별|나라별/.test(q)) groupBy = 'country';
+    else if (/수단별|방식별|결합수단/.test(q)) groupBy = 'mech';
+
+    const mod = {};
+    if (/국내|한국/.test(q)) mod.country = 'KR';
+    else if (/해외만|외국만/.test(q)) mod.country = 'FOREIGN';
+    else if (/전체국가|모든국가|국가조건해제|해외포함/.test(q)) mod.country = null;
+    if (/패밀리/.test(q)) mod.unit = 'family';
+    else if (/문헌단위|문헌기준|문헌으로|문헌수/.test(q)) mod.unit = 'doc';
+    if (mechIn && /그중|중에서|만보|만$|만요|만주/.test(q)) mod.mech = mechIn;
+
+    const hasMod = Object.keys(mod).length > 0;
+    if (!topic && !groupBy && !hasMod) return { kind: 'unsupported' };
+
+    const prev = prevSpec ? normalizeSpec(prevSpec) : null;
+    let spec, newTopic = false;
+    if (topic) {
+      spec = { groupBy: groupBy || topic.groupBy, unit: topic.unit, filters: clone(topic.filters) };
+      newTopic = !!prev;
+    } else if (prev) {
+      spec = clone(prev);
+      if (groupBy) spec.groupBy = groupBy;
+    } else {
+      spec = clone(DEFAULT_SPEC);
+      if (groupBy) spec.groupBy = groupBy;
+    }
+    if ('country' in mod) { if (mod.country) spec.filters.country = mod.country; else delete spec.filters.country; }
+    if (mod.unit) spec.unit = mod.unit;
+    if (mod.mech) spec.filters.mech = mod.mech;
+    spec = normalizeSpec(spec);
+    return { kind: 'analysis', spec: spec, newTopic: newTopic, topic: topic ? topic.name : null, changes: diffSpec(prev, spec, newTopic) };
+  }
+
+  function diffSpec(prev, next, newTopic) {
+    const out = { added: [], removed: [], changed: [], kept: [], newTopic: !!newTopic };
+    if (!prev) return out;
+    if (prev.groupBy !== next.groupBy) out.changed.push('보기: ' + GROUP_LABEL[prev.groupBy] + ' → ' + GROUP_LABEL[next.groupBy]);
+    if (prev.unit !== next.unit) out.changed.push('집계 단위: ' + (prev.unit === 'family' ? '패밀리' : '문헌') + ' → ' + (next.unit === 'family' ? '패밀리' : '문헌'));
+    ['country', 'sub', 'mech', 'rights'].forEach(function (k) {
+      const a = prev.filters[k], b = next.filters[k];
+      if (a && !b) out.removed.push(FILTER_LABEL[k](a));
+      else if (!a && b) out.added.push(FILTER_LABEL[k](b));
+      else if (a && b && a !== b) out.changed.push(FILTER_LABEL[k](a) + ' → ' + FILTER_LABEL[k](b).split(': ')[1]);
+      else if (a && b) out.kept.push(FILTER_LABEL[k](a));
+    });
+    return out;
+  }
+
+  const SUPPORTED = [
+    '연도별 추세를 보여 주세요', '그중 국내만', '패밀리 단위로 보여 주세요', '출원인별로 보여 주세요',
+    '흔들림을 줄이는 방식은 무엇인가요?', '공백 후보를 보여 주세요', '쐐기 구조가 특허에 걸리나요?', 'DEMO-KR-0001', '조건 초기화'
+  ];
+
+  function pushMsg(state, m) {
+    state.msgSeq += 1;
+    m.id = 'MSG-' + pad(state.msgSeq, 4);
+    m.at = nowIso();
+    state.chat.push(m);
+    return m;
+  }
+
+  function ask(state, raw) {
+    const text = String(raw == null ? '' : raw).trim().slice(0, 300);
+    const p = parseQuestion(text, state.ctx ? state.ctx.spec : null);
+    if (p.kind === 'empty') return null;
+    pushMsg(state, { from: 'user', text: text });
+    if (p.kind === 'analysis') {
+      const run = runAnalysis(state, p.spec, '물어보기');
+      state.ctx = { spec: clone(run.spec), runId: run.id };
+      const layer = (p.topic && p.spec.groupBy === 'mech') || p.spec.groupBy === 'matrix' ? 'explain' : 'calc';
+      return pushMsg(state, { from: 'bot', type: 'analysis', runId: run.id, layer: layer, changes: p.changes, topic: p.topic });
+    }
+    if (p.kind === 'resetCtx') {
+      const had = state.ctx ? specChips(state.ctx.spec) : [];
+      state.ctx = null;
+      return pushMsg(state, { from: 'bot', type: 'info', text: '적용 중이던 조건을 모두 해제했습니다.' + (had.length ? ' (해제: ' + had.join(', ') + ')' : '') });
+    }
+    if (p.kind === 'doc') {
+      const d = getDoc(p.docId);
+      const inBase = d && baselineOf(state, state.currentBaseline).docIds.indexOf(d.id) >= 0;
+      return pushMsg(state, { from: 'bot', type: 'doc', docId: p.docId, found: !!d, inBaseline: !!inBase });
+    }
+    if (p.kind === 'review') {
+      const task = state.tasks.find(function (t) { return t.id === state.activeTaskId; });
+      const docs = docsInBaseline(state).filter(function (d) {
+        return d.rights === 'H' && (p.mech ? d.mech === p.mech : d.sub === task.sub);
+      });
+      return pushMsg(state, { from: 'bot', type: 'review', question: text, mech: p.mech, taskId: task.id, docIds: docs.map(function (d) { return d.id; }), layer: 'review' });
+    }
+    return pushMsg(state, { from: 'bot', type: 'unsupported', supported: SUPPORTED.slice() });
+  }
+
+  function clearCtxFilter(state, key) {
+    if (!state.ctx) return null;
+    const spec = clone(state.ctx.spec);
+    if (key === 'unit') spec.unit = 'doc'; else delete spec.filters[key];
+    const prev = state.ctx.spec;
+    const run = runAnalysis(state, spec, '물어보기');
+    state.ctx = { spec: clone(run.spec), runId: run.id };
+    pushMsg(state, { from: 'user', text: '(조건 해제) ' + (key === 'unit' ? '집계 단위' : FILTER_LABEL[key](prev.filters[key])) });
+    return pushMsg(state, { from: 'bot', type: 'analysis', runId: run.id, layer: 'calc', changes: diffSpec(prev, run.spec, false) });
+  }
+
+  // ---------- 저장·재실행 ----------
+  function saveRun(state, runId, title) {
+    const run = state.runs[runId];
+    if (!run) return { ok: false, reason: '실행 기록 없음' };
+    const dup = state.saved.find(function (s) { return s.runId === runId; });
+    if (dup) return { ok: false, reason: '이미 저장한 결과입니다', saved: dup };
+    state.savedSeq += 1;
+    const s = { id: 'SAVE-' + pad(state.savedSeq, 3), runId: runId, title: title || (GROUP_LABEL[run.spec.groupBy] + ' 결과'), savedAt: nowIso() };
+    state.saved.push(s);
+    return { ok: true, saved: s };
+  }
+
+  function rerunSaved(state, savedId) {
+    const s = state.saved.find(function (x) { return x.id === savedId; });
+    if (!s) return { ok: false, reason: '저장 결과 없음' };
+    const old = state.runs[s.runId];
+    const run = runAnalysis(state, old.spec, '재실행(' + old.id + ')');
+    state.comparisons.push({ savedId: s.id, baseRunId: old.id, newRunId: run.id, at: nowIso() });
+    return { ok: true, run: run };
+  }
+
+  function rerunCard(state, cardId) {
+    const c = state.cards.find(function (x) { return x.id === cardId; });
+    if (!c) return { ok: false };
+    const last = state.runs[c.runIds[c.runIds.length - 1]];
+    if (last.baseline === state.currentBaseline) return { ok: false, reason: '이미 최신 기준선 결과입니다' };
+    const run = runAnalysis(state, c.spec, '카드 재계산(' + c.id + ')');
+    c.runIds.push(run.id);
+    return { ok: true, run: run };
+  }
+
+  function compareRuns(a, b) {
+    if (a.spec.groupBy === 'matrix') {
+      return Object.keys(a.matrix.cells).map(function (k) {
+        const p = k.split('|');
+        const x = a.matrix.cells[k].count, y = b.matrix.cells[k] ? b.matrix.cells[k].count : null;
+        return { label: D.SUBS[p[0]] + ' × ' + p[1], before: x, after: y, diff: y == null ? null : y - x };
+      });
+    }
+    const keys = []; const seen = {};
+    a.rows.concat(b.rows).forEach(function (r) { if (!seen[r.key]) { seen[r.key] = 1; keys.push(r); } });
+    return keys.map(function (r) {
+      const x = a.rows.find(function (q) { return q.key === r.key; });
+      const y = b.rows.find(function (q) { return q.key === r.key; });
+      return { label: r.label, before: x ? x.count : null, after: y ? y.count : null,
+        diff: x && y ? y.count - x.count : null };
+    }).concat([{ label: '합계(조건 내 문헌)', before: a.totals.docs, after: b.totals.docs, diff: b.totals.docs - a.totals.docs, total: true },
+      { label: '합계(고유 패밀리)', before: a.totals.families, after: b.totals.families, diff: b.totals.families - a.totals.families, total: true }]);
+  }
+
+  // ---------- 전문 검토 요청 ----------
+  function normKey(s) { return String(s || '').replace(/[\s?？.!]/g, '').toLowerCase(); }
+
+  function requestReview(state, msgId) {
+    const m = state.chat.find(function (x) { return x.id === msgId; });
+    if (!m || m.type !== 'review') return { ok: false, reason: '검토 대상 질문이 아닙니다' };
+    const key = normKey(m.question) + '|' + m.taskId;
+    const dup = state.requests.find(function (r) { return r.key === key; });
+    if (dup) { m.requestId = dup.id; return { ok: false, reason: '이미 접수된 요청입니다 (' + dup.id + ')', request: dup }; }
+    state.reqSeq += 1;
+    const r = { id: 'REQ-' + pad(state.reqSeq, 3), key: key, question: m.question, taskId: m.taskId, mech: m.mech,
+      docIds: m.docIds.slice(), baseline: state.currentBaseline, status: '검토 요청됨', createdAt: nowIso(), answer: null };
+    state.requests.push(r);
+    m.requestId = r.id;
+    return { ok: true, request: r };
+  }
+
+  function publishAnswer(state, reqId) {
+    const r = state.requests.find(function (x) { return x.id === reqId; });
+    if (!r) return { ok: false, reason: '요청 없음' };
+    if (r.status === '답변 공개') return { ok: false, reason: '이미 공개된 답변입니다' };
+    const task = state.tasks.find(function (t) { return t.id === r.taskId; });
+    const refs = r.docIds.slice(0, 2);
+    r.answer = {
+      reviewer: '담당 FDE(가상) · 가상 검토 의견 예시',
+      issue: (r.mech ? r.mech + ' 구조' : '과제 구성') + '가 ' + (refs.join(', ') || '관련 문헌') + '의 가상 청구항 1 구성요소를 모두 갖추는지',
+      premise: '과제 「' + task.title + '」의 현재 구성 초안 · 관할 KR · 기준선 ' + r.baseline + ' · 가상 청구항 기준',
+      opinion: '청구항 1의 "안내부" 구성과 과제 구성 초안의 대응 여부가 쟁점입니다. 현재 초안만으로는 판단할 정보가 부족하므로 접합부 도면과 경사면 각도 자료를 받은 뒤 구성요소 대비표를 작성하겠습니다. (가상 예시 — 실제 전문가 의견이 아니며 침해·비침해 결론이 아닙니다)',
+      next: '구성 도면 공유 → 구성요소 대비표 작성 → 필요 시 회피 설계 대안 검토'
+    };
+    r.status = '답변 공개';
+    r.publishedAt = nowIso();
+    state.unreadAnswers += 1;
+    pushMsg(state, { from: 'bot', type: 'reviewAnswer', reqId: r.id, layer: 'published' });
+    return { ok: true, request: r };
+  }
+
+  // ---------- 후보 영역·기준선 공개 ----------
+  function reviewCandidate(state, docId) {
+    const c = state.candidates.find(function (x) { return x.docId === docId; });
+    if (!c) return { ok: false };
+    if (c.reviewed) return { ok: false, reason: '이미 검토 완료' };
+    c.reviewed = true; c.reviewedAt = nowIso();
+    return { ok: true };
+  }
+
+  function canPublish(state) {
+    if (baselineOf(state, 'V2')) return { ok: false, reason: 'V2는 이미 공개되었습니다' };
+    const left = state.candidates.filter(function (c) { return !c.reviewed; }).length;
+    if (left) return { ok: false, reason: '검토하지 않은 후보 ' + left + '건이 남아 있습니다' };
+    return { ok: true };
+  }
+
+  function matrixCounts(docs) {
+    const out = {};
+    docs.forEach(function (d) { const k = d.sub + '|' + d.mech; out[k] = out[k] || new Set(); out[k].add(d.familyId); });
+    return out;
+  }
+
+  function publishBaseline(state) {
+    const chk = canPublish(state);
+    if (!chk.ok) return chk;
+    const v1 = baselineOf(state, 'V1');
+    const newIds = state.candidates.map(function (c) { return c.docId; });
+    const before = docsInBaseline(state, 'V1');
+    state.baselines.push({ id: 'V2', approvedAt: today(), approver: D.PROJECT.fde, docIds: v1.docIds.concat(newIds), note: '후보 ' + newIds.length + '건 검토 후 승인(가상)' });
+    state.currentBaseline = 'V2';
+    const after = docsInBaseline(state, 'V2');
+    // 과제 영향: 신규 문헌만으로 결론이 바뀌었다고 단정하지 않고 '확인 필요'로 시작한다.
+    state.tasks.forEach(function (t) {
+      const hits = newIds.map(getDoc).filter(function (d) { return d.sub === t.sub && (t.mechs.indexOf(d.mech) >= 0 || d.rights === 'H'); });
+      if (hits.length) {
+        state.impSeq += 1;
+        state.impacts.push({ id: 'IMP-' + pad(state.impSeq, 2), taskId: t.id, docIds: hits.map(function (d) { return d.id; }),
+          status: '확인 필요', reason: '과제의 관심 분류·결합 수단과 겹치는 신규 문헌 ' + hits.length + '건', note: null, history: [{ status: '확인 필요', at: nowIso() }] });
+      }
+    });
+    const mb = matrixCounts(before), ma = matrixCounts(after);
+    state.gapChanges = Object.keys(ma).filter(function (k) { return !mb[k]; }).map(function (k) {
+      const p = k.split('|'); return { cell: D.SUBS[p[0]] + ' × ' + p[1], families: ma[k].size };
+    });
+    return { ok: true };
+  }
+
+  const IMPACT_FLOW = ['확인 필요', '검토 중', '승인된 설명'];
+  function advanceImpact(state, id) {
+    const im = state.impacts.find(function (x) { return x.id === id; });
+    if (!im) return { ok: false };
+    const i = IMPACT_FLOW.indexOf(im.status);
+    if (i >= IMPACT_FLOW.length - 1) return { ok: false, reason: '이미 승인된 설명입니다' };
+    im.status = IMPACT_FLOW[i + 1];
+    im.history.push({ status: im.status, at: nowIso() });
+    if (im.status === '승인된 설명') {
+      im.note = '신규 문헌 ' + im.docIds.join(', ') + '을(를) 검토했습니다. 기존 카드의 결론을 바꿀 근거로 확정하지 않았으며, 과제 담당자와 구성 차이를 확인하도록 안내합니다. (가상 설명)';
+    }
+    return { ok: true, impact: im };
+  }
+
+  // ---------- 개발과제 수정 ----------
+  function updateTask(state, taskId, patch) {
+    const t = state.tasks.find(function (x) { return x.id === taskId; });
+    if (!t) return { ok: false };
+    const next = {
+      problem: String(patch.problem == null ? t.problem : patch.problem).trim().slice(0, 500),
+      constraints: (Array.isArray(patch.constraints) ? patch.constraints : String(patch.constraints || '').split('\n'))
+        .map(function (s) { return String(s).trim().slice(0, 120); }).filter(Boolean).slice(0, 12),
+      decisionDate: /^\d{4}-\d{2}-\d{2}$/.test(patch.decisionDate || '') ? patch.decisionDate : t.decisionDate
+    };
+    if (!next.problem) return { ok: false, reason: '해결하려는 문제를 비워 둘 수 없습니다' };
+    t.history.push({ at: nowIso(), by: '연구자', before: { problem: t.problem, constraints: t.constraints.slice(), decisionDate: t.decisionDate } });
+    t.problem = next.problem; t.constraints = next.constraints; t.decisionDate = next.decisionDate;
+    t.editedBy = '연구자 수정';
+    return { ok: true, task: t };
+  }
+
+  // ---------- 찾아보기 ----------
+  function expandQuery(q) {
+    const words = String(q || '').trim().split(/\s+/).filter(Boolean);
+    const terms = new Set(); const used = [];
+    words.forEach(function (w) {
+      terms.add(w);
+      D.GLOSSARY.forEach(function (g) {
+        if (w.indexOf(g.term) >= 0 || g.expand.indexOf(w) >= 0) {
+          g.expand.forEach(function (e) { if (e !== w) { terms.add(e); used.push(e); } });
+        }
+      });
+    });
+    return { words: words, terms: Array.from(terms), expandedWith: Array.from(new Set(used)) };
+  }
+
+  function searchAll(state, q, opts) {
+    opts = opts || {};
+    const ex = expandQuery(q);
+    function hit(text) { return !ex.words.length || ex.terms.some(function (t) { return text.indexOf(t) >= 0; }); }
+    const cards = state.cards.filter(function (c) {
+      if (opts.sub && c.spec.filters.sub !== opts.sub) return false;
+      if (opts.type && c.type !== opts.type) return false;
+      return hit(c.title + ' ' + c.type + ' ' + c.report + ' ' + (c.spec.filters.sub ? D.SUBS[c.spec.filters.sub] : ''));
+    });
+    const docs = ex.words.length ? docsInBaseline(state).filter(function (d) {
+      if (opts.sub && d.sub !== opts.sub) return false;
+      return hit(d.title + ' ' + d.mech + ' ' + D.SUBS[d.sub] + ' ' + d.applicant + ' ' + d.id + ' ' + d.claim);
+    }) : [];
+    return { cards: cards, docs: docs, expandedWith: ex.expandedWith };
+  }
+
+  // ---------- CSV ----------
+  function csvCell(v) {
+    let s = v == null ? '' : String(v);
+    if (/^[=+\-@\t\r]/.test(s)) s = "'" + s;           // 스프레드시트 수식 주입 방지
+    if (/[",\r\n]/.test(s)) s = '"' + s.replace(/"/g, '""') + '"';
+    return s;
+  }
+  function csvForRun(run) {
+    const lines = [];
+    const add = function (arr) { lines.push(arr.map(csvCell).join(',')); };
+    add(['# FDE 가상 데이터 시연 — 실제 특허 자료가 아닙니다']);
+    add(['실행 번호', run.id]); add(['기준선', run.baseline]); add(['실행 시각', run.createdAt]);
+    add(['조건', specChips(run.spec).join(' / ')]);
+    add(['조건 내 문헌', run.totals.docs]); add(['고유 패밀리', run.totals.families]);
+    lines.push('');
+    const u = run.spec.unit === 'family' ? '패밀리 수' : '문헌 수';
+    if (run.spec.groupBy === 'matrix') {
+      add(['세부 분류'].concat(run.matrix.cols.map(function (m) { return m + '(' + u + ')'; })));
+      run.matrix.rows.forEach(function (s) {
+        add([D.SUBS[s]].concat(run.matrix.cols.map(function (m) { return run.matrix.cells[s + '|' + m].count; })));
+      });
+    } else {
+      add([GROUP_LABEL[run.spec.groupBy], u]);
+      run.rows.forEach(function (r) { add([r.label, r.count]); });
+    }
+    lines.push('');
+    add(['근거 문헌 ID', '가상 패밀리', '국가', '공개연도', '세부 분류', '결합 수단', '가상 출원인', '제목']);
+    run.docIds.forEach(function (id) {
+      const d = getDoc(id);
+      add([d.id, d.familyId, d.country, d.year, D.SUBS[d.sub], d.mech, d.applicant, d.title]);
+    });
+    return lines.join('\r\n');
+  }
+
+  // ---------- 상태 생성·저장 ----------
+  function createInitialState() {
+    const v1Ids = D.DOCS.filter(function (d) { return d.stage === 'V1'; }).map(function (d) { return d.id; });
+    const state = {
+      schema: SCHEMA, role: 'researcher', view: 'today', activeTaskId: 'TASK-1', guideStep: 0, guideOpen: false,
+      baselines: [{ id: 'V1', approvedAt: D.V1_DATE, approver: D.PROJECT.fde, docIds: v1Ids, note: '최초 정제 DB 승인(가상)' }],
+      currentBaseline: 'V1',
+      candidates: D.DOCS.filter(function (d) { return d.stage === 'candidate'; }).map(function (d) {
+        const famV1 = D.DOCS.some(function (x) { return x.familyId === d.familyId && x.stage === 'V1'; });
+        return { docId: d.id, kind: famV1 ? '기존 패밀리 추가' : '신규 패밀리', reviewed: false };
+      }),
+      runs: {}, runSeq: 0, chat: [], msgSeq: 0, ctx: null,
+      saved: [], savedSeq: 0, comparisons: [],
+      requests: [], reqSeq: 0, unreadAnswers: 0,
+      impacts: [], impSeq: 0, gapChanges: [],
+      tasks: clone(D.TASKS).map(function (t) { t.editedBy = 'FDE 초안'; t.history = []; return t; }),
+      cards: []
+    };
+    state.cards = D.CARDS.map(function (c) {
+      const run = runAnalysis(state, c.spec, '카드 작성(' + c.id + ')');
+      return { id: c.id, type: c.type, layer: c.layer, tasks: c.tasks.slice(), title: c.title, spec: clone(c.spec),
+        evidence: c.evidence.slice(), report: c.report, recheck: c.recheck, runIds: [run.id] };
+    });
+    return state;
+  }
+
+  const STORE_KEY = 'fde-demo-state';
+  function serialize(state) { return JSON.stringify(state); }
+  function validateState(s) {
+    if (!s || typeof s !== 'object' || s.schema !== SCHEMA) return false;
+    if (!Array.isArray(s.baselines) || !baselineOf(s, s.currentBaseline)) return false;
+    if (!s.baselines.every(function (b) { return b.docIds.every(function (id) { return !!DOC_BY_ID[id]; }); })) return false;
+    if (!s.runs || !Array.isArray(s.chat) || !Array.isArray(s.cards) || !Array.isArray(s.tasks)) return false;
+    return true;
+  }
+  function saveToStorage(storage, state) {
+    try { storage.setItem(STORE_KEY, serialize(state)); return true; } catch (e) { return false; }
+  }
+  function loadFromStorage(storage) {
+    try {
+      const raw = storage.getItem(STORE_KEY);
+      if (!raw) return null;
+      const s = JSON.parse(raw);
+      if (!validateState(s)) return null;
+      Object.keys(s.runs).forEach(function (k) { deepFreeze(s.runs[k]); });
+      return s;
+    } catch (e) { return null; }
+  }
+  function clearStorage(storage) { try { storage.removeItem(STORE_KEY); return true; } catch (e) { return false; } }
+
+  global.FDE = {
+    esc: esc, getDoc: getDoc, clone: clone,
+    docsInBaseline: docsInBaseline, baselineOf: baselineOf, candidateDocs: candidateDocs, uniqueFamilies: uniqueFamilies,
+    matchFilters: matchFilters, aggregate: aggregate, runAnalysis: runAnalysis, describeRun: describeRun,
+    specChips: specChips, GROUP_LABEL: GROUP_LABEL, MECH_EXPLAIN: MECH_EXPLAIN, SUPPORTED: SUPPORTED,
+    parseQuestion: parseQuestion, ask: ask, clearCtxFilter: clearCtxFilter,
+    saveRun: saveRun, rerunSaved: rerunSaved, rerunCard: rerunCard, compareRuns: compareRuns,
+    requestReview: requestReview, publishAnswer: publishAnswer,
+    reviewCandidate: reviewCandidate, canPublish: canPublish, publishBaseline: publishBaseline, advanceImpact: advanceImpact,
+    updateTask: updateTask, expandQuery: expandQuery, searchAll: searchAll,
+    csvCell: csvCell, csvForRun: csvForRun,
+    createInitialState: createInitialState, validateState: validateState,
+    saveToStorage: saveToStorage, loadFromStorage: loadFromStorage, clearStorage: clearStorage, STORE_KEY: STORE_KEY
+  };
+})(typeof window !== 'undefined' ? window : globalThis);
+</script>
+
+<!-- ===================================================================
+     3. 화면 렌더링과 이벤트
+     =================================================================== -->
+<script id="fde-ui">
+(function () {
+  'use strict';
+  const D = window.FDE_DATA, F = window.FDE, esc = F.esc;
+  let state = F.loadFromStorage(safeStorage()) || F.createInitialState();
+  let storageOk = true;
+  let drawer = null;          // {kind:'doc'|'card', id, runId?}
+  let editingTask = null;
+  let browse = { q: '', sub: '', type: '' };
+  let toastTimer = null;
+
+  function safeStorage() {
+    try { return window.localStorage; } catch (e) { return { getItem: function () { return null; }, setItem: function () { throw new Error('blocked'); }, removeItem: function () {} }; }
+  }
+
+  const VIEWS = [
+    ['today', '오늘 볼 것'], ['ask', '물어보기'], ['browse', '결과 찾아보기'], ['tasks', '내 개발과제'],
+    ['updates', '새로 달라진 점'], ['saved', '저장 결과']
+  ];
+
+  const GUIDE = [
+    { t: '1. 발견', b: '오늘 볼 것에서 내 개발과제와 연결된 질문형 카드를 엽니다. 200쪽 보고서 안에 묻혀 있던 결과가 과제 단위로 다시 떠오르는 것을 보여 줍니다.', go: function () { setRole('researcher'); go('today'); } },
+    { t: '2. 질문·추세', b: '물어보기에서 “연도별 추세를 보여 주세요”를 보냅니다. 기준선 V1 36건, 공개연도 기준, 배열에서 계산한 그래프와 실행 번호를 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('연도별 추세를 보여 주세요'); } },
+    { t: '3. 후속 조건', b: '“그중 국내만”, 이어서 “패밀리 단위로 보여 주세요”를 보냅니다. 조건이 유지·추가되고 집계 단위가 바뀌는 것을 조건 표시줄에서 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('그중 국내만'); } },
+    { t: '4. 근거·저장', b: '답변의 근거 문헌을 눌러 가상 원문·청구항·보고서 위치를 엽니다. “결과 저장”과 “CSV 내려받기”로 같은 조건의 자료를 남깁니다.', go: function () { setRole('researcher'); go('ask'); } },
+    { t: '5. 전문 검토', b: '“쐐기 구조가 특허에 걸리나요?”를 보내고 전문 검토를 요청합니다. 역할을 컨설턴트로 바꿔 작업대에서 가상 답변을 공개한 뒤, 연구자 화면에서 도착을 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('쐐기 구조가 특허에 걸리나요?'); } },
+    { t: '6. 갱신', b: '컨설턴트 작업대에서 신규 후보 6건을 검토하고 V2 기준선을 공개합니다. 42건·21개 패밀리로 바뀌고, 과제 영향은 “확인 필요”로 표시됩니다.', go: function () { setRole('fde'); go('workbench'); } },
+    { t: '7. 과거·최신 비교', b: '저장 결과에서 V1 수치가 그대로인지 확인하고 “최신 기준선으로 재실행”을 누릅니다. 새 실행 번호의 V2 결과가 기존 결과와 나란히 비교됩니다.', go: function () { setRole('researcher'); go('saved'); } }
+  ];
+
+  // ---------- 공통 ----------
+  function commit(msg) {
+    storageOk = F.saveToStorage(safeStorage(), state);
+    render();
+    if (msg) toast(msg);
+  }
+  function toast(msg) {
+    const el = document.getElementById('toast-live') || document.createElement('div');
+    el.id = 'toast-live'; el.className = 'toast'; el.setAttribute('role', 'status');
+    el.textContent = msg;
+    document.body.appendChild(el);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { el.remove(); }, 2600);
+  }
+  function go(view) {
+    state.view = view; drawer = null; commit();
+    const last = view === 'ask' && document.querySelector('#thread > :last-child');
+    if (last && state.chat.length) last.scrollIntoView({ block: 'start' }); else window.scrollTo(0, 0);
+  }
+  function setRole(r) { state.role = r; if (r !== 'fde' && state.view === 'workbench') state.view = 'today'; commit(); }
+  function prefill(text) { setTimeout(function () { const i = document.getElementById('ask-input'); if (i) { i.value = text; i.focus(); } }, 0); }
+  function task(id) { return state.tasks.find(function (t) { return t.id === id; }); }
+  function curBase() { return F.baselineOf(state, state.currentBaseline); }
+
+  const LAYER = {
+    calc: ['b-calc', '계산 결과 · 승인 기준선 집계'],
+    explain: ['b-explain', '계산 결과 + 가상 설명(미검토)'],
+    review: ['b-review', '전문 검토 필요 · 자동 결론 없음'],
+    published: ['b-info', '공개된 가상 검토 답변 예시']
+  };
+  function layerBadge(l) { const x = LAYER[l] || LAYER.calc; return '<span class="badge ' + x[0] + '">' + esc(x[1]) + '</span>'; }
+  function lvl(v) { return D.LEVELS[v]; }
+  function docChip(id) { return '<button class="doc-chip" data-act="doc" data-id="' + esc(id) + '">' + esc(id) + '</button>'; }
+
+  // ---------- 차트·표 ----------
+  function chartSvg(run) {
+    const rows = run.rows; if (!rows.length) return '';
+    const max = Math.max(1, Math.max.apply(null, rows.map(function (r) { return r.count; })));
+    const u = run.spec.unit === 'family' ? '패밀리 수' : '문헌 수';
+    if (run.spec.groupBy === 'year') {
+      const W = 560, H = 210, pl = 30, pb = 28, bw = (W - pl - 10) / rows.length;
+      let g = '';
+      rows.forEach(function (r, i) {
+        const h = (H - pb - 22) * r.count / max, x = pl + i * bw + bw * 0.18, y = H - pb - h;
+        g += '<rect x="' + x.toFixed(1) + '" y="' + y.toFixed(1) + '" width="' + (bw * 0.64).toFixed(1) + '" height="' + h.toFixed(1) + '" rx="3" fill="var(--bar)"><title>' + esc(r.label + ' ' + r.count) + '</title></rect>' +
+          '<text class="val" x="' + (x + bw * 0.32).toFixed(1) + '" y="' + (y - 5).toFixed(1) + '" text-anchor="middle">' + r.count + '</text>' +
+          '<text x="' + (x + bw * 0.32).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + esc(String(r.key)) + '</text>';
+      });
+      return '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(F.GROUP_LABEL.year + ' ' + u) + '">' +
+        '<line x1="' + pl + '" x2="' + (W - 6) + '" y1="' + (H - pb) + '" y2="' + (H - pb) + '" stroke="var(--line)"/>' + g + '</svg>';
+    }
+    const W = 560, rh = 28, pl = 150, H = rows.length * rh + 8;
+    let g = '';
+    rows.forEach(function (r, i) {
+      const w = (W - pl - 40) * r.count / max, y = 4 + i * rh;
+      g += '<text x="' + (pl - 8) + '" y="' + (y + 17) + '" text-anchor="end">' + esc(r.label.length > 20 ? r.label.slice(0, 19) + '…' : r.label) + '</text>' +
+        '<rect x="' + pl + '" y="' + (y + 4) + '" width="' + Math.max(w, 1).toFixed(1) + '" height="' + (rh - 10) + '" rx="3" fill="' + (r.count ? 'var(--bar)' : 'var(--bar2)') + '"><title>' + esc(r.label + ' ' + r.count) + '</title></rect>' +
+        '<text class="val" x="' + (pl + w + 6).toFixed(1) + '" y="' + (y + 17) + '">' + r.count + '</text>';
+    });
+    return '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc((F.GROUP_LABEL[run.spec.groupBy] || '') + ' ' + u) + '">' + g + '</svg>';
+  }
+
+  function resultTable(run) {
+    const u = run.spec.unit === 'family' ? '패밀리 수' : '문헌 수';
+    if (run.spec.groupBy === 'matrix') {
+      let h = '<div class="tablewrap"><table><caption class="sr">분류 × 결합 수단 ' + u + '</caption><thead><tr><th>세부 분류 \\ 결합 수단</th>' +
+        run.matrix.cols.map(function (m) { return '<th class="num">' + esc(m) + '</th>'; }).join('') + '</tr></thead><tbody>';
+      run.matrix.rows.forEach(function (s) {
+        h += '<tr><th>' + esc(D.SUBS[s]) + '</th>' + run.matrix.cols.map(function (m) {
+          const c = run.matrix.cells[s + '|' + m].count;
+          return '<td class="mcell ' + (c === 0 ? 'zero' : c === 1 ? 'low' : '') + '">' + c + '</td>';
+        }).join('') + '</tr>';
+      });
+      return h + '</tbody></table></div><p class="small muted">셀 값은 ' + u + '입니다. 0은 이 가상 배열에서 관측되지 않았다는 뜻이며, 비어 있는 칸이 곧 발명 가능 영역이라는 뜻은 아닙니다.</p>';
+    }
+    let h = '<div class="tablewrap"><table><thead><tr><th>' + esc(F.GROUP_LABEL[run.spec.groupBy]) + '</th><th class="num">' + u + '</th><th>해당 문헌</th></tr></thead><tbody>';
+    run.rows.forEach(function (r) {
+      h += '<tr><td>' + esc(r.label) + '</td><td class="num">' + r.count + '</td><td class="small muted">' + (r.docIds.length ? r.docIds.length + '건' : '—') + '</td></tr>';
+    });
+    h += '</tbody><tfoot><tr><th>조건 내 전체</th><th class="num">' + (run.spec.unit === 'family' ? run.totals.families : run.totals.docs) + '</th><th class="small muted">문헌 ' + run.totals.docs + '건 · 고유 패밀리 ' + run.totals.families + '개</th></tr></tfoot></table></div>';
+    return h;
+  }
+
+  function condChips(spec, removable) {
+    return F.specChips(spec).map(function (c) { return '<span class="chip">' + esc(c) + '</span>'; }).join(' ');
+  }
+
+  function runBlock(run, opts) {
+    opts = opts || {};
+    const lines = F.describeRun(run);
+    let h = '<div class="sec"><div class="sec-title">결론</div>' + lines.map(function (l) { return '<div>' + esc(l) + '</div>'; }).join('') + '</div>';
+    if (opts.explain && run.spec.groupBy === 'mech') {
+      h += '<div class="sec"><div class="sec-title">가상 설명 · 미검토</div><ul class="small" style="margin:0;padding-left:18px">' +
+        run.rows.filter(function (r) { return r.count; }).map(function (r) { return '<li><b>' + esc(r.label) + '</b>: ' + esc(F.MECH_EXPLAIN[r.key]) + '</li>'; }).join('') + '</ul></div>';
+    }
+    h += '<div class="sec"><div class="sec-title">결과</div>' + (run.spec.groupBy === 'matrix' ? '' : chartSvg(run)) + resultTable(run) + '</div>';
+    h += '<div class="sec"><div class="sec-title">조건</div><div class="row"><span class="chip"><b>기준선 ' + esc(run.baseline) + '</b></span><span class="chip">실행 ' + esc(run.id) + '</span>' + condChips(run.spec) + '</div></div>';
+    const ev = run.docIds;
+    h += '<div class="sec"><div class="sec-title">근거 문헌 (' + ev.length + '건)</div><div class="row">' + ev.slice(0, 8).map(docChip).join('') +
+      (ev.length > 8 ? '<details><summary class="small">나머지 ' + (ev.length - 8) + '건 보기</summary><div class="row" style="margin-top:6px">' + ev.slice(8).map(docChip).join('') + '</div></details>' : '') + '</div></div>';
+    if (opts.actions !== false) {
+      const saved = state.saved.find(function (s) { return s.runId === run.id; });
+      h += '<div class="sec"><div class="sec-title">다음 행동</div><div class="row">' +
+        (saved ? '<span class="badge b-calc">저장됨 ' + esc(saved.id) + '</span>' : '<button class="btn small primary" data-act="save" data-id="' + esc(run.id) + '">결과 저장</button>') +
+        '<button class="btn small" data-act="csv" data-id="' + esc(run.id) + '">CSV 내려받기</button>' +
+        (opts.followups || '') + '</div></div>';
+    }
+    return h;
+  }
+
+  function changesNote(ch) {
+    if (!ch) return '';
+    const parts = [];
+    if (ch.newTopic) parts.push('<b>새 주제로 분석합니다.</b>');
+    if (ch.kept.length) parts.push('유지: ' + ch.kept.map(esc).join(', '));
+    if (ch.added.length) parts.push('추가: ' + ch.added.map(esc).join(', '));
+    if (ch.changed.length) parts.push('변경: ' + ch.changed.map(esc).join(', '));
+    if (ch.removed.length) parts.push('해제: ' + ch.removed.map(esc).join(', '));
+    if (!parts.length) return '';
+    return '<div class="note ' + (ch.newTopic || ch.removed.length ? 'warn' : '') + '">조건 변화 — ' + parts.join(' · ') + '</div>';
+  }
+
+  // ---------- 화면: 오늘 볼 것 ----------
+  function viewToday() {
+    const t = task(state.activeTaskId);
+    const related = state.cards.filter(function (c) { return c.tasks.indexOf(t.id) >= 0; });
+    const answered = state.requests.filter(function (r) { return r.status === '답변 공개'; });
+    const openImpacts = state.impacts.filter(function (i) { return i.status !== '승인된 설명'; });
+    let h = '<h1>오늘 볼 것</h1><p class="lead">내 개발과제와 연결된 결과를 먼저 보여 드립니다. 질문하지 않아도 예전 결과를 다시 만날 수 있습니다.</p>';
+    h += '<div class="row" role="group" aria-label="개발과제 선택">' + state.tasks.map(function (x) {
+      return '<button class="btn small' + (x.id === t.id ? ' primary' : '') + '" data-act="task-select" data-id="' + x.id + '" aria-pressed="' + (x.id === t.id) + '">' + esc(x.title) + '</button>';
+    }).join('') + '</div>';
+    h += '<div class="panel" style="margin-top:12px"><div class="row"><h3 style="margin:0">내 과제: ' + esc(t.title) + '</h3><span class="badge ' + (t.editedBy === 'FDE 초안' ? 'b-neutral' : 'b-info') + '">' + esc(t.editedBy) + '</span><span class="spacer"></span><span class="small muted">결정 시점 ' + esc(t.decisionDate) + '</span></div>' +
+      '<p style="margin:8px 0 4px">' + esc(t.problem) + '</p><div class="small muted">제약: ' + t.constraints.map(esc).join(' · ') + '</div>' +
+      '<div class="row" style="margin-top:8px"><button class="btn small" data-act="nav" data-id="tasks">과제 고치기</button></div></div>';
+
+    // 소식
+    let news = '';
+    if (state.currentBaseline === 'V1') news += '<div class="note">새로 도착(정리 중) <b>' + state.candidates.length + '건</b> — 컨설턴트 검토 전이라 검색·집계에 포함하지 않습니다.</div>';
+    else news += '<div class="note warn">기준선 <b>V2</b>가 공개되었습니다. 과제 영향 확인 <b>' + openImpacts.length + '건</b>이 진행 중입니다. <button class="link" data-act="nav" data-id="updates">새로 달라진 점 보기</button></div>';
+    if (answered.length) news += '<div class="note ok">전문 검토 답변(가상 예시) <b>' + answered.length + '건</b>이 도착했습니다. <button class="link" data-act="nav" data-id="ask">물어보기에서 보기</button></div>';
+    h += '<h2>새 소식</h2>' + news;
+
+    h += '<h2>이 과제와 연결된 결과 카드</h2><div class="grid2">' + related.map(cardItem).join('') + '</div>';
+    const others = state.cards.filter(function (c) { return related.indexOf(c) < 0; });
+    if (others.length) h += '<h2>다른 과제의 카드</h2><div class="grid3">' + others.map(cardItem).join('') + '</div>';
+    h += '<h2>바로 물어보기</h2><div class="examples">' + ['연도별 추세를 보여 주세요', '흔들림을 줄이는 방식은 무엇인가요?', '공백 후보를 보여 주세요'].map(function (q) {
+      return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>';
+    }).join('') + '</div>';
+    return h;
+  }
+
+  function cardItem(c) {
+    const last = state.runs[c.runIds[c.runIds.length - 1]];
+    const stale = last.baseline !== state.currentBaseline;
+    const layer = LAYER[c.layer];
+    return '<button class="card-item" data-act="card" data-id="' + c.id + '"><div class="row"><span class="badge b-neutral">' + esc(c.type) + '</span><span class="badge ' + layer[0] + '">' + esc(c.layer === 'calc' ? '계산 결과' : c.layer === 'explain' ? '가상 설명' : '검토 필요 표시') + '</span>' +
+      (stale ? '<span class="badge b-pending">최신 기준선 재계산 가능</span>' : '') + '</div><div class="q">' + esc(c.title) + '</div>' +
+      '<div class="small muted">' + esc(c.report) + ' · 기준선 ' + esc(last.baseline) + '</div></button>';
+  }
+
+  // ---------- 화면: 물어보기 ----------
+  function viewAsk() {
+    let h = '<h1>물어보기</h1><p class="lead">수치는 승인된 기준선 배열에서 계산합니다. 응답은 규칙 기반이며 실제 AI가 연결되어 있지 않습니다.</p>';
+    h += '<div class="condbar"><div class="row"><span class="small muted">적용 중인 조건</span>';
+    if (state.ctx) {
+      const s = state.ctx.spec;
+      h += '<span class="chip"><b>기준선 ' + esc(state.currentBaseline) + '</b></span><span class="chip">' + esc(F.GROUP_LABEL[s.groupBy]) + '</span>';
+      h += '<span class="chip">집계 단위: ' + (s.unit === 'family' ? '패밀리' : '문헌') + (s.unit === 'family' ? ' <button aria-label="집계 단위 해제" data-act="clear-filter" data-id="unit">×</button>' : '') + '</span>';
+      Object.keys(s.filters).forEach(function (k) {
+        h += '<span class="chip">' + esc(F.specChips({ groupBy: s.groupBy, unit: s.unit, filters: (function () { const o = {}; o[k] = s.filters[k]; return o; })() })[2]) +
+          ' <button aria-label="조건 해제" data-act="clear-filter" data-id="' + k + '">×</button></span>';
+      });
+      h += '<button class="btn small" data-act="quick-ask" data-q="조건 초기화">조건 초기화</button>';
+    } else {
+      h += '<span class="chip">없음 — 첫 질문이 기본 조건(기준선 ' + esc(state.currentBaseline) + ' 전체, 문헌 단위)으로 계산됩니다</span>';
+    }
+    h += '</div></div>';
+    h += '<div class="thread" id="thread">';
+    if (!state.chat.length) h += '<div class="msg-bot"><b>무엇을 확인할까요?</b><div class="small muted">아래 예시 질문을 누르거나 직접 입력하세요. 지원하지 않는 질문에는 답을 꾸며내지 않고 가능한 질문을 안내합니다.</div></div>';
+    state.chat.forEach(function (m) { h += msgHtml(m); });
+    h += '</div>';
+    h += '<div class="askbox"><form id="ask-form" autocomplete="off"><label class="sr" for="ask-input">질문</label><input id="ask-input" maxlength="300" placeholder="예: 연도별 추세를 보여 주세요"><button class="btn primary" type="submit">보내기</button></form>' +
+      '<div class="examples">' + F.SUPPORTED.map(function (q) { return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('') + '</div></div>';
+    return h;
+  }
+
+  function msgHtml(m) {
+    if (m.from === 'user') return '<div class="msg-user">' + esc(m.text) + '</div>';
+    if (m.type === 'analysis') {
+      const run = state.runs[m.runId];
+      const fu = [];
+      if (run.spec.filters.country !== 'KR') fu.push(['그중 국내만', '국내만']);
+      fu.push(run.spec.unit === 'family' ? ['문헌 단위로 보여 주세요', '문헌 단위로'] : ['패밀리 단위로 보여 주세요', '패밀리 단위로']);
+      if (run.spec.groupBy !== 'year') fu.push(['연도별 추세를 보여 주세요', '연도별로']);
+      const followups = fu.map(function (x) { return '<button class="btn small" data-act="quick-ask" data-q="' + esc(x[0]) + '">' + esc(x[1]) + '</button>'; }).join('');
+      return '<div class="msg-bot" data-run="' + esc(run.id) + '"><div class="row">' + layerBadge(m.layer) + '<span class="small muted">' + esc(run.id) + ' · 기준선 ' + esc(run.baseline) + '</span></div>' +
+        changesNote(m.changes) + runBlock(run, { explain: m.layer === 'explain', followups: followups }) + '</div>';
+    }
+    if (m.type === 'info') return '<div class="msg-bot">' + esc(m.text) + '</div>';
+    if (m.type === 'doc') {
+      if (!m.found) return '<div class="msg-bot">' + esc(m.docId) + '는 이 시연 데이터에 없는 번호입니다. DEMO-KR-0001처럼 입력해 주세요.</div>';
+      const d = F.getDoc(m.docId);
+      return '<div class="msg-bot"><div class="row">' + (m.inBaseline ? layerBadge('calc') : '<span class="badge b-pending">정리 중 · 집계 제외 · 등급 미확정</span>') + '</div>' +
+        '<div class="sec"><b>' + esc(d.id) + '</b> ' + esc(d.title) + '</div><div class="small muted">' + esc(d.applicant) + ' · ' + esc(D.COUNTRIES[d.country]) + ' · ' + d.year + ' · ' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</div>' +
+        '<div class="row" style="margin-top:8px"><button class="btn small" data-act="doc" data-id="' + esc(d.id) + '">가상 원문·근거 열기</button></div></div>';
+    }
+    if (m.type === 'review') {
+      const req = m.requestId ? state.requests.find(function (r) { return r.id === m.requestId; }) : null;
+      let act;
+      if (!req) act = '<button class="btn small primary" data-act="request" data-id="' + esc(m.id) + '">전문 검토 요청</button>';
+      else if (req.status === '답변 공개') act = '<span class="badge b-info">' + esc(req.id) + ' 답변 공개됨</span> <span class="small muted">아래에 도착한 답변을 확인하세요.</span>';
+      else act = '<span class="badge b-pending">' + esc(req.id) + ' 검토 요청됨 · 컨설턴트 대기</span>';
+      return '<div class="msg-bot">' + layerBadge('review') +
+        '<div class="sec"><div class="sec-title">결론</div>이 질문은 침해·회피·무효에 관한 <b>새로운 권리 판단</b>이므로 자동으로 결론을 내지 않습니다. 관련 문헌과 쟁점 초안만 보여 드리고 전문 검토로 연결합니다.</div>' +
+        '<div class="sec"><div class="sec-title">관련 문헌 · 권리검토 필요도 높음 (' + m.docIds.length + '건, 기준선 ' + esc(state.currentBaseline) + ')</div><div class="row">' + m.docIds.map(docChip).join('') + '</div></div>' +
+        '<div class="sec"><div class="sec-title">쟁점 초안</div><div class="small">과제 「' + esc(task(m.taskId).title) + '」의 구성이 위 문헌의 가상 청구항 1 구성요소를 모두 포함하는지 대비가 필요합니다.</div></div>' +
+        '<div class="sec"><div class="sec-title">다음 행동</div><div class="row">' + act + '</div></div></div>';
+    }
+    if (m.type === 'reviewAnswer') {
+      const r = state.requests.find(function (x) { return x.id === m.reqId; });
+      const a = r.answer;
+      return '<div class="msg-bot" style="border-color:#b7c8f2">' + layerBadge('published') + ' <span class="small muted">' + esc(r.id) + ' · “' + esc(r.question) + '”</span>' +
+        '<dl class="kv"><dt>검토자</dt><dd>' + esc(a.reviewer) + '</dd><dt>쟁점</dt><dd>' + esc(a.issue) + '</dd><dt>적용 전제</dt><dd>' + esc(a.premise) + '</dd><dt>의견</dt><dd>' + esc(a.opinion) + '</dd><dt>다음 단계</dt><dd>' + esc(a.next) + '</dd></dl>' +
+        '<div class="note warn">가상 예시입니다. 실제 변리사 의견이 아니며 정식 감정·의견서가 아닙니다.</div></div>';
+    }
+    if (m.type === 'unsupported') {
+      return '<div class="msg-bot"><span class="badge b-neutral">지원하지 않는 질문</span><div class="sec">이 시연은 정해진 유형의 질문만 처리하며, 처리할 수 없는 질문에 답을 꾸며내지 않습니다. 다음과 같은 질문을 해 보세요.</div><div class="examples">' +
+        m.supported.map(function (q) { return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('') + '</div></div>';
+    }
+    return '';
+  }
+
+  // ---------- 화면: 결과 찾아보기 ----------
+  function viewBrowse() {
+    const types = Array.from(new Set(state.cards.map(function (c) { return c.type; })));
+    let h = '<h1>결과 찾아보기</h1><p class="lead">질문형 카드가 먼저, 문헌이 다음에 나옵니다. 정리 중인 신규 문헌은 섞지 않습니다.</p>';
+    h += '<div class="panel"><div class="grid3"><div><label class="f" for="browse-q">검색어 (제품 말로 찾아도 됩니다)</label><input type="text" id="browse-q" value="' + esc(browse.q) + '" placeholder="예: 흔들림, 상판, 자석"></div>' +
+      '<div><label class="f" for="browse-sub">세부 분류</label><select id="browse-sub"><option value="">전체</option>' + Object.keys(D.SUBS).map(function (k) { return '<option value="' + k + '"' + (browse.sub === k ? ' selected' : '') + '>' + esc(D.SUBS[k]) + '</option>'; }).join('') + '</select></div>' +
+      '<div><label class="f" for="browse-type">카드 유형</label><select id="browse-type"><option value="">전체</option>' + types.map(function (t) { return '<option' + (browse.type === t ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></div></div></div>';
+    h += '<div id="browse-results">' + browseResults() + '</div>';
+    return h;
+  }
+  function browseResults() {
+    const r = F.searchAll(state, browse.q, { sub: browse.sub, type: browse.type });
+    let h = '';
+    if (r.expandedWith.length) h += '<div class="note">용어사전으로 넓혀 찾은 말: ' + r.expandedWith.map(esc).join(', ') + '</div>';
+    h += '<h2>카드 ' + r.cards.length + '건</h2>';
+    h += r.cards.length ? '<div class="grid2">' + r.cards.map(cardItem).join('') + '</div>' : '';
+    if (browse.q) {
+      h += '<h2>문헌 ' + r.docs.length + '건 <span class="small muted">(기준선 ' + esc(state.currentBaseline) + ')</span></h2>';
+      h += r.docs.length ? '<div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>분류</th><th>수단</th><th>연도</th></tr></thead><tbody>' + r.docs.slice(0, 30).map(function (d) {
+        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td>' + esc(D.SUBS[d.sub]) + '</td><td>' + esc(d.mech) + '</td><td>' + d.year + '</td></tr>';
+      }).join('') + '</tbody></table></div>' : '';
+    }
+    if (!r.cards.length && !r.docs.length) {
+      h += '<div class="note warn">결과가 없습니다. 이 프로젝트 범위 밖일 수 있습니다. <button class="link" data-act="quick-ask" data-q="' + esc(browse.q || '') + '">물어보기로 넘기기</button> (실제 서비스에서는 0건 검색어를 용어사전 후보로 기록합니다)</div>';
+    }
+    return h;
+  }
+
+  // ---------- 화면: 내 개발과제 ----------
+  function viewTasks() {
+    let h = '<h1>내 개발과제</h1><p class="lead">컨설턴트가 킥오프에서 만든 초안이 들어 있습니다. 빈 칸을 채우는 대신 고치기만 하면 됩니다.</p>';
+    state.tasks.forEach(function (t) {
+      const docs = F.docsInBaseline(state).filter(function (d) { return d.sub === t.sub && t.mechs.indexOf(d.mech) >= 0; });
+      const cards = state.cards.filter(function (c) { return c.tasks.indexOf(t.id) >= 0; });
+      const imps = state.impacts.filter(function (i) { return i.taskId === t.id; });
+      h += '<div class="panel" id="task-' + t.id + '"><div class="row"><h3 style="margin:0">' + esc(t.title) + '</h3><span class="badge ' + (t.editedBy === 'FDE 초안' ? 'b-neutral' : 'b-info') + '">' + esc(t.editedBy) + '</span>' +
+        imps.map(function (i) { return '<span class="badge ' + (i.status === '승인된 설명' ? 'b-calc' : 'b-pending') + '">영향: ' + esc(i.status) + '</span>'; }).join('') +
+        '<span class="spacer"></span><span class="small muted">' + esc(t.owner) + '</span></div>';
+      if (editingTask === t.id) {
+        h += '<form data-form="task" data-id="' + t.id + '"><label class="f" for="p-' + t.id + '">해결하려는 문제</label><textarea id="p-' + t.id + '" name="problem" rows="2" maxlength="500">' + esc(t.problem) + '</textarea>' +
+          '<label class="f" for="c-' + t.id + '">제약 조건 (한 줄에 하나)</label><textarea id="c-' + t.id + '" name="constraints" rows="3">' + esc(t.constraints.join('\n')) + '</textarea>' +
+          '<label class="f" for="d-' + t.id + '">의사결정 시점</label><input type="date" id="d-' + t.id + '" name="decisionDate" value="' + esc(t.decisionDate) + '">' +
+          '<div class="row" style="margin-top:10px"><button class="btn primary small" type="submit">저장</button><button class="btn small" type="button" data-act="task-cancel">취소</button></div></form>';
+      } else {
+        h += '<dl class="kv"><dt>해결하려는 문제</dt><dd>' + esc(t.problem) + '</dd><dt>관심 구성</dt><dd>' + t.components.map(esc).join(', ') + '</dd>' +
+          '<dt>관심 분류·수단</dt><dd>' + esc(D.SUBS[t.sub]) + ' · ' + t.mechs.map(esc).join(', ') + '</dd><dt>제약</dt><dd>' + t.constraints.map(esc).join(' · ') + '</dd>' +
+          '<dt>의사결정 시점</dt><dd>' + esc(t.decisionDate) + '</dd><dt>연결 카드</dt><dd>' + cards.map(function (c) { return '<button class="link" data-act="card" data-id="' + c.id + '">' + esc(c.title) + '</button>'; }).join('<br>') + '</dd>' +
+          '<dt>관련 문헌</dt><dd>' + docs.length + '건 (기준선 ' + esc(state.currentBaseline) + ')</dd></dl>' +
+          '<div class="row"><button class="btn small" data-act="task-edit" data-id="' + t.id + '">고치기</button>' + (t.history.length ? '<span class="small muted">수정 이력 ' + t.history.length + '회 · 마지막 ' + esc(t.history[t.history.length - 1].at.slice(0, 16).replace('T', ' ')) + '</span>' : '') + '</div>';
+      }
+      h += '</div>';
+    });
+    return h;
+  }
+
+  // ---------- 화면: 새로 달라진 점 ----------
+  function viewUpdates() {
+    const b = curBase();
+    let h = '<h1>새로 달라진 점</h1><p class="lead">건수보다 변화의 의미를 전달합니다. 신규 문헌이 있다는 사실만으로 기존 결론이 뒤집혔다고 단정하지 않습니다.</p>';
+    h += '<div class="panel"><h3>기준선 이력</h3><table><thead><tr><th>기준선</th><th>승인일</th><th class="num">문헌</th><th class="num">고유 패밀리</th><th>비고</th></tr></thead><tbody>' +
+      state.baselines.map(function (x) {
+        const ds = F.docsInBaseline(state, x.id);
+        return '<tr><td><b>' + esc(x.id) + '</b>' + (x.id === b.id ? ' <span class="badge b-info">현재</span>' : '') + '</td><td>' + esc(x.approvedAt) + '</td><td class="num">' + ds.length + '</td><td class="num">' + F.uniqueFamilies(ds) + '</td><td class="small">' + esc(x.note) + '</td></tr>';
+      }).join('') + '</tbody></table></div>';
+    if (state.currentBaseline === 'V1') {
+      h += '<div class="panel"><h3>새로 도착 · 정리 중 (' + state.candidates.length + '건)</h3><p class="small muted">컨설턴트가 검토하기 전이므로 검색·집계·그래프에 포함하지 않으며 등급도 확정되지 않았습니다.</p><table><thead><tr><th>ID</th><th>제목</th><th>구분</th><th>상태</th></tr></thead><tbody>' +
+        state.candidates.map(function (c) {
+          const d = F.getDoc(c.docId);
+          return '<tr><td><code>' + esc(d.id) + '</code></td><td>' + esc(d.title) + '</td><td class="small">' + esc(c.kind) + '</td><td>' + (c.reviewed ? '<span class="badge b-info">검토 완료 · 공개 대기</span>' : '<span class="badge b-pending">정리 중</span>') + '</td></tr>';
+        }).join('') + '</tbody></table></div>';
+      return h;
+    }
+    const v1 = F.docsInBaseline(state, 'V1'), v2 = F.docsInBaseline(state, 'V2');
+    h += '<div class="panel"><h3>V1 → V2 변화</h3><div class="grid3"><div><div class="muted small">문헌</div><b style="font-size:20px">' + v1.length + ' → ' + v2.length + '</b> <span class="diff-up">+' + (v2.length - v1.length) + '</span></div>' +
+      '<div><div class="muted small">고유 패밀리</div><b style="font-size:20px">' + F.uniqueFamilies(v1) + ' → ' + F.uniqueFamilies(v2) + '</b> <span class="diff-up">+' + (F.uniqueFamilies(v2) - F.uniqueFamilies(v1)) + '</span></div>' +
+      '<div><div class="muted small">과제 영향 확인</div><b style="font-size:20px">' + state.impacts.length + '건</b></div></div>';
+    if (state.gapChanges.length) h += '<div class="note warn">이전에 관측되지 않던 조합에 문헌이 생겼습니다: ' + state.gapChanges.map(function (g) { return esc(g.cell) + '(' + g.families + '개 패밀리)'; }).join(', ') + '. 공백 카드(CARD-05)를 최신 기준선으로 다시 계산해 보세요.</div>';
+    h += '<table style="margin-top:10px"><thead><tr><th>신규 문헌</th><th>구분</th><th>분류 · 수단</th><th>왜 중요한가</th></tr></thead><tbody>' + state.candidates.map(function (c) {
+      const d = F.getDoc(c.docId);
+      const why = d.rights === 'H' ? '권리검토 필요도 높음(가상 등급)' : d.rel === 'H' ? '개발 관련성 높음(가상 등급)' : '참고';
+      return '<tr><td>' + docChip(d.id) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</td><td class="small">' + esc(why) + '</td></tr>';
+    }).join('') + '</tbody></table></div>';
+    h += '<h2>영향받은 개발과제</h2>';
+    state.impacts.forEach(function (i) {
+      const cls = i.status === '승인된 설명' ? 'ok' : 'warn';
+      h += '<div class="panel"><div class="row"><b>' + esc(task(i.taskId).title) + '</b><span class="badge ' + (cls === 'ok' ? 'b-calc' : 'b-pending') + '">' + esc(i.status) + '</span><span class="small muted">' + esc(i.id) + '</span></div>' +
+        '<div class="small" style="margin:6px 0">' + esc(i.reason) + ': ' + i.docIds.map(docChip).join(' ') + '</div>' +
+        '<div class="small muted">단계: 확인 필요 → 검토 중 → 승인된 설명</div>' +
+        (i.note ? '<div class="note ok">' + esc(i.note) + '</div>' : '<div class="note">아직 결론이 바뀌었는지 확인되지 않았습니다. 컨설턴트 검토 후 설명이 공개됩니다.</div>') + '</div>';
+    });
+    h += '<div class="row"><button class="btn" data-act="nav" data-id="saved">저장 결과에서 최신 기준선으로 재실행하기</button></div>';
+    return h;
+  }
+
+  // ---------- 화면: 저장 결과 ----------
+  function viewSaved() {
+    let h = '<h1>저장 결과</h1><p class="lead">저장한 결과는 당시의 실행 번호·기준선·조건·문헌·수치를 그대로 보존합니다. 재실행하면 새 실행 번호로 따로 기록됩니다.</p>';
+    if (!state.saved.length) return h + '<div class="note">아직 저장한 결과가 없습니다. 물어보기 답변에서 “결과 저장”을 누르세요.</div>';
+    state.saved.slice().reverse().forEach(function (s) {
+      const run = state.runs[s.runId];
+      const comps = state.comparisons.filter(function (c) { return c.savedId === s.id; });
+      h += '<div class="panel" data-saved="' + esc(s.id) + '"><div class="row"><h3 style="margin:0">' + esc(s.title) + '</h3><span class="badge b-calc">' + esc(s.id) + '</span><span class="spacer"></span><span class="small muted">저장 ' + esc(s.savedAt.slice(0, 16).replace('T', ' ')) + '</span></div>' +
+        '<div class="row" style="margin:8px 0"><span class="chip"><b>기준선 ' + esc(run.baseline) + '</b></span><span class="chip">실행 ' + esc(run.id) + '</span>' + condChips(run.spec) + '</div>' +
+        resultTable(run) +
+        '<div class="row" style="margin-top:8px"><button class="btn small primary" data-act="rerun" data-id="' + esc(s.id) + '">최신 기준선(' + esc(state.currentBaseline) + ')으로 재실행</button><button class="btn small" data-act="csv" data-id="' + esc(run.id) + '">CSV</button></div>';
+      comps.forEach(function (c) {
+        const a = state.runs[c.baseRunId], b = state.runs[c.newRunId];
+        h += '<div class="sec" style="margin-top:14px"><div class="sec-title">비교: ' + esc(a.id) + '(' + esc(a.baseline) + ') ↔ ' + esc(b.id) + '(' + esc(b.baseline) + ')</div>' +
+          '<div class="small muted">두 실행의 조건: ' + F.specChips(a.spec).map(esc).join(' / ') + ' ' + (JSON.stringify(a.spec) === JSON.stringify(b.spec) ? '<span class="badge b-calc">동일 조건</span>' : '<span class="badge b-review">조건 다름</span>') + '</div>' +
+          '<div class="tablewrap"><table><thead><tr><th>항목</th><th class="num">' + esc(a.id) + ' · ' + esc(a.baseline) + '</th><th class="num">' + esc(b.id) + ' · ' + esc(b.baseline) + '</th><th class="num">차이</th></tr></thead><tbody>' +
+          F.compareRuns(a, b).map(function (r) {
+            const d = r.diff == null ? '—' : r.diff > 0 ? '<span class="diff-up">+' + r.diff + '</span>' : r.diff < 0 ? '<span class="diff-down">' + r.diff + '</span>' : '0';
+            return '<tr' + (r.total ? ' style="font-weight:600"' : '') + '><td>' + esc(r.label) + '</td><td class="num">' + (r.before == null ? '—(없음)' : r.before) + '</td><td class="num">' + (r.after == null ? '—(없음)' : r.after) + '</td><td class="num">' + d + '</td></tr>';
+          }).join('') + '</tbody></table></div></div>';
+      });
+      h += '</div>';
+    });
+    return h;
+  }
+
+  // ---------- 화면: 컨설턴트 작업대 ----------
+  function viewWorkbench() {
+    if (state.role !== 'fde') return '<h1>컨설턴트 작업대</h1><div class="note warn">컨설턴트(FDE) 역할에서만 보이는 화면입니다. <button class="link" data-act="role" data-id="fde">컨설턴트 화면으로 전환</button></div>';
+    let h = '<h1>컨설턴트 작업대</h1><p class="lead">역할 선택은 시연용 화면 전환이며 실제 인증이나 기관 접근 통제가 아닙니다.</p>';
+    h += '<h2>1. 전문 검토 요청</h2>';
+    if (!state.requests.length) h += '<div class="note">접수된 요청이 없습니다. 연구자 화면에서 “쐐기 구조가 특허에 걸리나요?”를 물어 요청을 만들어 보세요.</div>';
+    state.requests.forEach(function (r) {
+      h += '<div class="panel"><div class="row"><b>' + esc(r.id) + '</b><span class="badge ' + (r.status === '답변 공개' ? 'b-info' : 'b-pending') + '">' + esc(r.status) + '</span><span class="small muted">과제 ' + esc(task(r.taskId).title) + ' · 기준선 ' + esc(r.baseline) + '</span></div>' +
+        '<p style="margin:6px 0">“' + esc(r.question) + '”</p><div class="row small">관련 문헌: ' + r.docIds.map(docChip).join('') + '</div>' +
+        (r.status === '답변 공개' ? '<div class="note ok">가상 답변을 공개했습니다. 연구자 물어보기 화면에 도착 표시가 됩니다.</div>' :
+          '<div class="row" style="margin-top:8px"><button class="btn primary small" data-act="publish-answer" data-id="' + esc(r.id) + '">가상 답변 예시 공개</button><span class="small muted">실제 서비스에서는 변리사 검수를 거친 의견만 공개합니다.</span></div>') + '</div>';
+    });
+    h += '<h2>2. 신규 자료 후보 영역</h2>';
+    const pub = F.canPublish(state);
+    h += '<div class="panel"><p class="small muted" style="margin-top:0">후보는 승인 전까지 연구자 화면의 검색·집계에 포함되지 않습니다. 분류·등급은 컨설턴트 확인용 초안(가상)입니다.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>구분</th><th>분류 · 수단</th><th>등급 초안(벤치·관련·권리)</th><th>검토</th></tr></thead><tbody>' +
+      state.candidates.map(function (c) {
+        const d = F.getDoc(c.docId);
+        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</td><td class="small">' + lvl(d.bench) + ' · ' + lvl(d.rel) + ' · ' + lvl(d.rights) + '</td><td>' +
+          (c.reviewed ? '<span class="badge b-calc">검토 완료</span>' : '<button class="btn small" data-act="review-cand" data-id="' + esc(d.id) + '">검토 완료</button>') + '</td></tr>';
+      }).join('') + '</tbody></table></div>' +
+      '<div class="row" style="margin-top:10px">' + (F.baselineOf(state, 'V2') ? '<span class="badge b-calc">V2 공개됨 · 문헌 ' + F.docsInBaseline(state, 'V2').length + '건</span>' :
+        '<button class="btn small" data-act="review-all">남은 후보 모두 검토 완료</button><button class="btn primary small" data-act="publish-v2"' + (pub.ok ? '' : ' disabled') + '>V2 기준선 공개</button><span class="small muted">' + esc(pub.ok ? '공개하면 V1은 그대로 보존되고 V2가 현재 기준선이 됩니다.' : pub.reason) + '</span>') + '</div></div>';
+    h += '<h2>3. 과제 영향 검토</h2>';
+    if (!state.impacts.length) h += '<div class="note">V2를 공개하면 영향받은 과제가 여기에 “확인 필요”로 나타납니다.</div>';
+    state.impacts.forEach(function (i) {
+      h += '<div class="panel"><div class="row"><b>' + esc(task(i.taskId).title) + '</b><span class="badge ' + (i.status === '승인된 설명' ? 'b-calc' : 'b-pending') + '">' + esc(i.status) + '</span><span class="small muted">' + esc(i.id) + '</span><span class="spacer"></span>' +
+        (i.status !== '승인된 설명' ? '<button class="btn small primary" data-act="advance-impact" data-id="' + esc(i.id) + '">' + (i.status === '확인 필요' ? '검토 시작' : '설명 승인·공개') + '</button>' : '') + '</div>' +
+        '<div class="small" style="margin-top:6px">' + i.docIds.map(docChip).join(' ') + '</div></div>';
+    });
+    return h;
+  }
+
+  // ---------- 서랍: 문헌·카드 ----------
+  function drawerHtml() {
+    if (!drawer) return '';
+    let h = '<div class="drawer-bg" data-act="close-drawer"></div><aside class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1" id="drawer"><button class="btn small close" data-act="close-drawer" aria-label="닫기">닫기 ✕</button>';
+    if (drawer.kind === 'doc') {
+      const d = F.getDoc(drawer.id);
+      const inBase = curBase().docIds.indexOf(d.id) >= 0;
+      const citing = state.cards.filter(function (c) { return c.evidence.indexOf(d.id) >= 0; });
+      const fam = D.DOCS.filter(function (x) { return x.familyId === d.familyId && x.id !== d.id; });
+      h += '<h2 id="drawer-title" style="margin-top:4px">' + esc(d.id) + '</h2><div class="row">' + (inBase ? '<span class="badge b-calc">기준선 ' + esc(state.currentBaseline) + ' 포함</span>' : '<span class="badge b-pending">정리 중 · 집계 제외</span>') + '<span class="badge b-neutral">가상 문헌</span></div>' +
+        '<p><b>' + esc(d.title) + '</b></p><dl class="kv"><dt>가상 출원인</dt><dd>' + esc(d.applicant) + '</dd><dt>국가 · 공개연도</dt><dd>' + esc(D.COUNTRIES[d.country]) + ' · ' + d.year + '</dd>' +
+        '<dt>가상 패밀리</dt><dd>' + esc(d.familyId) + (fam.length ? ' (함께: ' + fam.map(function (x) { return esc(x.id); }).join(', ') + ')' : '') + '</dd>' +
+        '<dt>세부 분류</dt><dd>' + esc(D.SUBS[d.sub]) + '</dd><dt>결합 수단</dt><dd>' + esc(d.mech) + '</dd></dl>' +
+        '<h3>세 축 등급 ' + (inBase ? '(가상값)' : '(초안 · 미확정)') + '</h3><table><tbody><tr><td>벤치마킹 가치</td><td>' + lvl(d.bench) + '</td></tr><tr><td>개발방향 관련성</td><td>' + lvl(d.rel) + '</td></tr><tr><td>권리검토 필요도</td><td>' + lvl(d.rights) + '</td></tr></tbody></table>' +
+        '<p class="small muted">세 축은 서로 다른 뜻입니다. 벤치마킹 가치가 높다고 침해 위험이 크다는 뜻이 아니며, 실제 전문가 평가가 아닙니다.</p>' +
+        '<h3>가상 원문</h3><div class="quote">' + esc(d.claim) + '</div><div class="quote">' + esc(d.paragraph) + '</div>' +
+        '<h3>이 문헌을 근거로 쓴 카드</h3>' + (citing.length ? citing.map(function (c) { return '<div><button class="link" data-act="card" data-id="' + c.id + '">' + esc(c.title) + '</button><div class="small muted">' + esc(c.report) + '</div></div>'; }).join('') : '<p class="small muted">없음</p>');
+    } else {
+      const c = state.cards.find(function (x) { return x.id === drawer.id; });
+      const runId = drawer.runId || c.runIds[c.runIds.length - 1];
+      const run = state.runs[runId];
+      const latest = state.runs[c.runIds[c.runIds.length - 1]];
+      h += '<div class="row" style="margin-top:4px"><span class="badge b-neutral">' + esc(c.type) + '</span>' + layerBadge(c.layer) + '<span class="small muted">' + esc(c.id) + '</span></div>' +
+        '<h2 id="drawer-title">' + esc(c.title) + '</h2>';
+      if (c.runIds.length > 1) h += '<div class="row" role="group" aria-label="결과 버전">' + c.runIds.map(function (id, i) {
+        const r = state.runs[id];
+        return '<button class="btn small' + (id === runId ? ' primary' : '') + '" data-act="card-version" data-id="' + id + '">' + (i === 0 ? '당시 결과' : '재계산 ' + i) + ' · ' + esc(r.baseline) + ' · ' + esc(id) + '</button>';
+      }).join('') + '</div>';
+      if (latest.baseline !== state.currentBaseline) h += '<div class="note warn">현재 기준선은 ' + esc(state.currentBaseline) + '입니다. 이 카드의 수치는 ' + esc(latest.baseline) + ' 기준이며 몰래 바꾸지 않습니다. <button class="btn small primary" data-act="rerun-card" data-id="' + c.id + '">최신 기준선으로 다시 계산</button></div>';
+      if (c.layer === 'review') h += '<div class="note risk">이 카드는 권리 검토가 필요한 문헌의 <b>목록</b>입니다. 침해·비침해·회피·무효 결론을 담고 있지 않습니다.</div>';
+      h += runBlock(run, { explain: c.layer === 'explain' });
+      h += '<div class="sec"><div class="sec-title">카드 근거 문헌 (보고서 작성 당시 인용)</div><div class="row">' + c.evidence.map(docChip).join('') + '</div></div>' +
+        '<div class="sec"><div class="sec-title">원본 보고서 위치</div>' + esc(c.report) + '</div>' +
+        '<div class="sec"><div class="sec-title">재검토 조건</div>' + esc(c.recheck) + '</div>' +
+        '<div class="sec"><div class="sec-title">연결 개발과제</div>' + c.tasks.map(function (t) { return esc(task(t).title); }).join(', ') + '</div>';
+    }
+    return h + '</aside>';
+  }
+
+  // ---------- 가이드 ----------
+  function guideHtml() {
+    if (!state.guideOpen) return '';
+    const g = GUIDE[state.guideStep];
+    return '<section class="guide" aria-label="시연 가이드"><div class="row"><span class="steps">시연 가이드 ' + (state.guideStep + 1) + ' / ' + GUIDE.length + '</span><span class="spacer"></span><button class="btn small" data-act="guide-close" aria-label="가이드 닫기">✕</button></div>' +
+      '<h3>' + esc(g.t) + '</h3><p>' + esc(g.b) + '</p><div class="row"><button class="btn small" data-act="guide-prev"' + (state.guideStep === 0 ? ' disabled' : '') + '>이전</button>' +
+      '<button class="btn small primary" data-act="guide-go">이 단계 화면 열기</button><button class="btn small" data-act="guide-next"' + (state.guideStep === GUIDE.length - 1 ? ' disabled' : '') + '>다음</button></div></section>';
+  }
+
+  // ---------- 전체 렌더 ----------
+  function render() {
+    if (state.view === 'ask') state.unreadAnswers = 0;   // 물어보기를 열면 도착 답변을 읽은 것으로 처리
+    const b = curBase();
+    const bDocs = F.docsInBaseline(state);
+    const pendingReq = state.requests.filter(function (r) { return r.status !== '답변 공개'; }).length;
+    const views = VIEWS.slice();
+    const top = '<header class="top"><div class="top-row"><div class="brand">FDE 특허·연구 작업공간 <small>' + esc(D.PROJECT.name) + ' · ' + esc(D.PROJECT.group) + '</small></div>' +
+      '<span class="baseline-badge" id="baseline-badge" title="모든 수치는 이 기준선에서 계산됩니다">기준선 ' + esc(b.id) + ' · ' + esc(b.approvedAt) + ' 승인 · 문헌 ' + bDocs.length + '건</span>' +
+      '<div class="role-switch" role="group" aria-label="시연 역할 전환"><button data-act="role" data-id="researcher" aria-pressed="' + (state.role === 'researcher') + '">연구자</button><button data-act="role" data-id="fde" aria-pressed="' + (state.role === 'fde') + '">컨설턴트(FDE)</button></div>' +
+      '<button class="btn small" data-act="guide-open">시연 가이드</button><button class="btn small" data-act="reset">초기화</button></div>' +
+      '<div class="demo-banner">가상 데이터 시연 — 모든 문헌·출원인·과제·보고서·검토 의견은 가상이며, 응답은 규칙 기반입니다(실제 AI·특허 DB·서버 미연결).' + (storageOk ? '' : ' <b>브라우저 저장이 차단되어 새로고침하면 처음 상태로 돌아갑니다.</b>') + '</div></header>';
+    let nav = '<nav class="side" aria-label="주 메뉴">' + views.map(function (v) {
+      let badge = '';
+      if (v[0] === 'ask' && state.unreadAnswers) badge = '<span class="count" aria-label="새 답변">' + state.unreadAnswers + '</span>';
+      if (v[0] === 'updates' && state.impacts.some(function (i) { return i.status === '확인 필요'; })) badge = '<span class="count">!</span>';
+      return '<button data-act="nav" data-id="' + v[0] + '"' + (state.view === v[0] ? ' aria-current="page"' : '') + '>' + esc(v[1]) + badge + '</button>';
+    }).join('');
+    nav += '<div class="fde-only"><button data-act="nav" data-id="workbench"' + (state.view === 'workbench' ? ' aria-current="page"' : '') + '>컨설턴트 작업대' + (pendingReq ? '<span class="count">' + pendingReq + '</span>' : '') + '</button></div></nav>';
+    const V = { today: viewToday, ask: viewAsk, browse: viewBrowse, tasks: viewTasks, updates: viewUpdates, saved: viewSaved, workbench: viewWorkbench };
+    const body = (V[state.view] || viewToday)();
+    document.getElementById('app').innerHTML = top + '<div class="layout">' + nav + '<main id="main">' + body + '</main></div>';
+    document.getElementById('overlay').innerHTML = drawerHtml() + guideHtml();
+    const hd = document.querySelector('header.top');
+    if (hd) document.documentElement.style.setProperty('--head-h', hd.offsetHeight + 'px');
+    const dr = document.getElementById('drawer'); if (dr) dr.focus();
+  }
+
+  // ---------- CSV 내려받기 ----------
+  function downloadCsv(runId) {
+    const run = state.runs[runId];
+    try {
+      const blob = new Blob(['﻿' + F.csvForRun(run)], { type: 'text/csv;charset=utf-8' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob); a.download = 'FDE_' + run.id + '_' + run.baseline + '.csv';
+      document.body.appendChild(a); a.click();
+      setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      toast(run.id + ' CSV를 내려받았습니다.');
+    } catch (e) { toast('CSV를 만들지 못했습니다: 이 브라우저에서 다운로드가 차단되었습니다.'); }
+  }
+
+  function askAndShow(q) {
+    state.view = 'ask'; drawer = null;
+    const m = F.ask(state, q);
+    commit();
+    if (m) {
+      const last = document.querySelector('#thread > :last-child');
+      if (last) last.scrollIntoView({ block: 'start' });
+    }
+  }
+
+  // ---------- 이벤트 ----------
+  document.addEventListener('click', function (e) {
+    const el = e.target.closest('[data-act]');
+    if (!el || el.disabled) return;
+    const act = el.getAttribute('data-act'), id = el.getAttribute('data-id');
+    let r;
+    switch (act) {
+      case 'nav': go(id); break;
+      case 'role': setRole(id); toast(id === 'fde' ? '컨설턴트(FDE) 화면 — 시연용 전환이며 인증이 아닙니다' : '연구자 화면'); break;
+      case 'task-select': state.activeTaskId = id; commit(); break;
+      case 'quick-ask': askAndShow(el.getAttribute('data-q')); break;
+      case 'clear-filter': F.clearCtxFilter(state, id); commit(); break;
+      case 'save':
+        r = F.saveRun(state, id);
+        commit(r.ok ? r.saved.id + '로 저장했습니다. 저장 결과에서 볼 수 있습니다.' : r.reason); break;
+      case 'csv': downloadCsv(id); break;
+      case 'doc': drawer = { kind: 'doc', id: id }; render(); break;
+      case 'card': drawer = { kind: 'card', id: id }; render(); break;
+      case 'card-version': drawer.runId = id; render(); break;
+      case 'close-drawer': drawer = null; render(); break;
+      case 'rerun-card':
+        r = F.rerunCard(state, id); if (r.ok) drawer.runId = r.run.id;
+        commit(r.ok ? '새 실행 ' + r.run.id + '(' + r.run.baseline + ')를 만들었습니다. 당시 결과는 그대로 남습니다.' : r.reason); break;
+      case 'request':
+        r = F.requestReview(state, id); commit(r.ok ? r.request.id + ' 전문 검토를 요청했습니다.' : r.reason); break;
+      case 'publish-answer':
+        r = F.publishAnswer(state, id); commit(r.ok ? '가상 답변을 공개했습니다. 연구자 화면에 도착 표시가 됩니다.' : r.reason); break;
+      case 'review-cand': F.reviewCandidate(state, id); commit(); break;
+      case 'review-all': state.candidates.forEach(function (c) { F.reviewCandidate(state, c.docId); }); commit('후보 6건을 모두 검토 완료로 표시했습니다.'); break;
+      case 'publish-v2':
+        r = F.publishBaseline(state); commit(r.ok ? 'V2 기준선을 공개했습니다. 과제 영향은 “확인 필요”로 표시됩니다.' : r.reason); break;
+      case 'advance-impact': r = F.advanceImpact(state, id); commit(r.ok ? r.impact.id + ' → ' + r.impact.status : r.reason); break;
+      case 'rerun':
+        r = F.rerunSaved(state, id); commit(r.ok ? '새 실행 ' + r.run.id + '(' + r.run.baseline + ')로 재실행했습니다. 저장된 결과는 바뀌지 않았습니다.' : r.reason); break;
+      case 'task-edit': editingTask = id; render(); { const ta = document.getElementById('p-' + id); if (ta) ta.focus(); } break;
+      case 'task-cancel': editingTask = null; render(); break;
+      case 'guide-open': state.guideOpen = true; commit(); break;
+      case 'guide-close': state.guideOpen = false; commit(); break;
+      case 'guide-next': state.guideStep = Math.min(GUIDE.length - 1, state.guideStep + 1); commit(); break;
+      case 'guide-prev': state.guideStep = Math.max(0, state.guideStep - 1); commit(); break;
+      case 'guide-go': GUIDE[state.guideStep].go(); break;
+      case 'reset':
+        if (window.confirm('시연을 처음 상태로 되돌릴까요? 저장 결과와 요청이 모두 지워집니다.')) {
+          F.clearStorage(safeStorage());
+          state = F.createInitialState(); drawer = null; editingTask = null; browse = { q: '', sub: '', type: '' };
+          commit('처음 상태로 초기화했습니다.');
+        }
+        break;
+    }
+  });
+
+  document.addEventListener('submit', function (e) {
+    const f = e.target;
+    if (f.id === 'ask-form') {
+      e.preventDefault();
+      const i = document.getElementById('ask-input');
+      const q = i.value; if (!q.trim()) return;
+      askAndShow(q);
+      const ni = document.getElementById('ask-input'); if (ni) ni.focus();
+    } else if (f.getAttribute('data-form') === 'task') {
+      e.preventDefault();
+      const id = f.getAttribute('data-id');
+      const r = F.updateTask(state, id, { problem: f.problem.value, constraints: f.constraints.value, decisionDate: f.decisionDate.value });
+      if (r.ok) editingTask = null;
+      commit(r.ok ? '과제를 수정했습니다(연구자 수정으로 표시).' : r.reason);
+    }
+  });
+
+  document.addEventListener('input', function (e) {
+    if (e.target.id === 'browse-q') { browse.q = e.target.value; document.getElementById('browse-results').innerHTML = browseResults(); }
+  });
+  document.addEventListener('change', function (e) {
+    if (e.target.id === 'browse-sub') { browse.sub = e.target.value; document.getElementById('browse-results').innerHTML = browseResults(); }
+    if (e.target.id === 'browse-type') { browse.type = e.target.value; document.getElementById('browse-results').innerHTML = browseResults(); }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && drawer) { drawer = null; render(); }
+  });
+
+  window.__FDE_UI = { getState: function () { return state; } };
+  commit();
+})();
+</script>
+</body>
+</html>
