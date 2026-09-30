@@ -77,9 +77,14 @@ async function step(name, fn) {
     await ask('연도별 추세를 보여 주세요');
     const b = lastBot();
     assert.ok((await b.textContent()).includes('문헌 36건'));
-    assert.strictEqual(await b.locator('svg.chart rect').count(), 6);
+    assert.strictEqual(await b.locator('svg.chart .bar').count(), 6);
     const vals = await b.locator('tbody td.num').allTextContents();
     assert.deepStrictEqual(vals, ['3', '4', '5', '6', '8', '10']);
+    await b.locator('.bar-g').nth(5).hover();
+    const tip = page.locator('#viz-tip');
+    assert.ok(await tip.isVisible(), '막대 툴팁이 보여야 함');
+    assert.ok((await tip.textContent()).includes('10건') && (await tip.textContent()).includes('2025년'));
+    await page.mouse.move(0, 0);
   });
 
   await step('3 후속 조건: 국내만 24건 → 패밀리 단위 14개', async () => {
