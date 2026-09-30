@@ -63,7 +63,7 @@ nav.side button:hover{background:rgba(255,255,255,.06);color:#fff}
 nav.side button[aria-current="page"]{background:linear-gradient(135deg,rgba(99,102,241,.95),rgba(42,120,214,.95));color:#fff;font-weight:600;box-shadow:0 8px 20px -10px rgba(99,102,241,.9),inset 0 1px 0 rgba(255,255,255,.18)}
 nav.side .fde-only{margin-top:14px;border-top:1px solid rgba(255,255,255,.08);padding-top:14px}
 .count{background:linear-gradient(135deg,#f43f5e,#e11d48);color:#fff;border-radius:999px;font-size:11px;font-weight:700;padding:0 7px;min-width:20px;line-height:20px;text-align:center;box-shadow:0 2px 8px -2px rgba(225,29,72,.6)}
-main{padding:28px 32px 140px;max-width:1120px;width:100%}
+main{padding:28px 32px 140px;max-width:1180px;width:100%}
 h1{font-size:26px;margin:0 0 6px;letter-spacing:-.03em;font-weight:800}
 h2{font-size:16px;margin:30px 0 12px;letter-spacing:-.02em;font-weight:700;display:flex;align-items:center;gap:8px}
 h2::before{content:"";width:4px;height:16px;border-radius:4px;background:var(--grad-brand)}
@@ -114,7 +114,7 @@ h3{font-size:15px;margin:0 0 6px;letter-spacing:-.01em}
 .chip{display:inline-flex;align-items:center;gap:4px;border:1px solid var(--line);background:#fff;border-radius:999px;padding:3px 11px;font-size:12.5px;color:var(--ink-2);box-shadow:var(--shadow-sm)}
 .chip button{border:0;background:#eef1f7;border-radius:50%;width:16px;height:16px;line-height:14px;padding:0;margin-left:2px;color:var(--muted);font-size:12px}
 .chip button:hover{background:#fde2e7;color:var(--risk)}
-.doc-chip{border:1px solid #dcdffb;background:linear-gradient(180deg,#fff,#f4f5ff);color:#3f3aa8;border-radius:8px;padding:2px 9px;font-size:12px;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;transition:all .15s}
+.doc-chip{white-space:nowrap;border:1px solid #dcdffb;background:linear-gradient(180deg,#fff,#f4f5ff);color:#3f3aa8;border-radius:8px;padding:2px 9px;font-size:12px;font-weight:600;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;transition:all .15s}
 .doc-chip:hover{border-color:#a5a8f5;box-shadow:0 4px 12px -6px rgba(79,70,229,.6);transform:translateY(-1px)}
 
 /* 카드 목록 */
@@ -220,6 +220,56 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
 .kpi .k{font-size:12px;color:var(--muted);font-weight:600}
 .kpi .v{font-size:26px;font-weight:800;letter-spacing:-.03em}
 
+
+/* 분석 리포트 · 신규 IP */
+.kpis6{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kpi .v{line-height:1.25}
+.pipe{display:flex;flex-direction:column;gap:12px}
+.pipe-step{position:relative}
+.pipe-bar{height:10px;border-radius:99px;background:linear-gradient(90deg,#1c5cab,#2a78d6 60%,#86b6ef);margin-bottom:6px}
+.pipe-n{font-weight:800;font-size:17px;letter-spacing:-.02em}
+.insight{position:relative;background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px 18px;box-shadow:var(--shadow)}
+.insight .no{position:absolute;right:14px;top:12px;width:24px;height:24px;border-radius:50%;background:var(--grad-brand);color:#fff;font-size:12px;font-weight:800;display:grid;place-items:center}
+.insight .big{font-size:30px;font-weight:800;letter-spacing:-.03em;background:var(--grad-brand);-webkit-background-clip:text;background-clip:text;color:transparent}
+.panel.mini .q{display:block;text-align:left;margin:6px 0 10px;font-size:15px;color:var(--ink);text-decoration:none}
+.panel.mini .q:hover{color:var(--accent)}
+.flow{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}
+.flow-step{flex:1 1 150px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow-sm);position:relative}
+.flow-step .n{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;background:var(--grad-brand);color:#fff;font-size:12px;font-weight:800;margin-right:6px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.addon{background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px;box-shadow:var(--shadow-sm)}
+.addon.rec{border-color:#b9bdf7;box-shadow:0 0 0 3px rgba(99,102,241,.12),var(--shadow)}
+.ak{display:inline-grid;place-items:center;min-width:26px;height:26px;border-radius:8px;background:var(--grad-brand);color:#fff;font-weight:800;font-size:13px}
+.ak.sm{min-width:20px;height:20px;font-size:11px;border-radius:6px}
+tr.hl td{background:#f5f6ff}
+.pgrid{display:grid;grid-template-columns:28px 56px repeat(3,minmax(0,1fr));gap:6px;align-items:stretch;position:relative}
+.pgrid .axis-y{grid-row:1/4;writing-mode:vertical-rl;transform:rotate(180deg);text-align:center;font-size:12px;color:var(--muted);font-weight:700}
+.pgrid .plabel{font-size:12px;color:var(--muted);font-weight:700;display:flex;align-items:center;justify-content:center}
+.pgrid .plabel.x{padding-top:2px}
+.pgrid .axis-x{grid-column:3/6;text-align:center;font-size:12px;color:var(--muted);font-weight:700}
+.pcell{min-height:64px;border-radius:12px;background:#f5f7fc;border:1px solid var(--line-2);display:flex;flex-wrap:wrap;gap:6px;align-content:center;justify-content:center;padding:8px}
+.pcell.best{background:linear-gradient(135deg,#eef0ff,#e6f6ff);border-color:#c9d2f7}
+.pchip{display:inline-grid;place-items:center;min-width:28px;height:28px;border-radius:50%;font-weight:800;font-size:13px;background:#fff;border:2px solid #2a78d6;color:#1c5cab}
+.pchip.add{border-radius:8px;border-color:#94a3b8;color:var(--ink-2)}
+.pchip.add.rec{background:var(--grad-brand);border-color:transparent;color:#fff}
+.pchip.opt.pick{background:#2a78d6;color:#fff}
+.lkey{display:inline-block;width:14px;height:3px;border-radius:2px;margin:0 4px 2px 8px;vertical-align:middle}
+ol.claim{margin:4px 0 8px;padding-left:22px}
+ol.claim li{margin:3px 0}
+.tag{display:inline-block;border-radius:6px;padding:0 7px;font-size:12px;margin:0 4px 3px 0;border:1px solid}
+.tag.k{background:#eef4fe;border-color:#cfe0fa;color:#1c5cab}
+.tag.p{background:#f3f0fe;border-color:#e0d8fb;color:#5b3fb5}
+.tag.u{background:#ecf8f2;border-color:#cdeedb;color:#0f7a4a}
+.flow-pills{display:inline-flex;flex-wrap:wrap;gap:4px}
+.flow-pills i{font-style:normal;font-size:11.5px;padding:2px 9px;border-radius:999px;background:#eef1f7;color:var(--muted);font-weight:600}
+.flow-pills i.done{background:#e1ecfb;color:#1c5cab}
+.flow-pills i.on{background:var(--grad-brand);color:#fff}
+details.riskrow{border:1px solid var(--line);border-radius:12px;padding:8px 12px;margin:8px 0;background:#fff}
+details.riskrow summary{cursor:pointer;list-style:none}
+details.riskrow summary::-webkit-details-marker{display:none}
+details.riskrow table{margin-top:8px}
+@media (max-width:820px){.kpis6,.grid4{grid-template-columns:minmax(0,1fr)}.panel,.insight,.addon{min-width:0}.pgrid{grid-template-columns:20px 40px repeat(3,minmax(0,1fr))}}
+
 @media (max-width:820px){
   header.top{position:static}
   .layout{grid-template-columns:1fr}
@@ -228,7 +278,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   nav.side button{width:auto;white-space:nowrap;margin:0;padding:8px 12px}
   nav.side .fde-only{margin:0;border:0;padding:0;display:flex}
   main{padding:18px 16px 150px}
-  .grid2,.grid3,.kpis{grid-template-columns:1fr}
+  .grid2,.grid3,.kpis{grid-template-columns:minmax(0,1fr)}
   .stats{grid-template-columns:repeat(2,minmax(0,1fr))}
   .condbar{position:static}
   .brand{width:100%}
@@ -244,6 +294,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
   <linearGradient id="fde-gv" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#1c5cab"/><stop offset=".55" stop-color="#2a78d6"/><stop offset="1" stop-color="#86b6ef"/></linearGradient>
   <linearGradient id="fde-gh" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#1c5cab"/><stop offset=".6" stop-color="#2a78d6"/><stop offset="1" stop-color="#86b6ef"/></linearGradient>
+  <linearGradient id="fde-area-1" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a78d6" stop-opacity=".22"/><stop offset="1" stop-color="#2a78d6" stop-opacity="0"/></linearGradient>
+  <linearGradient id="fde-area-2" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#eb6834" stop-opacity=".18"/><stop offset="1" stop-color="#eb6834" stop-opacity="0"/></linearGradient>
   <linearGradient id="fde-glow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a78d6" stop-opacity=".10"/><stop offset="1" stop-color="#2a78d6" stop-opacity="0"/></linearGradient>
 </defs></svg>
 <div class="viz-tip" id="viz-tip" role="tooltip" hidden></div>
@@ -254,150 +306,367 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
 <script id="fde-data">
 (function (global) {
   'use strict';
-  const SUBS = { T1: '무공구 상판 교체', T2: '흔들림 억제', T3: '모듈 결합' };
-  const MECHS = ['레버', '쐐기', '탄성', '자석'];
-  const COUNTRIES = { KR: '한국', US: '미국', JP: '일본', EP: '유럽', CN: '중국' };
+  // 모든 문헌·출원인·과제·보고서·검토 의견은 가상입니다.
+  // 실제 IP-R&D 중간보고의 분석 구조와 분포(기술축 비중, 국가 구성, 만료 비율, 출원인 분산 등)를
+  // 본떠 결정적 난수로 생성합니다. 실제 특허번호·실존 기업은 쓰지 않습니다.
+  const SUBS = { A: 'A 재구성형 모듈 수납장', B: 'B 성장형 의자', C: 'C 상판–다리 DIY 테이블', D: 'D 공통 무공구 커넥터' };
+  const SUB_SHORT = { A: '모듈 수납장', B: '성장형 의자', C: 'DIY 테이블', D: '무공구 커넥터' };
+  const CODES = {
+    A1: '모듈 아키텍처', A2: '재구성 동작', A3: '공통 인터페이스', A4: '결합·하중·수명',
+    B1: '교체부품 구조', B2: '성장 변환', B3: '부품 인터페이스', B4: '인체공학·안전',
+    C1: '상판 호환', C2: '분리형 다리', C3: '수동 체결', C4: '안정·키트',
+    D1: '형상 정렬', D2: '기계 잠금', D3: '자기+기계 이중', D4: '해제·반복'
+  };
+  const MECHS = ['형상맞물림', '스냅·래치', '슬라이드·키홀', '회전·캠', '클램프·쐐기', '힌지·접이', '자석'];
+  const PERF = ['수직하중', '전단', '들뜸', '회전', '전도', '정렬', '반복내구'];
+  const USE = ['무공구', '원터치', '안전 2단계', '은폐해제', '반복착탈'];
+  const COUNTRIES = { US: '미국', KR: '한국', EP: '유럽', JP: '일본' };
   const LEVELS = { H: '높음', M: '보통', L: '낮음' };
-  const APPLICANTS = {
-    NURI: '누리가구(가상)', HANG: '한결모듈(가상)', DAON: '다온하드웨어(가상)',
-    ORBI: 'Orbis Furniture(가상)', MIRE: '미래리빙(가상)', KEST: 'Kestrel Home(가상)'
+  const STATUSES = ['만료 추정', '존속', '공개·심사중', '거절·포기'];
+
+  // ---------- 결정적 난수 ----------
+  function rng(seed) {
+    return function () {
+      seed = (seed + 0x6D2B79F5) | 0;
+      let t = Math.imul(seed ^ (seed >>> 15), 1 | seed);
+      t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t;
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  }
+  const R = rng(20260930);
+  function pick(arr) { return arr[Math.floor(R() * arr.length)]; }
+  function weighted(pairs) {
+    const tot = pairs.reduce(function (a, p) { return a + p[1]; }, 0);
+    let x = R() * tot;
+    for (let i = 0; i < pairs.length; i++) { x -= pairs[i][1]; if (x <= 0) return pairs[i][0]; }
+    return pairs[pairs.length - 1][0];
+  }
+
+  const PERIOD_W = [[1974, 1979, 7], [1980, 1984, 9], [1985, 1989, 10], [1990, 1994, 11], [1995, 1999, 12], [2000, 2004, 12],
+    [2005, 2009, 11], [2010, 2014, 11], [2015, 2019, 12], [2020, 2024, 14], [2025, 2026, 2]];
+  const AXIS = {
+    A: { families: 17, recent: 2.2, core: 0, kr: 0.18, mech: [0.55, 0.35, 0.35, 0.06, 0.10, 0.25, 0.05] },
+    B: { families: 36, recent: 1.2, core: 0, kr: 0.16, mech: [0.50, 0.45, 0.35, 0.00, 0.12, 0.30, 0.03] },
+    C: { families: 56, recent: 1.0, core: 0.34, kr: 0.13, mech: [0.45, 0.35, 0.30, 0.15, 0.45, 0.40, 0.07] },
+    D: { families: 56, recent: 1.0, core: 0.24, kr: 0.30, mech: [0.60, 0.45, 0.35, 0.20, 0.15, 0.10, 0.10] }
   };
-
-  // [패밀리ID, 세부분류, 결합수단, 출원인, 벤치마킹가치, 개발관련성, 권리검토필요도, 제목, 문헌[[ID, 공개연도, 'C'=후보]]]
-  const FAMILY_TABLE = [
-    ['VF-01', 'T1', '레버', 'NURI', 'H', 'H', 'M', '레버 회동으로 상판 걸림을 해제하는 무공구 교체형 테이블', [['DEMO-KR-0001', 2020], ['DEMO-US-0001', 2021]]],
-    ['VF-02', 'T1', '쐐기', 'HANG', 'M', 'H', 'H', '쐐기 삽입식 상판 고정 구조', [['DEMO-KR-0002', 2020], ['DEMO-JP-0001', 2021]]],
-    ['VF-03', 'T2', '쐐기', 'DAON', 'H', 'H', 'H', '경사 쐐기로 프레임 유격을 메우는 흔들림 억제 장치', [['DEMO-KR-0003', 2021], ['DEMO-US-0002', 2022], ['DEMO-EP-0003', 2025, 'C']]],
-    ['VF-04', 'T3', '자석', 'ORBI', 'M', 'M', 'L', '자석 정렬부를 갖는 확장형 수납 모듈', [['DEMO-KR-0004', 2021], ['DEMO-EP-0001', 2022]]],
-    ['VF-05', 'T1', '탄성', 'MIRE', 'M', 'M', 'L', '탄성 클립으로 상판을 착탈하는 책상', [['DEMO-KR-0005', 2022], ['DEMO-CN-0001', 2023]]],
-    ['VF-06', 'T2', '탄성', 'DAON', 'H', 'H', 'M', '탄성 패드로 다리 진동을 흡수하는 가구 프레임', [['DEMO-KR-0006', 2022], ['DEMO-US-0003', 2023]]],
-    ['VF-07', 'T3', '레버', 'HANG', 'M', 'M', 'M', '레버 잠금식 모듈 연결 브래킷', [['DEMO-KR-0007', 2023], ['DEMO-JP-0002', 2024]]],
-    ['VF-08', 'T2', '쐐기', 'NURI', 'M', 'H', 'H', '조절 쐐기를 이용한 선반 흔들림 방지 구조', [['DEMO-KR-0008', 2023], ['DEMO-US-0004', 2024]]],
-    ['VF-09', 'T1', '자석', 'ORBI', 'L', 'L', 'L', '자석 흡착식 교체 상판', [['DEMO-US-0005', 2020]]],
-    ['VF-10', 'T3', '쐐기', 'KEST', 'M', 'L', 'M', '쐐기 슬롯으로 결합되는 조립식 모듈 가구', [['DEMO-EP-0002', 2022]]],
-    ['VF-11', 'T2', '레버', 'KEST', 'L', 'M', 'L', '레버 조임식 프레임 강성 보강 장치', [['DEMO-CN-0002', 2024]]],
-    ['VF-12', 'T3', '자석', 'ORBI', 'M', 'M', 'L', '자석 커넥터를 갖는 모듈형 벽면 수납', [['DEMO-US-0006', 2025]]],
-    ['VF-13', 'T1', '레버', 'NURI', 'H', 'H', 'H', '원터치 레버를 갖는 상판 교체형 작업대', [['DEMO-KR-0009', 2023], ['DEMO-KR-0010', 2024], ['DEMO-KR-0011', 2025]]],
-    ['VF-14', 'T2', '쐐기', 'DAON', 'H', 'H', 'H', '이중 쐐기 구조를 갖는 흔들림 억제 테이블 다리', [['DEMO-KR-0012', 2024], ['DEMO-KR-0013', 2025], ['DEMO-KR-0014', 2025], ['DEMO-KR-0027', 2026, 'C']]],
-    ['VF-15', 'T1', '쐐기', 'HANG', 'M', 'H', 'M', '슬라이드 쐐기로 고정되는 교체 상판', [['DEMO-KR-0015', 2024], ['DEMO-KR-0016', 2025], ['DEMO-KR-0017', 2025]]],
-    ['VF-16', 'T3', '레버', 'MIRE', 'M', 'M', 'L', '캠 레버로 모듈을 연결하는 확장 가구', [['DEMO-KR-0018', 2023], ['DEMO-KR-0019', 2024], ['DEMO-KR-0020', 2025]]],
-    ['VF-17', 'T2', '탄성', 'MIRE', 'M', 'H', 'L', '탄성 부시를 이용한 가구 흔들림 저감 구조', [['DEMO-KR-0021', 2025], ['DEMO-KR-0022', 2025]]],
-    ['VF-18', 'T1', '레버', 'NURI', 'L', 'M', 'L', '힌지 레버식 상판 착탈 기구', [['DEMO-KR-0023', 2024], ['DEMO-KR-0024', 2025]]],
-    // 이하 후보 영역(신규 도착, 승인 전 집계 제외)
-    ['VF-19', 'T2', '자석', 'KEST', 'H', 'H', 'M', '자석 댐퍼를 이용한 프레임 흔들림 억제 구조', [['DEMO-KR-0025', 2025, 'C'], ['DEMO-US-0007', 2026, 'C']]],
-    ['VF-20', 'T2', '쐐기', 'DAON', 'M', 'H', 'H', '자동 조정 쐐기를 갖는 흔들림 방지 가구', [['DEMO-KR-0026', 2026, 'C']]],
-    ['VF-21', 'T1', '레버', 'MIRE', 'L', 'M', 'L', '레버 해제식 교체 상판 프레임', [['DEMO-CN-0003', 2025, 'C']]]
-  ];
-
+  const NOUN = {
+    A1: '적층형 모듈 수납장', A2: '층 교환형 수납 유닛', A3: '수납 모듈 연결 인터페이스', A4: '고하중 모듈 선반',
+    B1: '좌판 교체형 아동 의자', B2: '성장 단계 변환 의자', B3: '의자 부품 결합 구조', B4: '안전 잠금 아동 의자',
+    C1: '상판 호환형 테이블', C2: '분리형 테이블 다리', C3: '수동 체결식 상판 고정구', C4: '조립식 테이블 키트',
+    D1: '형상 정렬 가구 커넥터', D2: '기계식 잠금 가구 연결구', D3: '자석·기계 이중 결합 커넥터', D4: '반복 착탈형 가구 결합구'
+  };
+  const MECH_PHRASE = { '형상맞물림': '끼움 결합', '스냅·래치': '탄성 걸림', '슬라이드·키홀': '슬라이드 결합', '회전·캠': '캠 회전 잠금', '클램프·쐐기': '클램프 가압', '힌지·접이': '접이식 힌지', '자석': '자석 정렬' };
   const MECH_PART = {
-    '레버': ['프레임에 회동 가능하게 결합되어 상판 걸림부를 가압하거나 해제하는 레버', '레버를 젖히면 걸림이 풀리고 되돌리면 잠기는 동작'],
-    '쐐기': ['결합면 사이에 삽입되어 경사면으로 틈새를 메우는 쐐기 부재', '쐐기가 경사면을 따라 밀려 들어가며 유격을 없애는 동작'],
-    '탄성': ['결합 방향으로 복원력을 제공하여 유격을 흡수하는 탄성 부재', '탄성 부재가 눌렸다가 되돌아오며 흔들림과 유격을 흡수하는 동작'],
-    '자석': ['접촉면에 배치되어 위치를 정렬하고 흡착력을 제공하는 자석 부재', '자석이 정해진 위치로 끌어당겨 정렬하고 붙잡는 동작']
+    '형상맞물림': ['서로 맞물리는 돌기와 홈으로 이루어진 끼움부', '돌기가 홈에 끼워져 하중을 받는 동작'],
+    '스냅·래치': ['탄성 변형 후 복귀하며 걸리는 걸림 부재', '걸림 부재가 눌렸다가 딸깍 걸리는 동작'],
+    '슬라이드·키홀': ['키홀 형상의 안내홈과 이를 따라 이동하는 결합핀', '결합핀이 안내홈을 따라 미끄러져 잠기는 동작'],
+    '회전·캠': ['회동에 따라 반경이 커지는 캠면을 갖는 잠금 부재', '캠이 회전하며 결합면을 밀어 조이는 동작'],
+    '클램프·쐐기': ['판재 가장자리를 사이에 두고 가압하는 한 쌍의 조(jaw)', '가압 부재가 판재를 위아래에서 누르는 동작'],
+    '힌지·접이': ['부재를 회동 가능하게 연결하는 힌지부', '힌지를 중심으로 펼치고 접는 동작'],
+    '자석': ['접촉면에 배치되어 위치를 정렬하는 자석 부재', '자석이 정해진 위치로 끌어당겨 정렬하는 동작']
   };
-  const SUB_PURPOSE = {
-    T1: '상판을 공구 없이 프레임에 착탈하기 위한',
-    T2: '가구 프레임의 흔들림을 억제하기 위한',
-    T3: '수납 모듈을 서로 연결하고 분리하기 위한'
+  const PROBLEM = {
+    A: '수납 유닛을 추가·제거하거나 순서를 바꿀 때 공구가 필요하고 결합부가 헐거워짐',
+    B: '아이가 자라면 의자 전체를 바꿔야 하고, 교체 부위가 쉽게 풀림',
+    C: '상판과 다리를 공구 없이 결합하면 흔들리거나 상판에 흔적이 남음',
+    D: '가구 부재를 반복 착탈하면 정렬이 틀어지고 결합력이 약해짐'
   };
-  const SUFFIX = ['', ' — 개량형', ' — 제조방법 포함', ' — 분할출원'];
+  const EFFECT = { '수직하중': '위에서 누르는 하중을 안정적으로 지지', '전단': '옆으로 미는 힘에 밀리지 않음', '들뜸': '결합면이 들뜨지 않음',
+    '회전': '결합부가 돌아가 풀리지 않음', '전도': '넘어짐을 줄임', '정렬': '위치가 정확히 맞춰짐', '반복내구': '여러 번 착탈해도 결합력 유지' };
 
+  // ---------- 출원인 ----------
+  const POOL = [
+    ['Northwind Fittings(가상)', 'US', 'D'], ['Harbor Legs(가상)', 'US', 'C'], ['Kessler Möbelbau(가상)', 'EP', 'D'],
+    ['Lumen Kids(가상)', 'US', 'B'], ['소담퍼니처(가상)', 'KR', 'D'], ['한결체결(가상)', 'KR', 'C'],
+    ['Hayashi Kogyo(가상)', 'JP', 'D'], ['Brightwood Home(가상)', 'US', 'C'], ['Aalto Systems(가상)', 'EP', 'A'],
+    ['누리키즈(가상)', 'KR', 'B'], ['Oakline Works(가상)', 'US', 'C'], ['Tanaka Kagu(가상)', 'JP', 'B']
+  ];
+  const KR_A = ['한', '가', '소', '누', '다', '미', '새', '온', '라', '해', '청', '도'];
+  const KR_B = ['온', '담', '결', '빛', '솔', '람', '루', '나', '진', '우'];
+  const KR_C = ['가구', '퍼니처', '리빙', '공업', '디자인', '하드웨어', '목공'];
+  const EN_A = ['North', 'Oak', 'Pine', 'Stone', 'Clear', 'Bright', 'Maple', 'River', 'Summit', 'Cedar', 'Linden', 'Harbor'];
+  const EN_B = ['field', 'wood', 'line', 'craft', 'form', 'works', 'point', 'side'];
+  const EN_C = ['Furniture', 'Home', 'Design', 'Industries', 'Products', 'Studio'];
+  const used = {};
+  let indCount = { KR: 0, US: 0, EP: 0, JP: 0 };
+  function uniqueName(country) {
+    for (let i = 0; i < 50; i++) {
+      const n = country === 'KR' ? pick(KR_A) + pick(KR_B) + pick(KR_C) : pick(EN_A) + pick(EN_B) + ' ' + pick(EN_C);
+      if (!used[n]) { used[n] = 1; return n + '(가상)'; }
+    }
+    return '출원인 ' + Object.keys(used).length + '(가상)';
+  }
+  function applicantFor(axis, country) {
+    if (R() < 0.09) {
+      const cands = POOL.map(function (p, i) { return [p, (p[2] === axis || p[1] === country ? 3 : 1) * (i < 2 ? 4 : 1)]; });
+      const p = weighted(cands);
+      return { name: p[0], type: '기업' };
+    }
+    const indP = country === 'KR' ? 0.55 : 0.35;
+    if (R() < indP) { indCount[country] += 1; return { name: '개인 발명자 ' + country + '-' + String(indCount[country]).padStart(3, '0') + '(가상)', type: '개인' }; }
+    return { name: uniqueName(country), type: '기업' };
+  }
+
+  // ---------- 생성 ----------
   const DOCS = [];
-  FAMILY_TABLE.forEach(function (f, fi) {
-    const [familyId, sub, mech, appKey, bench, rel, rights, title, docs] = f;
-    let krIndex = 0;
-    docs.forEach(function (entry, di) {
-      const [id, year, stage] = entry;
-      const country = id.split('-')[1];
-      const suffix = country === 'KR' ? SUFFIX[Math.min(krIndex++, 3)] : ' (대응 출원)';
-      const para = 10 + ((fi * 7 + di * 3) % 40);
-      DOCS.push({
-        id: id, familyId: familyId, country: country, year: year,
-        sub: sub, mech: mech, applicant: APPLICANTS[appKey],
-        bench: bench, rel: rel, rights: rights,
-        title: title + suffix,
-        stage: stage === 'C' ? 'candidate' : 'V1',
-        claim: '[청구항 1 · 가상] ' + SUB_PURPOSE[sub] + ' 결합부로서, ' + MECH_PART[mech][0] + '; 및 상기 부재를 수용하는 안내부를 포함하는 가구 결합 구조.',
-        paragraph: '[' + String(para).padStart(4, '0') + ' · 가상 문단] 본 예시에서 ' + MECH_PART[mech][1] + '으로 ' + SUBS[sub] + ' 기능을 구현한다. 이 문장은 시연을 위해 작성한 가상 원문이며 실제 특허 문헌이 아니다.',
-        paragraphNo: para
-      });
+  const seq = { KR: 0, US: 0, EP: 0, JP: 0 };
+  let famSeq = 0;
+  function nextId(c) { seq[c] += 1; return 'DEMO-' + c + '-' + String(seq[c]).padStart(4, '0'); }
+  function statusOf(country, kind, year) {
+    const term = kind === '실용신안' ? 10 : 20;
+    const exp = year + term;
+    if (exp < 2026) return { status: '만료 추정', expiryYear: exp };
+    if (year >= 2024) return { status: R() < 0.7 ? '공개·심사중' : '존속', expiryYear: exp };
+    return { status: R() < 0.08 ? '거절·포기' : '존속', expiryYear: exp };
+  }
+  function buildDoc(f, country, year, extra) {
+    const kind = country === 'KR' && R() < 0.32 ? '실용신안' : '특허';
+    const st = statusOf(country, kind, year);
+    const d = {
+      id: nextId(country), familyId: f.id, country: country, year: year, pubYear: Math.min(2026, year + 1 + Math.floor(R() * 2)),
+      sub: f.axis, code: f.code, mechs: f.mechs.slice(), perf: f.perf.slice(), use: f.use.slice(),
+      applicant: country === f.country ? f.app.name : f.app.name, appType: f.app.type, kind: kind,
+      rel: f.rel, status: st.status, expiryYear: st.expiryYear, stage: 'V1',
+      title: f.title + (country === f.country ? '' : ' (대응 출원)'),
+      problem: PROBLEM[f.axis], solution: MECH_PART[f.mechs[0]][0], effect: f.perf.map(function (p) { return EFFECT[p]; }).join(', ')
+    };
+    Object.assign(d, extra || {});
+    return d;
+  }
+  function makeFamily(axis, over) {
+    const a = AXIS[axis];
+    famSeq += 1;
+    const code = axis + (1 + Math.floor(R() * 4));
+    const country = over && over.country || weighted([['US', 0.70 - a.kr / 2], ['KR', a.kr], ['EP', 0.13], ['JP', 0.09]]);
+    let year = over && over.year;
+    if (!year) {
+      const per = weighted(PERIOD_W.map(function (p, i) { return [p, p[2] * (i >= 8 ? a.recent : 1)]; }));
+      year = per[0] + Math.floor(R() * (per[1] - per[0] + 1));
+    }
+    const eraBoost = (year - 1974) / 52;
+    let mechs = MECHS.filter(function (m, i) {
+      let p = a.mech[i];
+      if (m === '형상맞물림') p *= 0.8 + 0.45 * eraBoost;
+      if (m === '자석') p *= 0.15 + 1.3 * eraBoost;
+      return R() < p;
     });
+    if (!mechs.length) mechs = [MECHS[Math.floor(R() * 6)]];
+    const perf = PERF.filter(function () { return R() < 0.3; }); if (!perf.length) perf.push(pick(PERF));
+    const use = ['무공구'].concat(USE.slice(1).filter(function () { return R() < 0.25; }));
+    const rel = R() < a.core ? 'Core' : 'Adjacent';
+    const f = { id: 'VF-' + String(famSeq).padStart(3, '0'), axis: axis, code: code, country: country, year: year, mechs: mechs, perf: perf, use: use, rel: rel,
+      app: applicantFor(axis, country), title: MECH_PHRASE[mechs[0]] + ' ' + pick(['방식의', '구조를 갖는', '기구를 구비한']) + ' ' + NOUN[code] };
+    return Object.assign(f, over || {});
+  }
+  function grades(d) {
+    const alive = d.status === '존속' || d.status === '공개·심사중';
+    d.bench = d.rel === 'Core' ? 'H' : R() < 0.3 ? 'H' : R() < 0.6 ? 'M' : 'L';
+    d.relG = d.rel === 'Core' ? 'H' : R() < 0.5 ? 'M' : 'L';
+    d.rights = alive && d.rel === 'Core' ? 'H' : alive ? 'M' : 'L';
+  }
+  function finish(d, fi, di) {
+    d.claim = '[청구항 1 · 가상] ' + NOUN[d.code] + '로서, ' + d.mechs.slice(0, 2).map(function (m) { return MECH_PART[m][0]; }).join('; ') + '; 및 상기 부재를 수용하는 안내부를 포함하는 ' + NOUN[d.code] + '.';
+    d.paragraphNo = 10 + ((fi * 7 + di * 3) % 60);
+    d.paragraph = '[' + String(d.paragraphNo).padStart(4, '0') + ' · 가상 문단] 본 예시는 ' + MECH_PART[d.mechs[0]][1] + '으로, ' + d.problem + '(이)라는 문제를 줄인다. 이 문장은 시연용 가상 원문이며 실제 특허 문헌이 아니다.';
+    if (!d.bench) grades(d);
+  }
+
+  ['A', 'B', 'C', 'D'].forEach(function (axis) {
+    for (let i = 0; i < AXIS[axis].families; i++) {
+      const f = makeFamily(axis);
+      DOCS.push(buildDoc(f, f.country, f.year));
+      if (R() < (f.country === 'KR' ? 0.08 : 0.2)) {
+        const second = f.country === 'US' ? pick(['EP', 'JP', 'EP']) : f.country === 'KR' ? 'US' : 'US';
+        DOCS.push(buildDoc(f, second, f.year));
+      }
+      if (f.country !== 'KR' && f.year >= 2008 && R() < 0.12) DOCS.push(buildDoc(f, 'KR', f.year));
+    }
   });
 
+  // ---------- 손으로 쓴 대표 문헌 (국내 핵심 존속, 벤치마킹, 신규 도착) ----------
+  function fixed(axis, country, year, spec) {
+    const f = makeFamily(axis, { country: country, year: year, mechs: spec.mechs, rel: spec.rel || 'Core', title: spec.title, code: spec.code || axis + '2',
+      app: { name: spec.applicant, type: spec.appType || '기업' } });
+    const extra = { title: spec.title };
+    if (spec.status) extra.status = spec.status;
+    if (spec.kind) extra.kind = spec.kind;
+    if (spec.stage) extra.stage = spec.stage;
+    if (spec.elements) extra.elements = spec.elements;
+    const d = buildDoc(f, country, year, extra);
+    if (spec.kind) d.expiryYear = year + (spec.kind === '실용신안' ? 10 : 20);
+    if (spec.status) d.status = spec.status;
+    d.key = spec.key || null;
+    DOCS.push(d);
+    return d;
+  }
+  const KEY_KR = [
+    ['D', 2025, { title: '잠금 레버로 선반을 원터치 고정·분리하는 수납가구', mechs: ['스냅·래치', '회전·캠'], applicant: '소담퍼니처(가상)', code: 'D2',
+      elements: [['선반을 받치는 지지 브래킷', '해당', false], ['브래킷에 회동 결합된 잠금 레버', '해당', true], ['레버 회동 시 선반 걸림턱을 누르는 캠면', '비해당', true]] }],
+    ['D', 2025, { title: '끼움부와 탄성 락킹으로 좌판을 원터치 결합하는 의자', mechs: ['형상맞물림', '스냅·래치'], applicant: '누리키즈(가상)', code: 'D1',
+      elements: [['좌판 하면의 끼움 돌기', '비해당', true], ['프레임의 끼움 홈', '비해당', false], ['끼움 후 튀어나와 걸리는 탄성 락킹편', '검토', false]] }],
+    ['C', 2025, { title: '회전 고정키로 테이블 상판과 다리를 탈착하는 구조', mechs: ['회전·캠'], applicant: '한결체결(가상)', code: 'C2',
+      elements: [['다리 상단의 결합 블록', '해당', false], ['상판 하면에 형성된 키 수용 홈', '비해당', true], ['회전 시 수용 홈에 걸리는 고정키', '비해당', true]] }],
+    ['D', 2024, { title: '끼움판과 끼움홈으로 수납가구 프레임과 판재를 분리 연결하는 구조', mechs: ['형상맞물림'], applicant: '청솔공업(가상)', code: 'D1',
+      elements: [['프레임에 형성된 끼움홈', '비해당', true], ['판재 가장자리의 끼움판', '해당', false]] }],
+    ['C', 2024, { title: '끼움구와 회전 가압으로 공구 없이 상판을 체결하는 테이블 다리', mechs: ['형상맞물림', '클램프·쐐기'], applicant: '다온목공(가상)', code: 'C3',
+      elements: [['상판 가장자리를 수용하는 끼움구', '해당', true], ['끼움구에 결합되어 회전으로 가압력을 만드는 조작부', '검토', true], ['조작 시 상판 하면을 누르는 가압판', '해당', false]] }],
+    ['C', 2024, { title: '탄성 연결구와 가압 고정으로 프레임과 상판을 결합하는 테이블', mechs: ['스냅·래치', '클램프·쐐기'], applicant: '다온목공(가상)', code: 'C3',
+      elements: [['다리 상단에서 상판 가장자리를 감싸는 연결구', '해당', true], ['상판 하면을 위로 미는 가압 부재', '해당', true], ['가압 상태를 유지하는 걸림 수단', '해당', false]] }],
+    ['D', 2023, { title: '돌기와 홈 사이의 고정클립으로 패널을 원터치 결합하는 구조', mechs: ['형상맞물림', '스냅·래치'], applicant: '해솔디자인(가상)', code: 'D2',
+      elements: [['패널 측면의 돌기', '비해당', true], ['상대 패널의 홈', '비해당', false], ['돌기와 홈 사이에 끼워지는 고정클립', '비해당', true]] }],
+    ['C', 2022, { title: '상판과 접이 프레임을 원터치 결합하는 롤 테이블', mechs: ['힌지·접이', '스냅·래치'], applicant: '가람리빙(가상)', code: 'C4',
+      elements: [['상판을 지지하는 접이 프레임', '검토', true], ['상판 끝단을 프레임에 거는 원터치 걸쇠', '검토', false], ['접힘 상태를 고정하는 잠금편', '해당', false]] }]
+  ];
+  KEY_KR.forEach(function (k) { const d = fixed(k[0], 'KR', k[1], k[2]); d.status = '존속'; d.rel = 'Core'; d.rights = 'H'; d.bench = 'H'; d.relG = 'H'; d.key = 'kr-core'; });
+
+  // 벤치마킹 대상: 클램프식 테이블 레그와 그 권리 지형 (모두 가상)
+  const BENCH = [
+    fixed('C', 'US', 2016, { title: '대각 스트랩으로 상판 모서리를 잡는 클램프식 테이블 다리', mechs: ['클램프·쐐기'], applicant: 'Harbor Legs(가상)', rel: 'Adjacent', code: 'C2', key: 'bench' }),
+    fixed('C', 'US', 2019, { title: 'L자 코너 파지부를 갖는 분리형 테이블 다리', mechs: ['클램프·쐐기', '형상맞물림'], applicant: 'Harbor Legs(가상)', rel: 'Adjacent', code: 'C2', key: 'bench' }),
+    fixed('C', 'US', 2018, { title: '나사 로드와 환형 노브로 상판을 조이는 테이블 다리', mechs: ['클램프·쐐기', '회전·캠'], applicant: '개인 발명자 US-900(가상)', appType: '개인', rel: 'Adjacent', code: 'C3', key: 'bench' }),
+    fixed('C', 'US', 1953, { title: '상판 가장자리를 물어 고정하는 휴대용 테이블 다리', mechs: ['클램프·쐐기'], applicant: 'Oakline Works(가상)', rel: 'Adjacent', code: 'C2', key: 'bench' }),
+    fixed('C', 'KR', 2021, { title: '상턱·하턱과 회전 조임으로 고정하는 휴대용 테이블 다리', mechs: ['클램프·쐐기', '회전·캠'], applicant: '개인 발명자 KR-900(가상)', appType: '개인', rel: 'Adjacent', code: 'C2', kind: '실용신안', status: '거절·포기', key: 'bench' })
+  ];
+  BENCH.forEach(function (d) { if (d.year + 20 < 2026) d.status = '만료 추정'; else if (d.status !== '거절·포기') d.status = '존속'; d.rights = d.status === '존속' ? 'M' : 'L'; d.bench = 'H'; d.relG = 'H'; });
+
+  // 신규 도착 후보 (승인 전 집계 제외)
+  const CAND = [
+    ['C', 'KR', 2025, { title: '오버센터 레버로 상판 가장자리를 무타공 고정하는 테이블 다리', mechs: ['클램프·쐐기', '회전·캠'], applicant: '한결체결(가상)', code: 'C2', status: '공개·심사중', rel: 'Core' }],
+    ['A', 'KR', 2025, { title: '자석 정렬과 형상 걸림을 결합한 적층 수납 모듈', mechs: ['자석', '형상맞물림'], applicant: '개인 발명자 KR-901(가상)', appType: '개인', code: 'A3', status: '공개·심사중', rel: 'Adjacent' }],
+    ['B', 'US', 2025, { title: '회전 캠으로 좌판 높이를 바꾸는 성장형 의자', mechs: ['회전·캠', '슬라이드·키홀'], applicant: 'Lumen Kids(가상)', code: 'B2', status: '공개·심사중', rel: 'Adjacent' }],
+    ['D', 'EP', 2025, { title: '자석 보조 도브테일 가구 커넥터', mechs: ['형상맞물림', '자석'], applicant: 'Kessler Möbelbau(가상)', code: 'D3', status: '공개·심사중', rel: 'Adjacent' }],
+    ['C', 'JP', 2024, { title: '래칫으로 두께를 맞추는 무타공 상판 클램프', mechs: ['클램프·쐐기', '스냅·래치'], applicant: 'Hayashi Kogyo(가상)', code: 'C3', status: '존속', rel: 'Core' }],
+    ['D', 'US', 2025, { title: '누름 버튼 2단계 해제 가구 연결구', mechs: ['스냅·래치'], applicant: 'Northwind Fittings(가상)', code: 'D4', status: '공개·심사중', rel: 'Adjacent' }],
+    ['B', 'KR', 2024, { title: '다리 교체형 유아 의자', mechs: ['슬라이드·키홀', '스냅·래치'], applicant: '누리키즈(가상)', code: 'B1', kind: '실용신안', status: '존속', rel: 'Adjacent' }],
+    ['A', 'US', 2025, { title: '서랍 유닛 순서 교환형 모듈 캐비닛', mechs: ['슬라이드·키홀'], applicant: 'Aalto Systems(가상)', code: 'A2', status: '공개·심사중', rel: 'Adjacent' }]
+  ];
+  CAND.forEach(function (c) {
+    c[3].stage = 'candidate';
+    const d = fixed(c[0], c[1], c[2], c[3]);
+    d.status = c[3].status; d.rel = c[3].rel;
+    d.rights = d.rel === 'Core' ? 'H' : 'M'; d.bench = d.rel === 'Core' ? 'H' : 'M'; d.relG = d.rel === 'Core' ? 'H' : 'M';
+  });
+  // 기존 패밀리에 추가되는 후보 2건
+  ['C', 'D'].forEach(function (axis) {
+    const base = DOCS.find(function (d) { return d.stage === 'V1' && d.sub === axis && d.country === 'US' && d.rel === 'Core' && d.status === '존속' && !d.key; });
+    const d = Object.assign({}, base, { id: nextId('EP'), country: 'EP', title: base.title + ' (대응 출원)', stage: 'candidate', pubYear: 2026, status: '공개·심사중', key: null });
+    delete d.elements;
+    DOCS.push(d);
+  });
+
+  DOCS.forEach(function (d, i) { finish(d, i, i % 3); });
+  // 가족 중 한국 문헌이 있는지 (해외 특허의 국내 효력 판단용)
+  const famKR = {};
+  DOCS.forEach(function (d) { if (d.country === 'KR') famKR[d.familyId] = true; });
+  DOCS.forEach(function (d) { d.krFamily = !!famKR[d.familyId]; });
+
   const TASKS = [
-    { id: 'TASK-1', title: '무공구 상판 교체', sub: 'T1', mechs: ['레버', '쐐기'],
-      problem: '사용자가 공구 없이 1분 안에 상판을 바꿀 수 있어야 한다.',
-      components: ['상판 걸림부', '해제 손잡이'],
-      constraints: ['상판 두께 18mm', '착탈 500회 이상 반복', '부품 추가 원가 최소화'],
-      decisionDate: '2026-11-30', owner: '연구원 김(가상)' },
-    { id: 'TASK-2', title: '흔들림 억제', sub: 'T2', mechs: ['쐐기', '탄성'],
-      problem: '바닥이 고르지 않아도 테이블 다리의 흔들림을 줄여야 한다.',
-      components: ['다리-프레임 접합부', '유격 보정 부재'],
-      constraints: ['외관 노출 최소화', '공구 없는 조정', '하중 80kg'],
-      decisionDate: '2026-12-15', owner: '연구원 이(가상)' },
-    { id: 'TASK-3', title: '모듈 결합', sub: 'T3', mechs: ['자석', '레버'],
-      problem: '수납 모듈을 옆·위로 이어 붙이고 다시 분리할 수 있어야 한다.',
-      components: ['모듈 연결부', '정렬 가이드'],
-      constraints: ['반복 분리 100회', '아동 끼임 방지'],
-      decisionDate: '2027-01-31', owner: '연구원 박(가상)' }
+    { id: 'TASK-A', title: '재구성형 모듈 수납장', sub: 'A', mechs: ['형상맞물림', '자석'],
+      problem: '층을 추가·제거하거나 순서를 바꿔도 공구 없이 단단히 고정되어야 한다.',
+      components: ['모듈 간 공통 인터페이스', '적층 정렬부'], constraints: ['층당 하중 30kg', '재구성 30초 이내', '아동 끼임 방지'],
+      decisionDate: '2026-12-15', owner: '대표(가상)' },
+    { id: 'TASK-B', title: '성장형 의자', sub: 'B', mechs: ['스냅·래치', '슬라이드·키홀'],
+      problem: '아이 성장 단계에 맞춰 좌판·다리만 바꿔 계속 쓸 수 있어야 한다.',
+      components: ['좌판 교체부', '다리 높이 전환부'], constraints: ['아이가 임의로 풀 수 없음', '교체 부품 3종 이내'],
+      decisionDate: '2027-01-31', owner: '디자이너(가상)' },
+    { id: 'TASK-C', title: '원터치 레버식 무타공 테이블 다리', sub: 'C', mechs: ['클램프·쐐기', '회전·캠'],
+      problem: '상판에 구멍을 뚫지 않고 레버 한 번으로 다리를 단단히 고정해야 한다.',
+      components: ['일체 상턱', '하턱 캐리지·래칫', '오버센터 레버', '탄성 정압부'], constraints: ['상판 두께 18–40mm', '두께와 무관한 일정 조임력', '레버 돌출 없음'],
+      decisionDate: '2026-11-30', owner: '대표(가상)' },
+    { id: 'TASK-D', title: '공통 무공구 커넥터', sub: 'D', mechs: ['형상맞물림', '자석'],
+      problem: '수납장·의자·테이블에 같은 규격의 무공구 커넥터를 쓰고 싶다.',
+      components: ['형상 정렬부', '자석 위치결정부'], constraints: ['반복 착탈 1,000회', '하중은 형상이, 위치는 자석이 담당'],
+      decisionDate: '2027-03-31', owner: '엔지니어(가상)' }
   ];
 
-  // 질문형 카드 6개. 수치는 카드에 적지 않고 실행조건(spec)으로 계산한다.
   const CARDS = [
-    { id: 'CARD-01', type: '벤치마킹', layer: 'explain', tasks: ['TASK-1'],
-      title: '공구 없이 상판을 바꾸는 구조는 어떤 결합 수단을 주로 쓰나요?',
-      spec: { groupBy: 'mech', unit: 'doc', filters: { sub: 'T1' } },
-      evidence: ['DEMO-KR-0001', 'DEMO-KR-0009', 'DEMO-KR-0015', 'DEMO-KR-0005'],
-      report: '가상 IP-R&D 보고서(2025) 3장 벤치마킹 · p.41–44 · 그림 3-2',
-      recheck: '무공구 상판 교체 분류에 새 문헌이 승인되면 다시 계산합니다.' },
-    { id: 'CARD-02', type: '벤치마킹', layer: 'explain', tasks: ['TASK-2'],
-      title: '흔들림을 줄이는 방식에는 무엇이 있고, 무엇이 많이 쓰이나요?',
-      spec: { groupBy: 'mech', unit: 'doc', filters: { sub: 'T2' } },
-      evidence: ['DEMO-KR-0003', 'DEMO-KR-0006', 'DEMO-KR-0012', 'DEMO-KR-0021'],
-      report: '가상 IP-R&D 보고서(2025) 3장 벤치마킹 · p.45–49 · 표 3-5',
-      recheck: '흔들림 억제 분류의 신규 문헌, 특히 권리검토 필요도 높음 문헌이 승인되면 확인합니다.' },
-    { id: 'CARD-03', type: '정량 그래프', layer: 'calc', tasks: ['TASK-1', 'TASK-2', 'TASK-3'],
-      title: '교체형 가구 결합부 출원은 해마다 늘고 있나요?',
-      spec: { groupBy: 'year', unit: 'doc', filters: {} },
-      evidence: ['DEMO-KR-0001', 'DEMO-KR-0013', 'DEMO-US-0006'],
-      report: '가상 IP-R&D 보고서(2025) 2장 정량분석 · p.18 · 그림 2-1',
-      recheck: '기준선이 바뀌면 다시 계산합니다. 공개연도 기준이며 최근 연도는 미공개분이 있을 수 있습니다.' },
-    { id: 'CARD-04', type: '정량 그래프', layer: 'calc', tasks: ['TASK-3'],
-      title: '모듈 결합 기술은 누가 출원하고 있나요?',
-      spec: { groupBy: 'applicant', unit: 'family', filters: { sub: 'T3' } },
-      evidence: ['DEMO-KR-0004', 'DEMO-KR-0007', 'DEMO-KR-0018', 'DEMO-EP-0002'],
-      report: '가상 IP-R&D 보고서(2025) 2장 정량분석 · p.24 · 그림 2-6',
-      recheck: '모듈 결합 분류의 출원인 구성이 바뀌면 다시 계산합니다.' },
-    { id: 'CARD-05', type: '공백 후보', layer: 'explain', tasks: ['TASK-2', 'TASK-3'],
-      title: '어떤 분류·결합 수단 조합이 적게 관측되나요?',
-      spec: { groupBy: 'matrix', unit: 'family', filters: {} },
-      evidence: ['DEMO-KR-0004', 'DEMO-US-0006', 'DEMO-CN-0002'],
-      report: '가상 IP-R&D 보고서(2025) 4장 공백 분석 · p.63 · 표 4-1',
-      recheck: '저밀도 조합에 새 문헌이 승인되면 확인합니다. 공백은 연구 후보(가설)이며 등록 가능성을 뜻하지 않습니다.' },
-    { id: 'CARD-06', type: '권리 검토 대상', layer: 'review', tasks: ['TASK-1', 'TASK-2'],
-      title: '쐐기 구조 가운데 권리 검토가 필요한 문헌은 무엇인가요?',
-      spec: { groupBy: 'sub', unit: 'doc', filters: { mech: '쐐기', rights: 'H' } },
-      evidence: ['DEMO-KR-0002', 'DEMO-KR-0003', 'DEMO-KR-0008', 'DEMO-KR-0012'],
-      report: '가상 IP-R&D 보고서(2025) 5장 핵심특허 · p.78–85 · 표 5-2',
-      recheck: '대상 문헌의 청구범위 변경·분할출원이 확인되면 재검토합니다. 이 카드는 목록이며 침해 여부 결론이 아닙니다.' }
+    { id: 'CARD-01', type: '정량 그래프', layer: 'calc', tasks: ['TASK-A', 'TASK-D'], title: '자석 결합만 조사했다면 무엇을 놓쳤을까요?',
+      spec: { groupBy: 'mech', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.14 결합방식별 문헌 수', recheck: '결합방식 태그 체계가 바뀌면 다시 계산합니다. 한 문헌이 여러 방식을 쓰므로 합계는 중복 포함입니다.' },
+    { id: 'CARD-02', type: '정량 그래프', layer: 'calc', tasks: ['TASK-A', 'TASK-B', 'TASK-C', 'TASK-D'], title: '이 분야 출원은 늘고 있나요? (5년 단위)',
+      spec: { groupBy: 'period', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.18 출원 동향', recheck: '출원연도 기준. 최근 구간은 미공개 출원이 빠져 있을 수 있습니다.' },
+    { id: 'CARD-03', type: '정량 그래프', layer: 'calc', tasks: ['TASK-A', 'TASK-B'], title: '제품군별로 핵심(Core) 선행 문헌은 얼마나 있나요?',
+      spec: { groupBy: 'sub', unit: 'doc', filters: { rel: 'Core' } }, report: '가상 중간보고 2장 · p.20 제품군별 핵심 문헌', recheck: 'Core 판정 기준(개발 컨셉 필수요건)이 바뀌면 재판정합니다.' },
+    { id: 'CARD-04', type: '추세', layer: 'explain', tasks: ['TASK-A', 'TASK-D'], title: '형상맞물림과 자석 결합의 비중은 어떻게 바뀌었나요?',
+      spec: { groupBy: 'share', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.21 결합방식 트렌드', recheck: '시기 구간 정의가 바뀌면 다시 계산합니다.' },
+    { id: 'CARD-05', type: '권리 상태', layer: 'calc', tasks: ['TASK-C'], title: '관련 특허 중 이미 기간이 끝난 것은 얼마나 되나요?',
+      spec: { groupBy: 'status', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.22 권리 상태', recheck: '출원일 + 법정 존속기간으로 추정. 실제 사용 전 등록원부로 확인해야 합니다.' },
+    { id: 'CARD-06', type: '권리 상태', layer: 'calc', tasks: ['TASK-A', 'TASK-B', 'TASK-C', 'TASK-D'], title: '해외 특허가 한국 사업에 영향을 줄 수 있나요?',
+      spec: { groupBy: 'funnel', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.23 해외 특허의 국내 영향', recheck: '한국 가족특허 진입 여부는 공개 후 추적합니다. 디자인권은 별도 확인 대상입니다.' },
+    { id: 'CARD-07', type: '권리 검토 대상', layer: 'review', tasks: ['TASK-C', 'TASK-D'], title: '한국에서 설계할 때 먼저 대조할 핵심 특허는 무엇인가요?',
+      spec: { groupBy: 'sub', unit: 'doc', filters: { country: 'KR', rel: 'Core', status: 'alive' } }, report: '가상 중간보고 2장 · p.24 국내 주의 특허', recheck: '목록일 뿐 침해 여부 결론이 아닙니다. 청구항 대조는 전문 검토로 진행합니다.' },
+    { id: 'CARD-08', type: '권리 상태', layer: 'calc', tasks: ['TASK-C'], title: '한국 존속 특허는 언제 풀리나요? (만료 예정 캘린더)',
+      spec: { groupBy: 'expiry', unit: 'doc', filters: { country: 'KR', status: 'alive' } }, report: '가상 중간보고 2장 · p.25 만료 예정 캘린더', recheck: '연차료 미납으로 더 일찍 소멸한 권리가 있을 수 있습니다.' },
+    { id: 'CARD-09', type: '정량 그래프', layer: 'calc', tasks: ['TASK-A', 'TASK-B', 'TASK-C', 'TASK-D'], title: '이 분야에 절대 강자가 있나요? (출원인 구조)',
+      spec: { groupBy: 'applicant', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.26 출원인 구조', recheck: '출원인 명칭 정규화 규칙이 바뀌면 다시 계산합니다.' },
+    { id: 'CARD-10', type: '공백 후보', layer: 'explain', tasks: ['TASK-A', 'TASK-B'], title: '살아 있는 권리가 적은 결합방식 × 제품 조합은 어디인가요?',
+      spec: { groupBy: 'matrix', unit: 'doc', filters: { status: 'alive' } }, report: '가상 중간보고 2장 · p.27 기술 공백', recheck: '공백은 연구 후보(가설)이며 등록 가능성을 뜻하지 않습니다.' },
+    { id: 'CARD-11', type: '정량 그래프', layer: 'calc', tasks: ['TASK-D'], title: '어느 나라 문헌이 많고, 한국은 어떤 제품군이 많나요?',
+      spec: { groupBy: 'country', unit: 'doc', filters: {} }, report: '가상 중간보고 2장 · p.19 국가별 구성', recheck: '국가는 문헌 발행국 기준입니다.' },
+    { id: 'CARD-12', type: '벤치마킹', layer: 'explain', tasks: ['TASK-C'], title: '클램프식 테이블 다리는 어떤 약점이 있고, 어떻게 개선할 수 있나요?',
+      spec: { groupBy: 'status', unit: 'doc', filters: { sub: 'C', mech: '클램프·쐐기' } }, report: '가상 중간보고 3장 · p.30–32 벤치마킹과 개선 설계', recheck: '시제품 시험 결과가 나오면 개선안 평가를 갱신합니다.', link: 'ip' }
   ];
+
+  // 신규 IP 창출 (가상 예시)
+  const IP = {
+    target: { name: '클램프식 테이블 다리(가상 제품)', how: ['상턱과 하턱 사이에 상판 끝을 끼우고 노브를 돌려 조임', '상판에 구멍을 뚫지 않고 공구 없이 설치', '같은 다리로 테이블·벤치 구성 — 상판과 다리를 따로 판매'] },
+    landscape: [['특허를 가진 기업', '1곳', '가상 미국 기업 한 곳뿐'], ['한국·일본·유럽 등록 장벽', '0건', '지금 바로 실시 가능(가상)'], ['미국 진출 시 검토 특허', '3건', '기업 2건 + 개인 1건'], ['국내 동일 개념 실용신안', '거절', '상턱+하턱+회전 조임']],
+    weaknesses: ['하중이 크면 헐거워짐', '상판 윗면에 턱이 보임', '압흔·이완·조임 편차', '노브를 수십 바퀴 돌림', '다리끼리 흔들림'],
+    options: [
+      { no: '①', name: '하중 자기증폭', weak: '하중이 크면 헐거워짐', core: '하중이 클수록 쐐기가 더 조이는 구조', pat: 'H', com: 'M' },
+      { no: '②', name: '상면 무노출', weak: '상판 윗면에 턱이 보임', core: '상판 밑면·옆면만 잡는 구조', pat: 'H', com: 'M' },
+      { no: '③', name: '정압 + 토크 제한', weak: '압흔·이완·조임 편차', core: '스프링 예압으로 일정한 조임력', pat: 'M', com: 'M' },
+      { no: '④', name: '원터치 레버', weak: '노브를 수십 바퀴 돌림', core: '오버센터 레버 한 번으로 잠금', pat: 'L', com: 'H', pick: true },
+      { no: '⑤', name: '강성 레일', weak: '다리끼리 흔들림', core: '상판 밑면에 붙는 연결 레일', pat: 'M', com: 'M' }
+    ],
+    addons: [
+      { k: 'A', name: '두께 자동 추종 + 정압', how: '하턱을 밀어 올리면 래칫이 두께에 맞춰 멈추고, 레버는 스프링만 눌러 늘 같은 힘으로 조임', pat: 'H', com: 'H', rec: true },
+      { k: 'B', name: '안전 2단계 해제', how: '버튼을 누른 채로만 레버가 열림 — 아이가 당겨도 풀리지 않음', pat: 'M', com: 'H', rec: true },
+      { k: 'C', name: '플러시 수납 레버', how: '잠그면 레버가 다리 본체 홈 안으로 들어가 돌출·걸림이 없음', pat: 'M', com: 'H', rec: true },
+      { k: 'D', name: '조임 상태 표시창', how: '예압이 충분하면 창이 녹색으로 바뀜', pat: 'M', com: 'M' },
+      { k: 'E', name: '단부 걸림홈 결합', how: '상판 끝의 얕은 홈에 하턱 돌기가 걸려 빠짐 방지', pat: 'M', com: 'M' },
+      { k: 'F', name: '하중 자기증폭 쐐기', how: '누르는 하중이 클수록 쐐기가 하턱을 더 밀어 올림(①의 결합)', pat: 'H', com: 'M' },
+      { k: 'G', name: '헤드–다리 분리 모듈', how: '클램프 헤드는 공통, 다리만 바꿔 테이블·벤치·아동 높이 전환', pat: 'M', com: 'H', rec: true },
+      { k: 'H', name: '레일 연결 브레이싱', how: '두 다리를 상판 밑면 레일로 연결해 흔들림 억제(⑤의 결합)', pat: 'M', com: 'M' }
+    ],
+    install: [['끼우기', '', '상판 가장자리를 상턱 아래로 밀어 넣음'], ['밀어 올리기', 'A', '하턱을 올리면 두께에 맞춰 자동 정지'], ['레버 내리기', 'A·C', '일정 힘으로 잠기고 홈 안에 수납'], ['자동 잠금', 'B', '걸쇠가 딸깍 걸려 임의 해제 불가']],
+    release: [['버튼 누르기', 'B', '해제 버튼을 누른 상태 유지'], ['레버 당기기', 'B·C', '손가락 홈으로 레버를 당겨 엶'], ['하턱 내리기', 'A·B', '레버가 열린 뒤에만 폴을 풀어 하강'], ['빼기', 'G', '다리만 교체도 가능']],
+    claim: {
+      concept: '두께가 달라도 레버 한 번에 늘 같은 힘으로 잠기는 무타공 다리',
+      independent: ['상턱이 일체로 형성된 판재 본체(헤드)', '안내부를 따라 오르내리는 하턱 캐리지', '하턱을 두께에 맞춰 멈추는 래칫(래크 + 폴)', '하턱 캐리지에 달려 함께 이동하는 오버센터 레버', '레버와 가압판 사이의 탄성체(일정한 조임력)'],
+      dependents: [['B', '잠금 레버를 구속하는 걸쇠와 눌린 상태에서만 푸는 해제 버튼'], ['B', '레버가 잠겨 있는 동안 폴 해제를 막는 인터록'], ['C', '잠금 위치에서 레버가 수용홈에 들어가 외곽선 밖으로 돌출되지 않음'], ['C', '레버 끝단의 손가락 걸림홈'], ['G', '본체가 클램프 헤드와 다리 부재로 분리되어 무공구 착탈'], ['G', '길이가 다른 다리 부재가 같은 규격 결합부를 갖는 키트'], ['–', '상판과 복수의 청구항 1 다리를 포함하는 테이블']]
+    },
+    diff: [
+      ['가상 미국 기업 2건', '대각 스트랩 · L자 코너 파지', '스트랩 없음, 직선 단부 파지', '회피'],
+      ['가상 미국 개인 1건', '나사 로드 + 환형 노브', '나사 없음(레버), 일체 절곡 상턱', '회피'],
+      ['국내 실용신안(거절)', '상턱 + 하턱 + 회전 조임', '레버 · 래칫 · 탄성 정압 추가', '차별'],
+      ['공구용 자동조절 토글 클램프', '레버 + 두께 자동 조절', '가구 다리 일체 구조 · 안전해제 · 수납 레버', '차별'],
+      ['국내 Core 존속 특허', '원터치 끼움 · 탄성 걸림 연결구 위주', '대조표에서 요소별 확인', '확인 중']
+    ],
+    candidates: [
+      { id: 'IC-1', title: '원터치 레버식 무타공 테이블 다리 (④ + A·B·C·G)', task: 'TASK-C', basis: '벤치마킹 약점 5개 → 개선안 ④ + 보강 기술', status: '기술검증 중' },
+      { id: 'IC-2', title: '형상맞물림 + 자석 위치결정 적층 수납장', task: 'TASK-A', basis: '공백: 자석 × 모듈 수납장 존속 권리 적음', status: '제안됨' },
+      { id: 'IC-3', title: '회전 캠 높이 전환 성장 의자', task: 'TASK-B', basis: '공백: 회전·캠 × 성장형 의자 존속 권리 0', status: '제안됨' }
+    ]
+  };
 
   const GLOSSARY = [
-    { term: '흔들림', expand: ['흔들림', '진동', '유격', '요동', '강성'] },
-    { term: '상판', expand: ['상판', '교체', '착탈', '무공구'] },
-    { term: '교체', expand: ['교체', '착탈', '상판', '무공구'] },
-    { term: '모듈', expand: ['모듈', '연결', '확장', '결합'] },
-    { term: '쐐기', expand: ['쐐기', '경사', '웨지'] },
-    { term: '자석', expand: ['자석', '자력', '흡착', '마그넷'] },
-    { term: '레버', expand: ['레버', '캠', '회동', '잠금'] },
-    { term: '탄성', expand: ['탄성', '스프링', '클립', '패드', '부시'] }
+    { term: '흔들림', expand: ['흔들림', '진동', '유격', '전도', '강성'] },
+    { term: '상판', expand: ['상판', '테이블', '무타공', '클램프'] },
+    { term: '다리', expand: ['다리', '테이블', '클램프'] },
+    { term: '수납', expand: ['수납', '모듈', '캐비닛', '선반', '적층'] },
+    { term: '의자', expand: ['의자', '좌판', '성장', '아동'] },
+    { term: '커넥터', expand: ['커넥터', '연결구', '결합구', '체결'] },
+    { term: '자석', expand: ['자석', '자력', '흡착'] },
+    { term: '레버', expand: ['레버', '캠', '토글', '잠금'] },
+    { term: '끼움', expand: ['끼움', '형상맞물림', '돌기', '홈'] }
   ];
 
   global.FDE_DATA = {
-    PROJECT: { name: '교체형 가구 결합부', group: '가상 연구그룹 A', fde: '담당 FDE(가상)' },
-    SUBS: SUBS, MECHS: MECHS, COUNTRIES: COUNTRIES, LEVELS: LEVELS,
-    DOCS: DOCS, TASKS: TASKS, CARDS: CARDS, GLOSSARY: GLOSSARY,
-    V1_DATE: '2026-06-30'
+    PROJECT: { name: '공구 없이 재구성하는 가구', client: '가상 고객사 · 3인 가구 스타트업', group: '가상 IP-R&D 프로젝트', fde: '담당 FDE(가상)',
+      pipeline: { search: { US: 540, JP: 268, EP: 179, KR: 206 }, excluded: 6 } },
+    SUBS: SUBS, SUB_SHORT: SUB_SHORT, CODES: CODES, MECHS: MECHS, PERF: PERF, USE: USE, COUNTRIES: COUNTRIES, LEVELS: LEVELS, STATUSES: STATUSES,
+    DOCS: DOCS, TASKS: TASKS, CARDS: CARDS, IP: IP, GLOSSARY: GLOSSARY, V1_DATE: '2026-08-28', TODAY_YEAR: 2026
   };
 })(typeof window !== 'undefined' ? window : globalThis);
 </script>
@@ -409,7 +678,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
 (function (global) {
   'use strict';
   const D = global.FDE_DATA;
-  const SCHEMA = 3;
+  const SCHEMA = 4;
   const DOC_BY_ID = {};
   D.DOCS.forEach(function (d) { DOC_BY_ID[d.id] = d; });
 
@@ -417,6 +686,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   function pad(n, w) { return String(n).padStart(w, '0'); }
   function nowIso() { return new Date().toISOString(); }
   function today() { return nowIso().slice(0, 10); }
+  function pct(a, b) { return b ? Math.round(a * 100 / b) : 0; }
 
   function esc(s) {
     return String(s == null ? '' : s)
@@ -425,6 +695,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   }
 
   function getDoc(id) { return DOC_BY_ID[id] || null; }
+  function isAlive(d) { return d.status === '존속' || d.status === '공개·심사중'; }
 
   // ---------- 기준선 ----------
   function baselineOf(state, id) { return state.baselines.find(function (b) { return b.id === id; }) || null; }
@@ -438,100 +709,130 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   }
   function candidateDocs(state) { return state.candidates.map(function (c) { return getDoc(c.docId); }); }
 
+  // ---------- 구간 ----------
+  const PERIODS = [['~1979', 0, 1979], ['1980–84', 1980, 1984], ['1985–89', 1985, 1989], ['1990–94', 1990, 1994], ['1995–99', 1995, 1999],
+    ['2000–04', 2000, 2004], ['2005–09', 2005, 2009], ['2010–14', 2010, 2014], ['2015–19', 2015, 2019], ['2020–24', 2020, 2024], ['2025–26', 2025, 2026]];
+  const ERAS = [['~1999', 0, 1999], ['2000–09', 2000, 2009], ['2010–19', 2010, 2019], ['2020–26', 2020, 2026]];
+  function bucketOf(list, y) { const b = list.find(function (p) { return y >= p[1] && y <= p[2]; }); return b ? b[0] : null; }
+
   // ---------- 필터·집계 ----------
   function matchFilters(d, f) {
     f = f || {};
     if (f.country === 'KR' && d.country !== 'KR') return false;
     if (f.country === 'FOREIGN' && d.country === 'KR') return false;
     if (f.sub && d.sub !== f.sub) return false;
-    if (f.mech && d.mech !== f.mech) return false;
+    if (f.mech && d.mechs.indexOf(f.mech) < 0) return false;
     if (f.rights && d.rights !== f.rights) return false;
+    if (f.rel && d.rel !== f.rel) return false;
+    if (f.status === 'alive' && !isAlive(d)) return false;
+    if (f.status === 'expired' && d.status !== '만료 추정') return false;
     return true;
   }
 
-  function groupValue(d, groupBy) {
-    if (groupBy === 'year') return d.year;
-    if (groupBy === 'mech') return d.mech;
-    if (groupBy === 'sub') return d.sub;
-    if (groupBy === 'applicant') return d.applicant;
-    if (groupBy === 'country') return d.country;
-    return null;
+  // 한 문헌이 여러 값을 가질 수 있다(결합방식). 항상 배열로 돌려준다.
+  function groupValues(d, groupBy) {
+    if (groupBy === 'period') return [bucketOf(PERIODS, d.year)];
+    if (groupBy === 'year') return [d.year];
+    if (groupBy === 'mech') return d.mechs;
+    if (groupBy === 'sub') return [d.sub];
+    if (groupBy === 'applicant') return [d.applicant];
+    if (groupBy === 'country') return [d.country];
+    if (groupBy === 'status') return [d.status];
+    if (groupBy === 'rel') return [d.rel];
+    if (groupBy === 'expiry') return [d.expiryYear];
+    return [];
   }
 
-  function groupKeys(groupBy, scopeDocs, baselineDocs) {
-    if (groupBy === 'year') {
-      const ys = baselineDocs.map(function (d) { return d.year; });
-      const out = []; for (let y = Math.min.apply(null, ys); y <= Math.max.apply(null, ys); y++) out.push(y);
-      return out;
-    }
+  function groupKeys(groupBy, scopeDocs) {
+    if (groupBy === 'period') return PERIODS.map(function (p) { return p[0]; });
     if (groupBy === 'mech') return D.MECHS.slice();
     if (groupBy === 'sub') return Object.keys(D.SUBS);
     if (groupBy === 'country') return Object.keys(D.COUNTRIES);
+    if (groupBy === 'status') return D.STATUSES.slice();
+    if (groupBy === 'rel') return ['Core', 'Adjacent'];
+    if (groupBy === 'expiry') {
+      if (!scopeDocs.length) return [];
+      const ys = scopeDocs.map(function (d) { return d.expiryYear; });
+      const out = []; for (let y = Math.max(D.TODAY_YEAR, Math.min.apply(null, ys)); y <= Math.max.apply(null, ys); y++) out.push(y);
+      return out;
+    }
     if (groupBy === 'applicant') {
       const counts = {};
       scopeDocs.forEach(function (d) { counts[d.applicant] = (counts[d.applicant] || 0) + 1; });
-      return Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); });
+      return Object.keys(counts).sort(function (a, b) { return counts[b] - counts[a] || a.localeCompare(b); }).slice(0, 10);
     }
     return [];
   }
 
   function keyLabel(groupBy, k) {
-    if (groupBy === 'year') return k + '년';
+    if (groupBy === 'year' || groupBy === 'expiry') return k + '년';
     if (groupBy === 'sub') return D.SUBS[k] || k;
     if (groupBy === 'country') return D.COUNTRIES[k] || k;
     return String(k);
   }
 
   function countOf(docs, unit) { return unit === 'family' ? uniqueFamilies(docs) : docs.length; }
+  function ids(docs) { return docs.map(function (d) { return d.id; }); }
 
   // 순수 함수: 문헌 배열 + 조건 → 결과. 수치는 오직 여기서 나온다.
   function aggregate(baselineDocs, spec) {
     const scope = baselineDocs.filter(function (d) { return matchFilters(d, spec.filters); });
-    const result = {
-      totals: { docs: scope.length, families: uniqueFamilies(scope) },
-      docIds: scope.map(function (d) { return d.id; }),
-      rows: [], matrix: null
-    };
+    const result = { totals: { docs: scope.length, families: uniqueFamilies(scope) }, docIds: ids(scope), rows: [], matrix: null, series: null, rowSum: null };
     if (spec.groupBy === 'matrix') {
-      const subs = Object.keys(D.SUBS);
-      result.matrix = { rows: subs, cols: D.MECHS.slice(), cells: {} };
-      subs.forEach(function (s) {
-        D.MECHS.forEach(function (m) {
-          const ds = scope.filter(function (d) { return d.sub === s && d.mech === m; });
-          result.matrix.cells[s + '|' + m] = { count: countOf(ds, spec.unit), docIds: ds.map(function (d) { return d.id; }) };
+      const rows = D.MECHS.slice(), cols = Object.keys(D.SUBS);
+      result.matrix = { rows: rows, cols: cols, cells: {} };
+      rows.forEach(function (m) {
+        cols.forEach(function (s) {
+          const ds = scope.filter(function (d) { return d.sub === s && d.mechs.indexOf(m) >= 0; });
+          result.matrix.cells[m + '|' + s] = { count: countOf(ds, spec.unit), docIds: ids(ds) };
         });
       });
       return result;
     }
-    const keys = groupKeys(spec.groupBy, scope, baselineDocs);
+    if (spec.groupBy === 'funnel') {
+      const s1 = scope.filter(function (d) { return d.country !== 'KR'; });
+      const s2 = s1.filter(isAlive);
+      const s3 = s2.filter(function (d) { return d.krFamily; });
+      result.rows = [['foreign', '해외 문헌 (미국·유럽·일본)', s1], ['alive', '그중 권리 존속·공개 중', s2], ['krfam', '그중 한국 가족특허 보유', s3]]
+        .map(function (x) { return { key: x[0], label: x[1], count: countOf(x[2], spec.unit), docIds: ids(x[2]) }; });
+      return result;
+    }
+    if (spec.groupBy === 'share') {
+      result.series = {};
+      result.rows = ERAS.map(function (e) {
+        const ds = scope.filter(function (d) { return d.year >= e[1] && d.year <= e[2]; });
+        return { key: e[0], label: e[0], count: countOf(ds, spec.unit), docIds: ids(ds) };
+      });
+      D.MECHS.forEach(function (m) {
+        result.series[m] = result.rows.map(function (r) {
+          const ds = r.docIds.map(getDoc);
+          const withM = ds.filter(function (d) { return d.mechs.indexOf(m) >= 0; });
+          return spec.unit === 'family' ? pct(uniqueFamilies(withM), uniqueFamilies(ds)) : pct(withM.length, ds.length);
+        });
+      });
+      return result;
+    }
+    const keys = groupKeys(spec.groupBy, scope);
     result.rows = keys.map(function (k) {
-      const ds = scope.filter(function (d) { return groupValue(d, spec.groupBy) === k; });
-      return { key: k, label: keyLabel(spec.groupBy, k), count: countOf(ds, spec.unit), docIds: ds.map(function (d) { return d.id; }) };
+      const ds = scope.filter(function (d) { return groupValues(d, spec.groupBy).indexOf(k) >= 0; });
+      return { key: k, label: keyLabel(spec.groupBy, k), count: countOf(ds, spec.unit), docIds: ids(ds) };
     });
     result.rowSum = result.rows.reduce(function (a, r) { return a + r.count; }, 0);
+    if (spec.groupBy === 'applicant') {
+      const counts = {};
+      scope.forEach(function (d) { counts[d.applicant] = (counts[d.applicant] || 0) + 1; });
+      const vals = Object.keys(counts).map(function (k) { return counts[k]; });
+      result.totals.applicants = { distinct: vals.length, single: vals.filter(function (v) { return v === 1; }).length, max: vals.length ? Math.max.apply(null, vals) : 0 };
+    }
     return result;
   }
 
+  const FILTER_KEYS = ['country', 'sub', 'mech', 'rights', 'rel', 'status'];
   function normalizeSpec(spec) {
     const f = spec.filters || {};
     const filters = {};
-    ['country', 'sub', 'mech', 'rights'].forEach(function (k) { if (f[k]) filters[k] = f[k]; });
-    return { groupBy: spec.groupBy || 'year', unit: spec.unit === 'family' ? 'family' : 'doc', filters: filters };
-  }
-
-  // 분석 실행: 실행 번호·기준선·조건·문헌·수치를 함께 고정해 기록한다.
-  function runAnalysis(state, spec, origin) {
-    const s = normalizeSpec(spec);
-    const baseline = state.currentBaseline;
-    const res = aggregate(docsInBaseline(state, baseline), s);
-    state.runSeq += 1;
-    const run = {
-      id: 'RUN-' + pad(state.runSeq, 4), baseline: baseline, spec: s,
-      createdAt: nowIso(), origin: origin || '질문', engine: 'fde-core/' + SCHEMA,
-      totals: res.totals, docIds: res.docIds, rows: res.rows, rowSum: res.rowSum, matrix: res.matrix
-    };
-    state.runs[run.id] = deepFreeze(clone(run));
-    return state.runs[run.id];
+    FILTER_KEYS.forEach(function (k) { if (f[k]) filters[k] = f[k]; });
+    return { groupBy: spec.groupBy || 'period', unit: spec.unit === 'family' ? 'family' : 'doc', filters: filters };
   }
 
   function deepFreeze(o) {
@@ -541,12 +842,29 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     return o;
   }
 
-  const GROUP_LABEL = { year: '공개연도별', mech: '결합 수단별', sub: '세부 분류별', applicant: '출원인별', country: '국가별', matrix: '분류 × 결합 수단' };
+  // 분석 실행: 실행 번호·기준선·조건·문헌·수치를 함께 고정해 기록한다.
+  function runAnalysis(state, spec, origin) {
+    const s = normalizeSpec(spec);
+    const baseline = state.currentBaseline;
+    const res = aggregate(docsInBaseline(state, baseline), s);
+    state.runSeq += 1;
+    const run = {
+      id: 'RUN-' + pad(state.runSeq, 4), baseline: baseline, spec: s, createdAt: nowIso(), origin: origin || '질문', engine: 'fde-core/' + SCHEMA,
+      totals: res.totals, docIds: res.docIds, rows: res.rows, rowSum: res.rowSum, matrix: res.matrix, series: res.series
+    };
+    state.runs[run.id] = deepFreeze(clone(run));
+    return state.runs[run.id];
+  }
+
+  const GROUP_LABEL = { period: '5년 단위 출원', year: '출원연도별', mech: '결합방식별', sub: '제품군(기술축)별', applicant: '출원인별(상위 10)', country: '국가별',
+    status: '권리 상태별', rel: '관련도별', expiry: '만료 예정 연도별', matrix: '결합방식 × 제품군', funnel: '해외 특허의 국내 영향', share: '시기별 결합방식 비중' };
   const FILTER_LABEL = {
     country: function (v) { return '국가: ' + (v === 'KR' ? '국내(한국)만' : '해외만'); },
-    sub: function (v) { return '분류: ' + D.SUBS[v]; },
-    mech: function (v) { return '결합 수단: ' + v; },
-    rights: function (v) { return '권리검토 필요도: ' + D.LEVELS[v]; }
+    sub: function (v) { return '제품군: ' + D.SUBS[v]; },
+    mech: function (v) { return '결합방식: ' + v; },
+    rights: function (v) { return '권리검토 필요도: ' + D.LEVELS[v]; },
+    rel: function (v) { return '관련도: ' + v + '만'; },
+    status: function (v) { return '권리: ' + (v === 'alive' ? '존속·공개 중' : '만료 추정'); }
   };
 
   function specChips(spec) {
@@ -555,99 +873,154 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (!Object.keys(spec.filters).length) out.push('필터 없음(전체)');
     return out;
   }
+  function filterChip(k, v) { return FILTER_LABEL[k](v); }
 
   function unitWord(spec) { return spec.unit === 'family' ? '개 패밀리' : '건'; }
 
   // 결과 설명: 계산된 수치를 그대로 읽어 문장으로 만든다(새 수치를 만들지 않음).
   function describeRun(run) {
     const u = unitWord(run.spec);
-    const lines = [];
-    const base = '기준선 ' + run.baseline + ' · 조건에 포함된 문헌 ' + run.totals.docs + '건(고유 패밀리 ' + run.totals.families + '개)';
-    lines.push(base + '.');
-    if (run.spec.groupBy === 'matrix') {
+    const lines = ['기준선 ' + run.baseline + ' · 조건에 포함된 문헌 ' + run.totals.docs + '건(고유 패밀리 ' + run.totals.families + '개).'];
+    const g = run.spec.groupBy;
+    if (g === 'matrix') {
       const zero = [], low = [];
       Object.keys(run.matrix.cells).forEach(function (k) {
         const c = run.matrix.cells[k].count; const p = k.split('|');
-        const name = D.SUBS[p[0]] + ' × ' + p[1];
-        if (c === 0) zero.push(name); else if (c === 1) low.push(name);
+        const name = p[0] + ' × ' + D.SUB_SHORT[p[1]];
+        if (c === 0) zero.push(name); else if (c <= 2) low.push(name + '(' + c + ')');
       });
       lines.push(zero.length ? '관측되지 않은 조합: ' + zero.join(', ') + '.' : '관측되지 않은 조합은 없습니다.');
-      if (low.length) lines.push('1' + u + '만 관측된 조합: ' + low.join(', ') + '.');
+      if (low.length) lines.push('2' + u + ' 이하로 적게 관측된 조합: ' + low.join(', ') + '.');
       lines.push('적게 관측된 조합은 연구 후보(가설)일 뿐이며, 신규성·등록 가능성을 뜻하지 않습니다.');
       return lines;
     }
-    if (!run.rows.length || run.totals.docs === 0) { lines.push('조건에 맞는 문헌이 없습니다.'); return lines; }
-    if (run.spec.groupBy === 'year') {
-      const first = run.rows[0], last = run.rows[run.rows.length - 1];
-      const max = run.rows.reduce(function (a, r) { return r.count > a.count ? r : a; }, run.rows[0]);
-      lines.push(first.label + ' ' + first.count + u + ' → ' + last.label + ' ' + last.count + u + '. 가장 많은 해는 ' + max.label + '(' + max.count + u + ')입니다.');
-      if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) {
-        lines.push('연도별 패밀리 수의 합(' + run.rowSum + ')은 전체 고유 패밀리 수(' + run.totals.families + ')와 다릅니다. 한 패밀리의 문헌이 여러 해에 공개되면 각 연도에 한 번씩 셉니다.');
-      }
-      lines.push('공개연도 기준이므로 최근 연도는 아직 공개되지 않은 출원이 빠져 있을 수 있습니다.');
+    if (run.totals.docs === 0) { lines.push('조건에 맞는 문헌이 없습니다.'); return lines; }
+    if (g === 'funnel') {
+      const r = run.rows;
+      lines.push(r[0].label + ' ' + r[0].count + u + ' → ' + r[1].label.replace('그중 ', '') + ' ' + r[1].count + u + ' → ' + r[2].label.replace('그중 ', '') + ' ' + r[2].count + u + '.');
+      if (r[1].count) lines.push('해외 존속·공개 문헌의 ' + (100 - pct(r[2].count, r[1].count)) + '%는 이 데이터에서 한국 가족특허가 확인되지 않습니다. 특허는 나라별로 효력이 있으므로 국내 효력은 한국 등록 여부로 따로 확인해야 합니다.');
+      lines.push('모양을 따라 하는 경우 디자인권은 별도 확인 대상입니다.');
       return lines;
+    }
+    if (g === 'share') {
+      const f = run.series['형상맞물림'], m = run.series['자석'];
+      lines.push('형상맞물림 비중 ' + f[0] + '% → ' + f[f.length - 1] + '%, 자석 비중 ' + m[0] + '% → ' + m[m.length - 1] + '% (' + run.rows[0].label + ' → ' + run.rows[run.rows.length - 1].label + ').');
+      lines.push('비중은 각 시기 문헌 중 해당 방식을 쓰는 문헌의 비율이며, 한 문헌이 여러 방식을 쓰므로 합이 100%를 넘습니다.');
+      return lines;
+    }
+    if (g === 'period') {
+      const nz = run.rows.filter(function (r) { return r.count; });
+      const max = run.rows.reduce(function (a, r) { return r.count > a.count ? r : a; }, run.rows[0]);
+      lines.push('가장 많은 구간은 ' + max.label + '(' + max.count + u + ')입니다. 관측 구간 ' + nz[0].label + ' ~ ' + nz[nz.length - 1].label + '.');
+      if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) lines.push('구간별 패밀리 수의 합(' + run.rowSum + ')은 전체 고유 패밀리 수(' + run.totals.families + ')와 다릅니다. 한 패밀리가 여러 구간에 걸치면 각 구간에서 셉니다.');
+      lines.push('출원연도 기준이므로 최근 구간은 아직 공개되지 않은 출원이 빠져 있을 수 있습니다.');
+      return lines;
+    }
+    if (g === 'expiry') {
+      const by2030 = run.rows.filter(function (r) { return r.key <= 2030; }).reduce(function (a, r) { return a + r.count; }, 0);
+      lines.push('2030년까지 만료 예정 ' + by2030 + u + '. 만료 연도는 출원일 + 법정 존속기간으로 계산한 추정치입니다.');
+      lines.push('연차료 미납으로 더 일찍 소멸한 권리가 있을 수 있어, 실제 사용 전 등록원부 확인이 필요합니다.');
+      return lines;
+    }
+    if (g === 'applicant') {
+      const a = run.totals.applicants;
+      lines.push('서로 다른 출원인 ' + a.distinct + '명 중 1건만 보유한 출원인 ' + pct(a.single, a.distinct) + '%, 최다 보유 ' + a.max + '건.');
+      return lines;
+    }
+    if (g === 'status') {
+      const ex = run.rows.find(function (r) { return r.key === '만료 추정'; });
+      lines.push('만료 추정 ' + ex.count + u + '(' + pct(ex.count, run.spec.unit === 'family' ? run.totals.families : run.totals.docs) + '%) — 만료된 구조는 누구나 참고·적용할 수 있으나, 개량 부분은 새 권리를 확인해야 합니다.');
     }
     const sorted = run.rows.slice().sort(function (a, b) { return b.count - a.count; });
     const nz = sorted.filter(function (r) { return r.count > 0; });
-    lines.push('가장 많이 관측된 것은 ' + nz.slice(0, 2).map(function (r) { return r.label + '(' + r.count + u + ')'; }).join(', 다음은 ') + '입니다.');
+    if (nz.length) lines.push('가장 많은 것은 ' + nz.slice(0, 2).map(function (r) { return r.label + '(' + r.count + u + ')'; }).join(', 다음은 ') + '입니다.');
     const zeros = run.rows.filter(function (r) { return r.count === 0; });
     if (zeros.length) lines.push(zeros.map(function (r) { return r.label; }).join(', ') + ': 0' + u + ' — 이 가상 배열에서 관측되지 않았다는 뜻입니다.');
-    if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) {
+    if (g === 'mech') {
+      const mag = run.docIds.map(getDoc).filter(function (d) { return d.mechs.indexOf('자석') >= 0; }).length;
+      lines.push('자석이 들어간 문헌 ' + mag + '건(' + pct(mag, run.totals.docs) + '%), 자석 없이 결합하는 문헌 ' + (run.totals.docs - mag) + '건. 한 문헌이 여러 방식을 쓰므로 항목 합(' + run.rowSum + ')은 중복 포함입니다.');
+    } else if (run.spec.unit === 'family' && run.rowSum !== run.totals.families) {
       lines.push('항목별 패밀리 수의 합(' + run.rowSum + ')과 전체 고유 패밀리 수(' + run.totals.families + ')는 다를 수 있습니다.');
     }
     return lines;
   }
 
-  // 결합 수단별 가상 설명(벤치마킹). 가상 원문의 동작 서술만 요약한다.
   const MECH_EXPLAIN = {
-    '레버': '레버를 젖혀 걸림을 풀고 되돌려 잠그는 방식(가상 문헌 서술 요약).',
-    '쐐기': '쐐기 경사면을 밀어 넣어 틈새와 유격을 메우는 방식(가상 문헌 서술 요약).',
-    '탄성': '탄성 부재의 복원력으로 유격과 진동을 흡수하는 방식(가상 문헌 서술 요약).',
-    '자석': '자석의 흡착력으로 위치를 정렬하고 붙잡는 방식(가상 문헌 서술 요약).'
+    '형상맞물림': '돌기와 홈이 맞물려 하중을 받는 방식 — 가장 흔한 주류(가상 문헌 서술 요약).',
+    '스냅·래치': '탄성 부재가 딸깍 걸려 잠기는 방식(가상 문헌 서술 요약).',
+    '슬라이드·키홀': '안내홈을 따라 밀어 넣어 잠그는 방식(가상 문헌 서술 요약).',
+    '회전·캠': '캠을 돌려 결합면을 조이는 방식(가상 문헌 서술 요약).',
+    '클램프·쐐기': '판재를 위아래에서 눌러 잡는 방식(가상 문헌 서술 요약).',
+    '힌지·접이': '힌지로 펼치고 접는 방식(가상 문헌 서술 요약).',
+    '자석': '자력으로 위치를 맞추고 붙잡는 방식 — 하중보다 정렬 역할에 적합(가상 문헌 서술 요약).'
   };
 
   // ---------- 질문 분기 ----------
-  const DEFAULT_SPEC = { groupBy: 'year', unit: 'doc', filters: {} };
+  const DEFAULT_SPEC = { groupBy: 'period', unit: 'doc', filters: {} };
+  const MECH_WORDS = [['자석', '자석'], ['형상', '형상맞물림'], ['끼움', '형상맞물림'], ['스냅', '스냅·래치'], ['래치', '스냅·래치'], ['슬라이드', '슬라이드·키홀'],
+    ['키홀', '슬라이드·키홀'], ['캠', '회전·캠'], ['클램프', '클램프·쐐기'], ['쐐기', '클램프·쐐기'], ['힌지', '힌지·접이'], ['접이', '힌지·접이']];
 
   function parseQuestion(raw, prevSpec) {
     const text = String(raw == null ? '' : raw).trim();
-    const q = text.replace(/\s+/g, '');
+    const q = text.replace(/\s+/g, '').toLowerCase();
     if (!q) return { kind: 'empty' };
     const idm = text.toUpperCase().match(/DEMO-[A-Z]{2}-\d{4}/);
     if (idm) return { kind: 'doc', docId: idm[0] };
-    const mechIn = D.MECHS.find(function (m) { return q.indexOf(m) >= 0; }) || null;
-    if (/걸리|걸릴|침해|회피|무효|등록가능|특허받|권리|문제없|써도되/.test(q)) return { kind: 'review', mech: mechIn };
+    const mw = MECH_WORDS.find(function (m) { return q.indexOf(m[0]) >= 0; });
+    const mechIn = mw ? mw[1] : null;
+    if (/걸리|걸릴|침해|회피가능|무효|등록가능|특허받|써도되|문제없/.test(q)) return { kind: 'review', mech: mechIn };
     if (/조건초기화|처음부터|조건해제|조건을모두|모든조건/.test(q)) return { kind: 'resetCtx' };
+    if (/개선안|발명후보|약점|청구항초안|출원안|신규ip/.test(q)) return { kind: 'ip' };
+
+    let preset = null;
+    if (/해외/.test(q) && /(국내|한국)/.test(q) && /(영향|효력|문제|사업)/.test(q)) preset = { groupBy: 'funnel', unit: 'doc', filters: {}, name: '해외 특허의 국내 영향' };
+    else if (/만료예정|캘린더|언제풀|언제만료|풀리/.test(q)) preset = { groupBy: 'expiry', unit: 'doc', filters: { country: 'KR', status: 'alive' }, name: '만료 예정 캘린더' };
+    else if (/핵심특허|주의특허|먼저대조|대조할/.test(q)) preset = { groupBy: 'sub', unit: 'doc', filters: { country: 'KR', rel: 'Core', status: 'alive' }, name: '국내 주의 특허' };
+    else if (/공백|빈곳|빈칸|빈영역|적게관측|비어/.test(q)) preset = { groupBy: 'matrix', unit: 'doc', filters: { status: 'alive' }, name: '기술 공백' };
+    else if (/조사했다면|놓쳤|놓칠/.test(q)) preset = { groupBy: 'mech', unit: 'doc', filters: {}, name: '결합방식 전체' };
 
     let topic = null;
-    if (/공백|빈곳|빈칸|적게관측|비어/.test(q)) topic = { groupBy: 'matrix', unit: 'family', filters: {}, name: '공백 후보' };
-    else if (/흔들|진동|유격/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T2' }, name: '흔들림 억제' };
-    else if (/상판|무공구/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T1' }, name: '무공구 상판 교체' };
-    else if (/모듈/.test(q)) topic = { groupBy: 'mech', unit: 'doc', filters: { sub: 'T3' }, name: '모듈 결합' };
+    if (!preset) {
+      if (/수납|캐비닛|선반/.test(q)) topic = { sub: 'A', name: D.SUBS.A };
+      else if (/의자|좌판/.test(q)) topic = { sub: 'B', name: D.SUBS.B };
+      else if (/테이블|상판|다리/.test(q)) topic = { sub: 'C', name: D.SUBS.C };
+      else if (/커넥터|연결구|결합구/.test(q)) topic = { sub: 'D', name: D.SUBS.D };
+    }
 
     let groupBy = null;
-    if (/연도|추세|해마다|년도|증가|늘고/.test(q)) groupBy = 'year';
-    else if (/출원인|누가/.test(q)) groupBy = 'applicant';
-    else if (/분류별/.test(q)) groupBy = 'sub';
-    else if (/국가별|나라별/.test(q)) groupBy = 'country';
-    else if (/수단별|방식별|결합수단/.test(q)) groupBy = 'mech';
+    if (/비중|트렌드/.test(q)) groupBy = 'share';
+    else if (/추세|연도|동향|해마다|늘고|증가|년단위/.test(q)) groupBy = 'period';
+    else if (/권리상태|만료|존속여부|기간이끝|기간끝/.test(q) && !preset) groupBy = 'status';
+    else if (/출원인|누가|강자/.test(q)) groupBy = 'applicant';
+    else if (/국가별|나라/.test(q)) groupBy = 'country';
+    else if (/제품군|기술축|분류별/.test(q)) groupBy = 'sub';
+    else if (/결합방식|방식별|수단별|어떤방식|어떤결합|방식은|방식이/.test(q)) groupBy = 'mech';
 
     const mod = {};
-    if (/국내|한국/.test(q)) mod.country = 'KR';
-    else if (/해외만|외국만/.test(q)) mod.country = 'FOREIGN';
-    else if (/전체국가|모든국가|국가조건해제|해외포함/.test(q)) mod.country = null;
+    if (!preset || preset.groupBy !== 'funnel') {
+      if (/해외만|외국만/.test(q)) mod.country = 'FOREIGN';
+      else if (/전체국가|모든국가|국가조건해제|해외포함/.test(q)) mod.country = null;
+      else if (/국내|한국/.test(q)) mod.country = 'KR';
+    }
     if (/패밀리/.test(q)) mod.unit = 'family';
     else if (/문헌단위|문헌기준|문헌으로|문헌수/.test(q)) mod.unit = 'doc';
-    if (mechIn && /그중|중에서|만보|만$|만요|만주/.test(q)) mod.mech = mechIn;
+    if (/core만|핵심만|핵심문헌만/.test(q)) mod.rel = 'Core';
+    else if (/관련문헌전체|core해제/.test(q)) mod.rel = null;
+    if (/존속만|살아있|존속중인/.test(q)) mod.status = 'alive';
+    else if (/만료된것만|만료만/.test(q)) mod.status = 'expired';
+    if (mechIn && !preset && /그중|중에서|만보|만$|만요|만주|만으로/.test(q)) mod.mech = mechIn;
 
     const hasMod = Object.keys(mod).length > 0;
-    if (!topic && !groupBy && !hasMod) return { kind: 'unsupported' };
+    if (!preset && !topic && !groupBy && !hasMod) return { kind: 'unsupported' };
 
     const prev = prevSpec ? normalizeSpec(prevSpec) : null;
-    let spec, newTopic = false;
-    if (topic) {
-      spec = { groupBy: groupBy || topic.groupBy, unit: topic.unit, filters: clone(topic.filters) };
-      newTopic = !!prev;
+    let spec, newTopic = false, name = null;
+    if (preset) {
+      spec = { groupBy: groupBy && preset.groupBy === 'sub' ? groupBy : preset.groupBy, unit: preset.unit, filters: clone(preset.filters) };
+      newTopic = !!prev; name = preset.name;
+    } else if (topic) {
+      spec = { groupBy: groupBy || 'mech', unit: 'doc', filters: { sub: topic.sub } };
+      newTopic = !!prev; name = topic.name;
     } else if (prev) {
       spec = clone(prev);
       if (groupBy) spec.groupBy = groupBy;
@@ -655,11 +1028,13 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       spec = clone(DEFAULT_SPEC);
       if (groupBy) spec.groupBy = groupBy;
     }
-    if ('country' in mod) { if (mod.country) spec.filters.country = mod.country; else delete spec.filters.country; }
+    ['country', 'rel', 'status'].forEach(function (k) {
+      if (k in mod) { if (mod[k]) spec.filters[k] = mod[k]; else delete spec.filters[k]; }
+    });
     if (mod.unit) spec.unit = mod.unit;
     if (mod.mech) spec.filters.mech = mod.mech;
     spec = normalizeSpec(spec);
-    return { kind: 'analysis', spec: spec, newTopic: newTopic, topic: topic ? topic.name : null, changes: diffSpec(prev, spec, newTopic) };
+    return { kind: 'analysis', spec: spec, newTopic: newTopic, topic: name, changes: diffSpec(prev, spec, newTopic) };
   }
 
   function diffSpec(prev, next, newTopic) {
@@ -667,7 +1042,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (!prev) return out;
     if (prev.groupBy !== next.groupBy) out.changed.push('보기: ' + GROUP_LABEL[prev.groupBy] + ' → ' + GROUP_LABEL[next.groupBy]);
     if (prev.unit !== next.unit) out.changed.push('집계 단위: ' + (prev.unit === 'family' ? '패밀리' : '문헌') + ' → ' + (next.unit === 'family' ? '패밀리' : '문헌'));
-    ['country', 'sub', 'mech', 'rights'].forEach(function (k) {
+    FILTER_KEYS.forEach(function (k) {
       const a = prev.filters[k], b = next.filters[k];
       if (a && !b) out.removed.push(FILTER_LABEL[k](a));
       else if (!a && b) out.added.push(FILTER_LABEL[k](b));
@@ -678,8 +1053,10 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   }
 
   const SUPPORTED = [
-    '연도별 추세를 보여 주세요', '그중 국내만', '패밀리 단위로 보여 주세요', '출원인별로 보여 주세요',
-    '흔들림을 줄이는 방식은 무엇인가요?', '공백 후보를 보여 주세요', '쐐기 구조가 특허에 걸리나요?', 'DEMO-KR-0001', '조건 초기화'
+    '출원 추세를 보여 주세요', '그중 국내만', '패밀리 단위로 보여 주세요', '자석 결합만 조사했다면 무엇을 놓쳤나요?',
+    '해외 특허가 국내 사업에 영향을 주나요?', '국내 핵심 특허를 보여 주세요', '만료 예정 캘린더', '권리 상태별로 보여 주세요',
+    '출원인별로 보여 주세요', '결합방식 비중 트렌드', '공백 후보를 보여 주세요', '의자 관련 결합방식은?',
+    '레버 클램프가 특허에 걸리나요?', '개선안을 보여 주세요', 'DEMO-KR-0001', '조건 초기화'
   ];
 
   function pushMsg(state, m) {
@@ -698,7 +1075,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (p.kind === 'analysis') {
       const run = runAnalysis(state, p.spec, '물어보기');
       state.ctx = { spec: clone(run.spec), runId: run.id };
-      const layer = (p.topic && p.spec.groupBy === 'mech') || p.spec.groupBy === 'matrix' ? 'explain' : 'calc';
+      const g = p.spec.groupBy;
+      const layer = g === 'matrix' || g === 'share' || (p.topic && g === 'mech') ? 'explain' : (p.spec.filters.rel === 'Core' && p.spec.filters.status === 'alive' ? 'review' : 'calc');
       return pushMsg(state, { from: 'bot', type: 'analysis', runId: run.id, layer: layer, changes: p.changes, topic: p.topic });
     }
     if (p.kind === 'resetCtx') {
@@ -706,6 +1084,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       state.ctx = null;
       return pushMsg(state, { from: 'bot', type: 'info', text: '적용 중이던 조건을 모두 해제했습니다.' + (had.length ? ' (해제: ' + had.join(', ') + ')' : '') });
     }
+    if (p.kind === 'ip') return pushMsg(state, { from: 'bot', type: 'ip', layer: 'explain' });
     if (p.kind === 'doc') {
       const d = getDoc(p.docId);
       const inBase = d && baselineOf(state, state.currentBaseline).docIds.indexOf(d.id) >= 0;
@@ -714,9 +1093,9 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (p.kind === 'review') {
       const task = state.tasks.find(function (t) { return t.id === state.activeTaskId; });
       const docs = docsInBaseline(state).filter(function (d) {
-        return d.rights === 'H' && (p.mech ? d.mech === p.mech : d.sub === task.sub);
-      });
-      return pushMsg(state, { from: 'bot', type: 'review', question: text, mech: p.mech, taskId: task.id, docIds: docs.map(function (d) { return d.id; }), layer: 'review' });
+        return isAlive(d) && d.rights === 'H' && (p.mech ? d.mechs.indexOf(p.mech) >= 0 : d.sub === task.sub);
+      }).sort(function (a, b) { return (a.country === 'KR' ? 0 : 1) - (b.country === 'KR' ? 0 : 1); }).slice(0, 12);
+      return pushMsg(state, { from: 'bot', type: 'review', question: text, mech: p.mech, taskId: task.id, docIds: ids(docs), layer: 'review' });
     }
     return pushMsg(state, { from: 'bot', type: 'unsupported', supported: SUPPORTED.slice() });
   }
@@ -768,7 +1147,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       return Object.keys(a.matrix.cells).map(function (k) {
         const p = k.split('|');
         const x = a.matrix.cells[k].count, y = b.matrix.cells[k] ? b.matrix.cells[k].count : null;
-        return { label: D.SUBS[p[0]] + ' × ' + p[1], before: x, after: y, diff: y == null ? null : y - x };
+        return { label: p[0] + ' × ' + D.SUB_SHORT[p[1]], before: x, after: y, diff: y == null ? null : y - x };
       });
     }
     const keys = []; const seen = {};
@@ -776,8 +1155,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     return keys.map(function (r) {
       const x = a.rows.find(function (q) { return q.key === r.key; });
       const y = b.rows.find(function (q) { return q.key === r.key; });
-      return { label: r.label, before: x ? x.count : null, after: y ? y.count : null,
-        diff: x && y ? y.count - x.count : null };
+      return { label: r.label, before: x ? x.count : null, after: y ? y.count : null, diff: x && y ? y.count - x.count : null };
     }).concat([{ label: '합계(조건 내 문헌)', before: a.totals.docs, after: b.totals.docs, diff: b.totals.docs - a.totals.docs, total: true },
       { label: '합계(고유 패밀리)', before: a.totals.families, after: b.totals.families, diff: b.totals.families - a.totals.families, total: true }]);
   }
@@ -809,8 +1187,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       reviewer: '담당 FDE(가상) · 가상 검토 의견 예시',
       issue: (r.mech ? r.mech + ' 구조' : '과제 구성') + '가 ' + (refs.join(', ') || '관련 문헌') + '의 가상 청구항 1 구성요소를 모두 갖추는지',
       premise: '과제 「' + task.title + '」의 현재 구성 초안 · 관할 KR · 기준선 ' + r.baseline + ' · 가상 청구항 기준',
-      opinion: '청구항 1의 "안내부" 구성과 과제 구성 초안의 대응 여부가 쟁점입니다. 현재 초안만으로는 판단할 정보가 부족하므로 접합부 도면과 경사면 각도 자료를 받은 뒤 구성요소 대비표를 작성하겠습니다. (가상 예시 — 실제 전문가 의견이 아니며 침해·비침해 결론이 아닙니다)',
-      next: '구성 도면 공유 → 구성요소 대비표 작성 → 필요 시 회피 설계 대안 검토'
+      opinion: '청구항을 구성요소 단위로 나눠 과제 설계안과 하나씩 대조해야 판단할 수 있습니다. 현재 초안에는 레버·래칫·탄성 정압 구성이 있어 일부 요소가 다를 가능성이 있으나, 균등 여부 검토가 필요합니다. 설계 도면을 받은 뒤 대조표를 작성하겠습니다. (가상 예시 — 실제 전문가 의견이 아니며 침해·비침해 결론이 아닙니다)',
+      next: '청구항 분해 → 설계안 대조 → 위험도 판정(상·중·하) → 회피 설계 지침'
     };
     r.status = '답변 공개';
     r.publishedAt = nowIso();
@@ -835,9 +1213,9 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     return { ok: true };
   }
 
-  function matrixCounts(docs) {
+  function aliveMatrix(docs) {
     const out = {};
-    docs.forEach(function (d) { const k = d.sub + '|' + d.mech; out[k] = out[k] || new Set(); out[k].add(d.familyId); });
+    docs.filter(isAlive).forEach(function (d) { d.mechs.forEach(function (m) { const k = m + '|' + d.sub; out[k] = (out[k] || 0) + 1; }); });
     return out;
   }
 
@@ -847,21 +1225,23 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     const v1 = baselineOf(state, 'V1');
     const newIds = state.candidates.map(function (c) { return c.docId; });
     const before = docsInBaseline(state, 'V1');
-    state.baselines.push({ id: 'V2', approvedAt: today(), approver: D.PROJECT.fde, docIds: v1.docIds.concat(newIds), note: '후보 ' + newIds.length + '건 검토 후 승인(가상)' });
+    state.baselines.push({ id: 'V2', approvedAt: today(), approver: D.PROJECT.fde, docIds: v1.docIds.concat(newIds), note: '신규 도착 ' + newIds.length + '건 검토 후 승인(가상)' });
     state.currentBaseline = 'V2';
     const after = docsInBaseline(state, 'V2');
     // 과제 영향: 신규 문헌만으로 결론이 바뀌었다고 단정하지 않고 '확인 필요'로 시작한다.
     state.tasks.forEach(function (t) {
-      const hits = newIds.map(getDoc).filter(function (d) { return d.sub === t.sub && (t.mechs.indexOf(d.mech) >= 0 || d.rights === 'H'); });
+      const hits = newIds.map(getDoc).filter(function (d) {
+        return d.sub === t.sub && (d.mechs.some(function (m) { return t.mechs.indexOf(m) >= 0; }) || d.rights === 'H');
+      });
       if (hits.length) {
         state.impSeq += 1;
-        state.impacts.push({ id: 'IMP-' + pad(state.impSeq, 2), taskId: t.id, docIds: hits.map(function (d) { return d.id; }),
-          status: '확인 필요', reason: '과제의 관심 분류·결합 수단과 겹치는 신규 문헌 ' + hits.length + '건', note: null, history: [{ status: '확인 필요', at: nowIso() }] });
+        state.impacts.push({ id: 'IMP-' + pad(state.impSeq, 2), taskId: t.id, docIds: ids(hits), status: '확인 필요',
+          reason: '과제의 제품군·관심 결합방식과 겹치는 신규 문헌 ' + hits.length + '건', note: null, history: [{ status: '확인 필요', at: nowIso() }] });
       }
     });
-    const mb = matrixCounts(before), ma = matrixCounts(after);
+    const mb = aliveMatrix(before), ma = aliveMatrix(after);
     state.gapChanges = Object.keys(ma).filter(function (k) { return !mb[k]; }).map(function (k) {
-      const p = k.split('|'); return { cell: D.SUBS[p[0]] + ' × ' + p[1], families: ma[k].size };
+      const p = k.split('|'); return { cell: p[0] + ' × ' + D.SUB_SHORT[p[1]], count: ma[k] };
     });
     return { ok: true };
   }
@@ -897,6 +1277,87 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     return { ok: true, task: t };
   }
 
+  // ---------- 국내 핵심 특허 대조표 (청구항 요소 × 과제 설계안) ----------
+  // 예비 분류는 컨설턴트 작업용이며, 연구자에게는 검토 의견이 공개된 뒤에만 보인다.
+  function riskPrelim(elements) {
+    if (elements.every(function (e) { return e[1] === '해당'; })) return '상';
+    if (elements.some(function (e) { return e[1] === '비해당' && e[2]; })) return '하';
+    return '중';
+  }
+  function riskRows(state) {
+    const base = baselineOf(state, state.currentBaseline).docIds;
+    return D.DOCS.filter(function (d) { return d.elements && base.indexOf(d.id) >= 0; }).map(function (d) {
+      const r = state.risk[d.id] || { status: '검토 대기' };
+      return { docId: d.id, elements: d.elements, prelim: riskPrelim(d.elements), status: r.status, publishedAt: r.publishedAt || null };
+    });
+  }
+  function publishRisk(state, docId) {
+    const d = getDoc(docId);
+    if (!d || !d.elements) return { ok: false, reason: '대조 대상이 아닙니다' };
+    if (state.risk[docId] && state.risk[docId].status === '의견 공개') return { ok: false, reason: '이미 공개된 판정입니다' };
+    state.risk[docId] = { status: '의견 공개', grade: riskPrelim(d.elements), publishedAt: nowIso() };
+    return { ok: true };
+  }
+
+  const IC_FLOW = ['제안됨', '추가 조사 중', '기술검증 중', '전문 검토 중', '채택'];
+  function advanceCandidate(state, id) {
+    const c = state.ipCandidates.find(function (x) { return x.id === id; });
+    if (!c) return { ok: false };
+    const i = IC_FLOW.indexOf(c.status);
+    if (i >= IC_FLOW.length - 1) return { ok: false, reason: '이미 채택된 후보입니다' };
+    c.status = IC_FLOW[i + 1];
+    c.history.push({ status: c.status, at: nowIso() });
+    return { ok: true, candidate: c };
+  }
+
+  // ---------- 프로젝트 요약 수치 (모두 현재 기준선 배열에서 계산) ----------
+  function projectStats(state) {
+    const docs = docsInBaseline(state);
+    const n = docs.length;
+    const foreign = docs.filter(function (d) { return d.country !== 'KR'; });
+    const fAlive = foreign.filter(isAlive);
+    const fKr = fAlive.filter(function (d) { return d.krFamily; });
+    const apps = {};
+    docs.forEach(function (d) { apps[d.applicant] = (apps[d.applicant] || 0) + 1; });
+    const appVals = Object.keys(apps).map(function (k) { return apps[k]; });
+    const kr = docs.filter(function (d) { return d.country === 'KR'; });
+    const recent = docs.filter(function (d) { return d.year >= 2020; });
+    const early = docs.filter(function (d) { return d.year <= 1999; });
+    const has = function (arr, m) { return arr.filter(function (d) { return d.mechs.indexOf(m) >= 0; }).length; };
+    const mechTotal = docs.reduce(function (a, d) { return a + d.mechs.length; }, 0);
+    return {
+      docs: n, families: uniqueFamilies(docs),
+      core: docs.filter(function (d) { return d.rel === 'Core'; }).length,
+      coreBy: Object.keys(D.SUBS).reduce(function (o, s) { o[s] = docs.filter(function (d) { return d.rel === 'Core' && d.sub === s; }).length; return o; }, {}),
+      usPct: pct(docs.filter(function (d) { return d.country === 'US'; }).length, n),
+      expired: docs.filter(function (d) { return d.status === '만료 추정'; }).length,
+      expiredPct: pct(docs.filter(function (d) { return d.status === '만료 추정'; }).length, n),
+      applicants: appVals.length, singlePct: pct(appVals.filter(function (v) { return v === 1; }).length, appVals.length), maxApp: appVals.length ? Math.max.apply(null, appVals) : 0,
+      avgMechs: n ? Math.round(mechTotal * 10 / n) / 10 : 0,
+      magnet: has(docs, '자석'), magnetPct: pct(has(docs, '자석'), n),
+      foreignAlive: fAlive.length, foreignKr: fKr.length, noKrPct: 100 - pct(fKr.length, fAlive.length),
+      kr: kr.length, krAlive: kr.filter(isAlive).length, krCoreAlive: kr.filter(function (d) { return d.rel === 'Core' && isAlive(d); }).length,
+      krIndPct: pct(kr.filter(function (d) { return d.appType === '개인'; }).length, kr.length),
+      krUtilPct: pct(kr.filter(function (d) { return d.kind === '실용신안'; }).length, kr.length),
+      shapeEarly: pct(has(early, '형상맞물림'), early.length), shapeRecent: pct(has(recent, '형상맞물림'), recent.length),
+      magnetEarly: pct(has(early, '자석'), early.length), magnetRecent: pct(has(recent, '자석'), recent.length),
+      yearMin: n ? Math.min.apply(null, docs.map(function (d) { return d.year; })) : 0, yearMax: n ? Math.max.apply(null, docs.map(function (d) { return d.year; })) : 0
+    };
+  }
+
+  // 시사점: 계산된 수치를 끼워 넣는 고정 문장. 새 수치를 만들지 않는다.
+  function insights(state) {
+    const s = projectStats(state);
+    return [
+      { big: s.noKrPct + '%', label: '해외 존속 특허 중 한국 가족 미확인', title: '해외 제품, 참고할 수 있습니다', text: '해외 존속 특허 ' + s.foreignAlive + '건 중 한국 가족특허가 확인된 것은 ' + s.foreignKr + '건. 한국 등록 여부와 디자인권은 출시 전 확인.' },
+      { big: s.expiredPct + '%', label: '기간만료 추정', title: '만료 기술은 설계 교과서로', text: s.expired + '건은 만료 추정 — 검증된 구조를 참고해 개발비·기간을 줄이되, 개량 부분은 새 권리 확인.' },
+      { big: s.krCoreAlive + '건', label: '국내 핵심 존속', title: '국내 핵심 특허부터 대조', text: '설계안과 한국 Core·존속 특허 ' + s.krCoreAlive + '건을 청구항 단위로 비교하는 것이 첫 확인 절차.' },
+      { big: (s.coreBy.A + s.coreBy.B) + '건', label: 'A·B 제품군 Core 선행', title: 'A·B 제품부터 출원 검토', text: '모듈 수납장·성장형 의자는 개발 컨셉의 필수요건을 모두 갖춘 선행 문헌이 ' + (s.coreBy.A + s.coreBy.B) + '건.' },
+      { big: s.shapeRecent + '%', label: '최근 형상맞물림 비중', title: '형상 + 자석 조합으로', text: '형상맞물림 비중 ' + s.shapeEarly + '% → ' + s.shapeRecent + '%, 자석 ' + s.magnetEarly + '% → ' + s.magnetRecent + '%. 하중은 형상이, 위치는 자석이.' },
+      { big: s.singlePct + '%', label: '1건만 보유한 출원인', title: '작게, 자주 권리화', text: '출원인 ' + s.applicants + '명, 최다 보유 ' + s.maxApp + '건 — 강자 없는 분산 시장. 실용신안 포함 제품마다 1~2건씩.' }
+    ];
+  }
+
   // ---------- 찾아보기 ----------
   function expandQuery(q) {
     const words = String(q || '').trim().split(/\s+/).filter(Boolean);
@@ -917,13 +1378,13 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     const ex = expandQuery(q);
     function hit(text) { return !ex.words.length || ex.terms.some(function (t) { return text.indexOf(t) >= 0; }); }
     const cards = state.cards.filter(function (c) {
-      if (opts.sub && c.spec.filters.sub !== opts.sub) return false;
+      if (opts.sub && c.spec.filters.sub !== opts.sub && c.tasks.map(function (t) { return t.slice(-1); }).indexOf(opts.sub) < 0) return false;
       if (opts.type && c.type !== opts.type) return false;
-      return hit(c.title + ' ' + c.type + ' ' + c.report + ' ' + (c.spec.filters.sub ? D.SUBS[c.spec.filters.sub] : ''));
+      return hit(c.title + ' ' + c.type + ' ' + c.report);
     });
     const docs = ex.words.length ? docsInBaseline(state).filter(function (d) {
       if (opts.sub && d.sub !== opts.sub) return false;
-      return hit(d.title + ' ' + d.mech + ' ' + D.SUBS[d.sub] + ' ' + d.applicant + ' ' + d.id + ' ' + d.claim);
+      return hit(d.title + ' ' + d.mechs.join(' ') + ' ' + D.SUBS[d.sub] + ' ' + d.applicant + ' ' + d.id + ' ' + d.claim + ' ' + d.problem);
     }) : [];
     return { cards: cards, docs: docs, expandedWith: ex.expandedWith };
   }
@@ -945,28 +1406,35 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     lines.push('');
     const u = run.spec.unit === 'family' ? '패밀리 수' : '문헌 수';
     if (run.spec.groupBy === 'matrix') {
-      add(['세부 분류'].concat(run.matrix.cols.map(function (m) { return m + '(' + u + ')'; })));
-      run.matrix.rows.forEach(function (s) {
-        add([D.SUBS[s]].concat(run.matrix.cols.map(function (m) { return run.matrix.cells[s + '|' + m].count; })));
-      });
+      add(['결합방식'].concat(run.matrix.cols.map(function (s) { return D.SUB_SHORT[s] + '(' + u + ')'; })));
+      run.matrix.rows.forEach(function (m) { add([m].concat(run.matrix.cols.map(function (s) { return run.matrix.cells[m + '|' + s].count; }))); });
+    } else if (run.spec.groupBy === 'share') {
+      add(['시기', u].concat(D.MECHS.map(function (m) { return m + '(%)'; })));
+      run.rows.forEach(function (r, i) { add([r.label, r.count].concat(D.MECHS.map(function (m) { return run.series[m][i]; }))); });
     } else {
       add([GROUP_LABEL[run.spec.groupBy], u]);
       run.rows.forEach(function (r) { add([r.label, r.count]); });
     }
     lines.push('');
-    add(['근거 문헌 ID', '가상 패밀리', '국가', '공개연도', '세부 분류', '결합 수단', '가상 출원인', '제목']);
+    add(['근거 문헌 ID', '가상 패밀리', '국가', '출원연도', '제품군', '결합방식', '관련도', '권리 상태', '가상 출원인', '제목']);
     run.docIds.forEach(function (id) {
       const d = getDoc(id);
-      add([d.id, d.familyId, d.country, d.year, D.SUBS[d.sub], d.mech, d.applicant, d.title]);
+      add([d.id, d.familyId, d.country, d.year, D.SUBS[d.sub], d.mechs.join('+'), d.rel, d.status, d.applicant, d.title]);
     });
     return lines.join('\r\n');
   }
 
   // ---------- 상태 생성·저장 ----------
+  function pickEvidence(run) {
+    const docs = run.docIds.map(getDoc);
+    const score = function (d) { return (d.rel === 'Core' ? 4 : 0) + (d.bench === 'H' ? 2 : 0) + (isAlive(d) ? 1 : 0) + (d.country === 'KR' ? 1 : 0); };
+    return docs.slice().sort(function (a, b) { return score(b) - score(a) || a.id.localeCompare(b.id); }).slice(0, 5).map(function (d) { return d.id; });
+  }
+
   function createInitialState() {
     const v1Ids = D.DOCS.filter(function (d) { return d.stage === 'V1'; }).map(function (d) { return d.id; });
     const state = {
-      schema: SCHEMA, role: 'researcher', view: 'today', activeTaskId: 'TASK-1', guideStep: 0, guideOpen: false,
+      schema: SCHEMA, role: 'researcher', view: 'today', activeTaskId: 'TASK-C', guideStep: 0, guideOpen: false,
       baselines: [{ id: 'V1', approvedAt: D.V1_DATE, approver: D.PROJECT.fde, docIds: v1Ids, note: '최초 정제 DB 승인(가상)' }],
       currentBaseline: 'V1',
       candidates: D.DOCS.filter(function (d) { return d.stage === 'candidate'; }).map(function (d) {
@@ -977,13 +1445,15 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       saved: [], savedSeq: 0, comparisons: [],
       requests: [], reqSeq: 0, unreadAnswers: 0,
       impacts: [], impSeq: 0, gapChanges: [],
+      risk: {},
+      ipCandidates: clone(D.IP.candidates).map(function (c) { c.history = [{ status: c.status, at: nowIso() }]; return c; }),
       tasks: clone(D.TASKS).map(function (t) { t.editedBy = 'FDE 초안'; t.history = []; return t; }),
       cards: []
     };
     state.cards = D.CARDS.map(function (c) {
       const run = runAnalysis(state, c.spec, '카드 작성(' + c.id + ')');
-      return { id: c.id, type: c.type, layer: c.layer, tasks: c.tasks.slice(), title: c.title, spec: clone(c.spec),
-        evidence: c.evidence.slice(), report: c.report, recheck: c.recheck, runIds: [run.id] };
+      return { id: c.id, type: c.type, layer: c.layer, tasks: c.tasks.slice(), title: c.title, spec: clone(c.spec), link: c.link || null,
+        evidence: pickEvidence(run), report: c.report, recheck: c.recheck, runIds: [run.id] };
     });
     return state;
   }
@@ -994,7 +1464,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (!s || typeof s !== 'object' || s.schema !== SCHEMA) return false;
     if (!Array.isArray(s.baselines) || !baselineOf(s, s.currentBaseline)) return false;
     if (!s.baselines.every(function (b) { return b.docIds.every(function (id) { return !!DOC_BY_ID[id]; }); })) return false;
-    if (!s.runs || !Array.isArray(s.chat) || !Array.isArray(s.cards) || !Array.isArray(s.tasks)) return false;
+    if (!s.runs || !Array.isArray(s.chat) || !Array.isArray(s.cards) || !Array.isArray(s.tasks) || !Array.isArray(s.ipCandidates) || !s.risk) return false;
     return true;
   }
   function saveToStorage(storage, state) {
@@ -1013,15 +1483,16 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   function clearStorage(storage) { try { storage.removeItem(STORE_KEY); return true; } catch (e) { return false; } }
 
   global.FDE = {
-    esc: esc, getDoc: getDoc, clone: clone,
+    esc: esc, getDoc: getDoc, clone: clone, isAlive: isAlive, PERIODS: PERIODS, ERAS: ERAS,
     docsInBaseline: docsInBaseline, baselineOf: baselineOf, candidateDocs: candidateDocs, uniqueFamilies: uniqueFamilies,
     matchFilters: matchFilters, aggregate: aggregate, runAnalysis: runAnalysis, describeRun: describeRun,
-    specChips: specChips, GROUP_LABEL: GROUP_LABEL, MECH_EXPLAIN: MECH_EXPLAIN, SUPPORTED: SUPPORTED,
+    specChips: specChips, filterChip: filterChip, GROUP_LABEL: GROUP_LABEL, MECH_EXPLAIN: MECH_EXPLAIN, SUPPORTED: SUPPORTED,
     parseQuestion: parseQuestion, ask: ask, clearCtxFilter: clearCtxFilter,
     saveRun: saveRun, rerunSaved: rerunSaved, rerunCard: rerunCard, compareRuns: compareRuns,
     requestReview: requestReview, publishAnswer: publishAnswer,
     reviewCandidate: reviewCandidate, canPublish: canPublish, publishBaseline: publishBaseline, advanceImpact: advanceImpact,
-    updateTask: updateTask, expandQuery: expandQuery, searchAll: searchAll,
+    updateTask: updateTask, riskRows: riskRows, riskPrelim: riskPrelim, publishRisk: publishRisk, advanceCandidate: advanceCandidate, IC_FLOW: IC_FLOW,
+    projectStats: projectStats, insights: insights, expandQuery: expandQuery, searchAll: searchAll,
     csvCell: csvCell, csvForRun: csvForRun,
     createInitialState: createInitialState, validateState: validateState,
     saveToStorage: saveToStorage, loadFromStorage: loadFromStorage, clearStorage: clearStorage, STORE_KEY: STORE_KEY
@@ -1048,18 +1519,20 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   }
 
   const VIEWS = [
-    ['today', '오늘 볼 것'], ['ask', '물어보기'], ['browse', '결과 찾아보기'], ['tasks', '내 개발과제'],
-    ['updates', '새로 달라진 점'], ['saved', '저장 결과']
+    ['today', '오늘 볼 것'], ['ask', '물어보기'], ['report', '분석 리포트'], ['browse', '결과 찾아보기'], ['tasks', '내 개발과제'],
+    ['ip', '신규 IP 창출'], ['updates', '새로 달라진 점'], ['saved', '저장 결과']
   ];
 
   const GUIDE = [
-    { t: '1. 발견', b: '오늘 볼 것에서 내 개발과제와 연결된 질문형 카드를 엽니다. 200쪽 보고서 안에 묻혀 있던 결과가 과제 단위로 다시 떠오르는 것을 보여 줍니다.', go: function () { setRole('researcher'); go('today'); } },
-    { t: '2. 질문·추세', b: '물어보기에서 “연도별 추세를 보여 주세요”를 보냅니다. 기준선 V1 36건, 공개연도 기준, 배열에서 계산한 그래프와 실행 번호를 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('연도별 추세를 보여 주세요'); } },
-    { t: '3. 후속 조건', b: '“그중 국내만”, 이어서 “패밀리 단위로 보여 주세요”를 보냅니다. 조건이 유지·추가되고 집계 단위가 바뀌는 것을 조건 표시줄에서 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('그중 국내만'); } },
-    { t: '4. 근거·저장', b: '답변의 근거 문헌을 눌러 가상 원문·청구항·보고서 위치를 엽니다. “결과 저장”과 “CSV 내려받기”로 같은 조건의 자료를 남깁니다.', go: function () { setRole('researcher'); go('ask'); } },
-    { t: '5. 전문 검토', b: '“쐐기 구조가 특허에 걸리나요?”를 보내고 전문 검토를 요청합니다. 역할을 컨설턴트로 바꿔 작업대에서 가상 답변을 공개한 뒤, 연구자 화면에서 도착을 확인합니다.', go: function () { setRole('researcher'); go('ask'); prefill('쐐기 구조가 특허에 걸리나요?'); } },
-    { t: '6. 갱신', b: '컨설턴트 작업대에서 신규 후보 6건을 검토하고 V2 기준선을 공개합니다. 42건·21개 패밀리로 바뀌고, 과제 영향은 “확인 필요”로 표시됩니다.', go: function () { setRole('fde'); go('workbench'); } },
-    { t: '7. 과거·최신 비교', b: '저장 결과에서 V1 수치가 그대로인지 확인하고 “최신 기준선으로 재실행”을 누릅니다. 새 실행 번호의 V2 결과가 기존 결과와 나란히 비교됩니다.', go: function () { setRole('researcher'); go('saved'); } }
+    { t: '1. 발견', b: function () { return '오늘 볼 것에서 개발과제를 고르면 그 과제와 연결된 질문형 카드가 먼저 나옵니다. 보고서 안에 묻혀 있던 결과가 과제 단위로 다시 떠오릅니다.'; }, go: function () { setRole('researcher'); go('today'); } },
+    { t: '2. 분석 한눈에', b: function () { const s = F.projectStats(state); return '분석 리포트에서 관련 문헌 ' + s.docs + '건의 핵심 수치와 시사점 6가지를 봅니다. 모든 숫자는 기준선 ' + state.currentBaseline + ' 배열에서 계산합니다.'; }, go: function () { setRole('researcher'); go('report'); } },
+    { t: '3. 질문·추세', b: function () { return '물어보기에서 “출원 추세를 보여 주세요”를 보냅니다. 5년 단위 그래프, 실행 번호, 근거 문헌이 함께 나옵니다.'; }, go: function () { setRole('researcher'); go('ask'); prefill('출원 추세를 보여 주세요'); } },
+    { t: '4. 후속 조건', b: function () { return '“그중 국내만”, 이어서 “패밀리 단위로 보여 주세요”를 보냅니다. 조건이 유지·추가되는 것을 조건 표시줄에서 확인합니다. “해외 특허가 국내 사업에 영향을 주나요?”도 물어보세요.'; }, go: function () { setRole('researcher'); go('ask'); prefill('그중 국내만'); } },
+    { t: '5. 근거·저장', b: function () { return '근거 문헌을 눌러 과제·구성·효과, 결합방식 태그, 권리 상태, 가상 청구항을 엽니다. “결과 저장”과 “CSV 내려받기”로 같은 조건의 자료를 남깁니다.'; }, go: function () { setRole('researcher'); go('ask'); } },
+    { t: '6. 전문 검토', b: function () { return '“레버 클램프가 특허에 걸리나요?”를 보내고 전문 검토를 요청합니다. 컨설턴트로 바꿔 작업대에서 가상 답변을 공개하고, 연구자 화면에서 도착을 확인합니다.'; }, go: function () { setRole('researcher'); go('ask'); prefill('레버 클램프가 특허에 걸리나요?'); } },
+    { t: '7. 신규 IP 창출', b: function () { return '벤치마킹 → 약점 → 개선안 → 보강 기술 → 청구항 초안 → 회피 점검 순서를 봅니다. 국내 핵심 특허 대조표의 위험도는 컨설턴트가 공개해야 보입니다.'; }, go: function () { setRole('researcher'); go('ip'); } },
+    { t: '8. 갱신', b: function () { return '컨설턴트 작업대에서 신규 도착 ' + state.candidates.length + '건을 검토하고 V2 기준선을 공개합니다. 과제 영향은 “확인 필요”로 시작합니다.'; }, go: function () { setRole('fde'); go('workbench'); } },
+    { t: '9. 과거·최신 비교', b: function () { return '저장 결과에서 V1 수치가 그대로인지 확인하고 “최신 기준선으로 재실행”을 누릅니다. 새 실행 번호의 결과와 나란히 비교됩니다.'; }, go: function () { setRole('researcher'); go('saved'); } }
   ];
 
   // ---------- 공통 ----------
@@ -1112,8 +1585,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     const unit = run.spec.unit === 'family' ? '개 패밀리' : '건';
     const ticks = niceTicks(Math.max.apply(null, rows.map(function (r) { return r.count; })));
     const top = ticks[ticks.length - 1];
-    if (run.spec.groupBy === 'year') {
-      const W = 640, H = 250, pl = 34, pr = 8, pt = 20, pb = 30, ph = H - pt - pb, slot = (W - pl - pr) / rows.length;
+    if (['year', 'period', 'expiry'].indexOf(run.spec.groupBy) >= 0) {
+      const W = 640, H = 250, pl = 34, pr = 8, pt = 20, pb = 30, ph = H - pt - pb, slot = (W - pl - pr) / rows.length, every = rows.length > 14 ? 2 : 1;
       const bw = Math.min(58, slot * 0.58), base = pt + ph;
       let g = '';
       ticks.forEach(function (t) {
@@ -1127,11 +1600,11 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
         g += '<g class="bar-g"' + tipAttrs(r.label, r.count, unit) + '><rect class="hit" x="' + (cx - slot / 2).toFixed(1) + '" y="' + pt + '" width="' + slot.toFixed(1) + '" height="' + ph + '"/>' +
           '<path class="bar' + (r.count ? '' : ' zero') + '" d="' + path + '" fill="url(#fde-gv)"/>' +
           '<text class="val" x="' + cx.toFixed(1) + '" y="' + (y - 7).toFixed(1) + '" text-anchor="middle">' + r.count + '</text>' +
-          '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + esc(String(r.key)) + '</text></g>';
+          (i % every === 0 ? '<text x="' + cx.toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + esc(String(r.key)) + '</text>' : '') + '</g>';
       });
-      return '<svg class="chart v" viewBox="0 0 ' + W + ' ' + H + '" aria-label="' + esc(F.GROUP_LABEL.year + ' ' + unit) + '">' + g + '</svg>';
+      return '<svg class="chart v" viewBox="0 0 ' + W + ' ' + H + '" aria-label="' + esc(F.GROUP_LABEL[run.spec.groupBy] + ' ' + unit) + '">' + g + '</svg>';
     }
-    const W = 640, rh = 36, pl = 168, pr = 44, pt = 6, H = rows.length * rh + pt + 22, pw = W - pl - pr;
+    const W = 640, rh = 36, pl = 200, pr = 44, pt = 6, H = rows.length * rh + pt + 22, pw = W - pl - pr;
     let g = '';
     ticks.forEach(function (t) {
       const x = pl + pw * t / top;
@@ -1142,34 +1615,68 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       const path = r.count ? 'M' + pl + ',' + y + 'H' + (pl + w - rr).toFixed(1) + 'Q' + (pl + w).toFixed(1) + ',' + y + ' ' + (pl + w).toFixed(1) + ',' + (y + rr).toFixed(1) + 'V' + (y + bh - rr).toFixed(1) + 'Q' + (pl + w).toFixed(1) + ',' + (y + bh) + ' ' + (pl + w - rr).toFixed(1) + ',' + (y + bh) + 'H' + pl + 'Z'
         : 'M' + pl + ',' + y + 'h2v' + bh + 'h-2Z';
       g += '<g class="bar-g"' + tipAttrs(r.label, r.count, unit) + '><rect class="hit" x="0" y="' + (y - 7) + '" width="' + W + '" height="' + rh + '"/>' +
-        '<text x="' + (pl - 12) + '" y="' + (y + bh / 2 + 4) + '" text-anchor="end" class="lab">' + esc(r.label.length > 20 ? r.label.slice(0, 19) + '…' : r.label) + '</text>' +
+        '<text x="' + (pl - 12) + '" y="' + (y + bh / 2 + 4) + '" text-anchor="end" class="lab">' + esc(r.label.length > 17 ? r.label.slice(0, 16) + '…' : r.label) + '</text>' +
         '<path class="bar' + (r.count ? '' : ' zero') + '" d="' + path + '" fill="url(#fde-gh)"/>' +
         '<text class="val" x="' + (pl + w + 8).toFixed(1) + '" y="' + (y + bh / 2 + 4) + '">' + r.count + '</text></g>';
     });
     return '<svg class="chart h" viewBox="0 0 ' + W + ' ' + H + '" aria-label="' + esc((F.GROUP_LABEL[run.spec.groupBy] || '') + ' ' + unit) + '">' + g + '</svg>';
   }
 
+  // 시기별 비중: 두 방식만 선으로 강조하고 나머지는 표로 둔다.
+  function lineChart(run) {
+    const W = 640, H = 250, pl = 40, pr = 120, pt = 16, pb = 30, pw = W - pl - pr, ph = H - pt - pb, n = run.rows.length;
+    const HL = [['형상맞물림', '#2a78d6', 'fde-area-1'], ['자석', '#eb6834', 'fde-area-2']];
+    let g = '';
+    [0, 25, 50, 75, 100].forEach(function (t) {
+      const y = pt + ph - ph * t / 100;
+      g += '<line class="' + (t ? 'grid' : 'axis') + '" x1="' + pl + '" x2="' + (pl + pw) + '" y1="' + y + '" y2="' + y + '"/><text x="' + (pl - 8) + '" y="' + (y + 4) + '" text-anchor="end">' + t + '%</text>';
+    });
+    const X = function (i) { return pl + (n > 1 ? pw * i / (n - 1) : pw / 2); };
+    run.rows.forEach(function (r, i) { g += '<text x="' + X(i).toFixed(1) + '" y="' + (H - 10) + '" text-anchor="middle">' + esc(r.label) + '</text>'; });
+    HL.forEach(function (h) {
+      const vals = run.series[h[0]];
+      const pts = vals.map(function (v, i) { return [X(i), pt + ph - ph * v / 100]; });
+      const d = pts.map(function (p, i) { return (i ? 'L' : 'M') + p[0].toFixed(1) + ',' + p[1].toFixed(1); }).join('');
+      g += '<path d="' + d + 'L' + pts[pts.length - 1][0].toFixed(1) + ',' + (pt + ph) + 'L' + pts[0][0].toFixed(1) + ',' + (pt + ph) + 'Z" fill="url(#' + h[2] + ')"/>';
+      g += '<path d="' + d + '" fill="none" stroke="' + h[1] + '" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>';
+      pts.forEach(function (p, i) {
+        g += '<g class="bar-g"' + tipAttrs(h[0] + ' · ' + run.rows[i].label, vals[i], '%') + '><circle class="hit" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="13"/><circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="4.5" fill="' + h[1] + '" stroke="#fff" stroke-width="2"/></g>';
+      });
+      const last = pts[pts.length - 1];
+      g += '<circle cx="' + (last[0] + 14) + '" cy="' + (last[1] - 4) + '" r="4" fill="' + h[1] + '"/><text class="val" x="' + (last[0] + 22) + '" y="' + last[1].toFixed(1) + '">' + esc(h[0]) + ' ' + vals[vals.length - 1] + '%</text>';
+    });
+    return '<svg class="chart" viewBox="0 0 ' + W + ' ' + H + '" aria-label="시기별 결합방식 비중">' + g + '</svg>' +
+      '<div class="heat-legend">' + HL.map(function (h) { return '<span class="lkey" style="background:' + h[1] + '"></span>' + esc(h[0]); }).join(' ') + '<span class="spacer"></span><span>나머지 방식은 아래 표</span></div>';
+  }
+
   function chartCard(run) {
     if (run.spec.groupBy === 'matrix') return '';
+    if (run.spec.groupBy === 'share') return '<div class="chart-card"><div class="chart-head"><b style="color:var(--ink-2)">시기별 결합방식 비중(%)</b><span class="spacer"></span>기준선 ' + esc(run.baseline) + ' · ' + esc(run.id) + '</div>' + lineChart(run) + '</div>';
     return '<div class="chart-card"><div class="chart-head"><span class="key" aria-hidden="true"></span><b style="color:var(--ink-2)">' + esc(F.GROUP_LABEL[run.spec.groupBy]) + ' ' + (run.spec.unit === 'family' ? '패밀리 수' : '문헌 수') + '</b><span class="spacer"></span>기준선 ' + esc(run.baseline) + ' · ' + esc(run.id) + '</div>' + chartSvg(run) + '</div>';
   }
 
   function resultTable(run) {
     const u = run.spec.unit === 'family' ? '패밀리 수' : '문헌 수';
+    const un = run.spec.unit === 'family' ? '개 패밀리' : '건';
     if (run.spec.groupBy === 'matrix') {
       const RAMP = ['#cde2fb', '#9ec5f4', '#6da7ec', '#3987e5', '#256abf', '#184f95'];
       const maxC = Math.max(1, Math.max.apply(null, Object.keys(run.matrix.cells).map(function (k) { return run.matrix.cells[k].count; })));
-      let h = '<div style="overflow-x:auto"><table class="heat"><caption class="sr">분류 × 결합 수단 ' + u + '</caption><thead><tr><th></th>' +
-        run.matrix.cols.map(function (m) { return '<th class="num" style="text-align:center">' + esc(m) + '</th>'; }).join('') + '</tr></thead><tbody>';
-      run.matrix.rows.forEach(function (s) {
-        h += '<tr><th>' + esc(D.SUBS[s]) + '</th>' + run.matrix.cols.map(function (m) {
-          const c = run.matrix.cells[s + '|' + m].count;
-          const idx = c ? Math.max(0, Math.round((c / maxC) * (RAMP.length - 1))) : -1;
-          const style = c ? ' style="background:' + RAMP[idx] + ';color:' + (idx >= 3 ? '#fff' : '#0d366b') + '"' : '';
-          return '<td class="mcell ' + (c === 0 ? 'zero' : c === 1 ? 'low' : '') + '"' + style + tipAttrs(D.SUBS[s] + ' × ' + m, c, run.spec.unit === 'family' ? '개 패밀리' : '건') + '>' + c + '</td>';
+      let h = '<div style="overflow-x:auto"><table class="heat"><caption class="sr">결합방식 × 제품군 ' + u + '</caption><thead><tr><th></th>' +
+        run.matrix.cols.map(function (c) { return '<th class="num" style="text-align:center">' + esc(D.SUB_SHORT[c]) + '</th>'; }).join('') + '</tr></thead><tbody>';
+      run.matrix.rows.forEach(function (m) {
+        h += '<tr><th>' + esc(m) + '</th>' + run.matrix.cols.map(function (c) {
+          const n = run.matrix.cells[m + '|' + c].count;
+          const idx = n ? Math.max(0, Math.round((n / maxC) * (RAMP.length - 1))) : -1;
+          const style = n ? ' style="background:' + RAMP[idx] + ';color:' + (idx >= 3 ? '#fff' : '#0d366b') + '"' : '';
+          return '<td class="mcell ' + (n === 0 ? 'zero' : n <= 2 ? 'low' : '') + '"' + style + tipAttrs(m + ' × ' + D.SUB_SHORT[c], n, un) + '>' + n + '</td>';
         }).join('') + '</tr>';
       });
       return h + '</tbody></table></div><div class="heat-legend"><span>적음</span><span class="ramp" aria-hidden="true"></span><span>많음</span><span class="spacer"></span><span>빗금 칸 = 관측 0</span></div><p class="small muted">셀 값은 ' + u + '입니다. 0은 이 가상 배열에서 관측되지 않았다는 뜻이며, 비어 있는 칸이 곧 발명 가능 영역이라는 뜻은 아닙니다.</p>';
+    }
+    if (run.spec.groupBy === 'share') {
+      let h = '<div class="tablewrap"><table><thead><tr><th>시기</th><th class="num">' + u + '</th>' + D.MECHS.map(function (m) { return '<th class="num">' + esc(m) + '</th>'; }).join('') + '</tr></thead><tbody>';
+      run.rows.forEach(function (r, i) { h += '<tr><td>' + esc(r.label) + '</td><td class="num">' + r.count + '</td>' + D.MECHS.map(function (m) { return '<td class="num">' + run.series[m][i] + '%</td>'; }).join('') + '</tr>'; });
+      return h + '</tbody></table></div>';
     }
     let h = '<div class="tablewrap"><table><thead><tr><th>' + esc(F.GROUP_LABEL[run.spec.groupBy]) + '</th><th class="num">' + u + '</th><th>해당 문헌</th></tr></thead><tbody>';
     run.rows.forEach(function (r) {
@@ -1232,8 +1739,9 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     h += '<div class="hero-task"><div class="row"><h3>내 과제 · ' + esc(t.title) + '</h3><span class="badge ' + (t.editedBy === 'FDE 초안' ? 'b-neutral' : 'b-info') + '">' + esc(t.editedBy) + '</span><span class="spacer"></span><span class="meta">결정 시점 ' + esc(t.decisionDate) + '</span></div>' +
       '<p style="margin:8px 0 4px;color:#eef1ff">' + esc(t.problem) + '</p><div class="meta">제약: ' + t.constraints.map(esc).join(' · ') + '</div>' +
       '<div class="row" style="margin-top:10px"><button class="btn small" data-act="nav" data-id="tasks">과제 고치기</button></div></div>';
-    h += '<div class="stats"><div class="stat"><div class="k">승인 문헌</div><div class="v">' + bd.length + '<small>건</small></div></div>' +
-      '<div class="stat"><div class="k">고유 패밀리</div><div class="v">' + F.uniqueFamilies(bd) + '<small>개</small></div></div>' +
+    const st = F.projectStats(state);
+    h += '<div class="stats"><div class="stat"><div class="k">관련 문헌</div><div class="v">' + bd.length + '<small>건</small></div></div>' +
+      '<div class="stat"><div class="k">Core 문헌</div><div class="v">' + st.core + '<small>건</small></div></div>' +
       '<div class="stat"><div class="k">연결 카드</div><div class="v">' + related.length + '<small>개</small></div></div>' +
       '<div class="stat"><div class="k">' + (state.currentBaseline === 'V1' ? '정리 중 후보' : '영향 확인 중') + '</div><div class="v">' + (state.currentBaseline === 'V1' ? state.candidates.length : openImpacts.length) + '<small>건</small></div></div></div></section>';
 
@@ -1242,12 +1750,13 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (state.currentBaseline === 'V1') news += '<div class="note">새로 도착(정리 중) <b>' + state.candidates.length + '건</b> — 컨설턴트 검토 전이라 검색·집계에 포함하지 않습니다.</div>';
     else news += '<div class="note warn">기준선 <b>V2</b>가 공개되었습니다. 과제 영향 확인 <b>' + openImpacts.length + '건</b>이 진행 중입니다. <button class="link" data-act="nav" data-id="updates">새로 달라진 점 보기</button></div>';
     if (answered.length) news += '<div class="note ok">전문 검토 답변(가상 예시) <b>' + answered.length + '건</b>이 도착했습니다. <button class="link" data-act="nav" data-id="ask">물어보기에서 보기</button></div>';
+    news += '<div class="note">분석 리포트에 시사점 6가지가 정리되어 있습니다. <button class="link" data-act="nav" data-id="report">분석 리포트 보기</button> · 신규 IP 후보 ' + state.ipCandidates.length + '건 <button class="link" data-act="nav" data-id="ip">신규 IP 창출 보기</button></div>';
     h += '<h2>새 소식</h2>' + news;
 
     h += '<h2>이 과제와 연결된 결과 카드</h2><div class="grid2">' + related.map(cardItem).join('') + '</div>';
     const others = state.cards.filter(function (c) { return related.indexOf(c) < 0; });
     if (others.length) h += '<h2>다른 과제의 카드</h2><div class="grid3">' + others.map(cardItem).join('') + '</div>';
-    h += '<h2>바로 물어보기</h2><div class="examples">' + ['연도별 추세를 보여 주세요', '흔들림을 줄이는 방식은 무엇인가요?', '공백 후보를 보여 주세요'].map(function (q) {
+    h += '<h2>바로 물어보기</h2><div class="examples">' + ['출원 추세를 보여 주세요', '해외 특허가 국내 사업에 영향을 주나요?', '국내 핵심 특허를 보여 주세요', '공백 후보를 보여 주세요'].map(function (q) {
       return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>';
     }).join('') + '</div>';
     return h;
@@ -1283,7 +1792,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (!state.chat.length) h += '<div class="msg-bot"><b>무엇을 확인할까요?</b><div class="small muted">아래 예시 질문을 누르거나 직접 입력하세요. 지원하지 않는 질문에는 답을 꾸며내지 않고 가능한 질문을 안내합니다.</div></div>';
     state.chat.forEach(function (m) { h += msgHtml(m); });
     h += '</div>';
-    h += '<div class="askbox"><form id="ask-form" autocomplete="off"><label class="sr" for="ask-input">질문</label><input id="ask-input" maxlength="300" placeholder="예: 연도별 추세를 보여 주세요"><button class="btn primary" type="submit">보내기</button></form>' +
+    h += '<div class="askbox"><form id="ask-form" autocomplete="off"><label class="sr" for="ask-input">질문</label><input id="ask-input" maxlength="300" placeholder="예: 출원 추세를 보여 주세요"><button class="btn primary" type="submit">보내기</button></form>' +
       '<div class="examples">' + F.SUPPORTED.map(function (q) { return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('') + '</div></div>';
     return h;
   }
@@ -1295,17 +1804,18 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       const fu = [];
       if (run.spec.filters.country !== 'KR') fu.push(['그중 국내만', '국내만']);
       fu.push(run.spec.unit === 'family' ? ['문헌 단위로 보여 주세요', '문헌 단위로'] : ['패밀리 단위로 보여 주세요', '패밀리 단위로']);
-      if (run.spec.groupBy !== 'year') fu.push(['연도별 추세를 보여 주세요', '연도별로']);
+      if (run.spec.groupBy !== 'period') fu.push(['출원 추세를 보여 주세요', '추세로']);
+      if (run.spec.filters.status !== 'alive') fu.push(['그중 존속만', '존속만']);
       const followups = fu.map(function (x) { return '<button class="btn small" data-act="quick-ask" data-q="' + esc(x[0]) + '">' + esc(x[1]) + '</button>'; }).join('');
       return '<div class="msg-bot" data-run="' + esc(run.id) + '"><div class="row">' + layerBadge(m.layer) + '<span class="small muted">' + esc(run.id) + ' · 기준선 ' + esc(run.baseline) + '</span></div>' +
-        changesNote(m.changes) + runBlock(run, { explain: m.layer === 'explain', followups: followups }) + '</div>';
+        changesNote(m.changes) + (m.layer === 'review' ? '<div class="note risk">권리 검토가 필요한 문헌의 <b>목록</b>입니다. 침해·비침해 결론이 아니며, 청구항 대조는 전문 검토로 진행합니다.</div>' : '') + runBlock(run, { explain: m.layer === 'explain', followups: followups }) + '</div>';
     }
     if (m.type === 'info') return '<div class="msg-bot">' + esc(m.text) + '</div>';
     if (m.type === 'doc') {
       if (!m.found) return '<div class="msg-bot">' + esc(m.docId) + '는 이 시연 데이터에 없는 번호입니다. DEMO-KR-0001처럼 입력해 주세요.</div>';
       const d = F.getDoc(m.docId);
       return '<div class="msg-bot"><div class="row">' + (m.inBaseline ? layerBadge('calc') : '<span class="badge b-pending">정리 중 · 집계 제외 · 등급 미확정</span>') + '</div>' +
-        '<div class="sec"><b>' + esc(d.id) + '</b> ' + esc(d.title) + '</div><div class="small muted">' + esc(d.applicant) + ' · ' + esc(D.COUNTRIES[d.country]) + ' · ' + d.year + ' · ' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</div>' +
+        '<div class="sec"><b>' + esc(d.id) + '</b> ' + esc(d.title) + '</div><div class="small muted">' + esc(d.applicant) + ' · ' + esc(D.COUNTRIES[d.country]) + ' · ' + d.year + ' · ' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mechs.join(', ')) + ' · ' + esc(d.status) + '</div>' +
         '<div class="row" style="margin-top:8px"><button class="btn small" data-act="doc" data-id="' + esc(d.id) + '">가상 원문·근거 열기</button></div></div>';
     }
     if (m.type === 'review') {
@@ -1327,6 +1837,14 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
         '<dl class="kv"><dt>검토자</dt><dd>' + esc(a.reviewer) + '</dd><dt>쟁점</dt><dd>' + esc(a.issue) + '</dd><dt>적용 전제</dt><dd>' + esc(a.premise) + '</dd><dt>의견</dt><dd>' + esc(a.opinion) + '</dd><dt>다음 단계</dt><dd>' + esc(a.next) + '</dd></dl>' +
         '<div class="note warn">가상 예시입니다. 실제 변리사 의견이 아니며 정식 감정·의견서가 아닙니다.</div></div>';
     }
+    if (m.type === 'ip') {
+      const IP = D.IP;
+      return '<div class="msg-bot">' + layerBadge('explain') +
+        '<div class="sec"><div class="sec-title">결론</div>벤치마킹 대상(' + esc(IP.target.name) + ')의 약점 ' + IP.weaknesses.length + '가지에 개선안 ' + IP.options.length + '개와 보강 기술 ' + IP.addons.length + '개를 제안했습니다. 기업 선호안 ④는 상업성이 높지만 단독 특허성은 낮아, 보강 기술 ' + IP.addons.filter(function (a) { return a.rec; }).map(function (a) { return a.k; }).join('·') + '를 얹는 조합을 1차 출원안으로 제안합니다(가상 예시).</div>' +
+        '<div class="sec"><div class="sec-title">개선안</div><div class="tablewrap"><table><thead><tr><th>안</th><th>해결하는 약점</th><th>핵심 구조</th><th>특허성</th><th>상업성</th></tr></thead><tbody>' +
+        IP.options.map(function (o) { return '<tr><td><b>' + esc(o.no + ' ' + o.name) + '</b>' + (o.pick ? ' <span class="badge b-info">기업 선호</span>' : '') + '</td><td>' + esc(o.weak) + '</td><td>' + esc(o.core) + '</td><td>' + lvl(o.pat) + '</td><td>' + lvl(o.com) + '</td></tr>'; }).join('') + '</tbody></table></div></div>' +
+        '<div class="sec"><div class="sec-title">다음 행동</div><div class="row"><button class="btn small primary" data-act="nav" data-id="ip">신규 IP 창출 화면 열기</button><button class="btn small" data-act="quick-ask" data-q="레버 클램프가 특허에 걸리나요?">권리 검토 요청하기</button></div></div></div>';
+    }
     if (m.type === 'unsupported') {
       return '<div class="msg-bot"><span class="badge b-neutral">지원하지 않는 질문</span><div class="sec">이 시연은 정해진 유형의 질문만 처리하며, 처리할 수 없는 질문에 답을 꾸며내지 않습니다. 다음과 같은 질문을 해 보세요.</div><div class="examples">' +
         m.supported.map(function (q) { return '<button data-act="quick-ask" data-q="' + esc(q) + '">' + esc(q) + '</button>'; }).join('') + '</div></div>';
@@ -1338,8 +1856,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   function viewBrowse() {
     const types = Array.from(new Set(state.cards.map(function (c) { return c.type; })));
     let h = '<h1>결과 찾아보기</h1><p class="lead">질문형 카드가 먼저, 문헌이 다음에 나옵니다. 정리 중인 신규 문헌은 섞지 않습니다.</p>';
-    h += '<div class="panel"><div class="grid3"><div><label class="f" for="browse-q">검색어 (제품 말로 찾아도 됩니다)</label><input type="text" id="browse-q" value="' + esc(browse.q) + '" placeholder="예: 흔들림, 상판, 자석"></div>' +
-      '<div><label class="f" for="browse-sub">세부 분류</label><select id="browse-sub"><option value="">전체</option>' + Object.keys(D.SUBS).map(function (k) { return '<option value="' + k + '"' + (browse.sub === k ? ' selected' : '') + '>' + esc(D.SUBS[k]) + '</option>'; }).join('') + '</select></div>' +
+    h += '<div class="panel"><div class="grid3"><div><label class="f" for="browse-q">검색어 (제품 말로 찾아도 됩니다)</label><input type="text" id="browse-q" value="' + esc(browse.q) + '" placeholder="예: 의자, 상판, 자석, 커넥터"></div>' +
+      '<div><label class="f" for="browse-sub">제품군</label><select id="browse-sub"><option value="">전체</option>' + Object.keys(D.SUBS).map(function (k) { return '<option value="' + k + '"' + (browse.sub === k ? ' selected' : '') + '>' + esc(D.SUBS[k]) + '</option>'; }).join('') + '</select></div>' +
       '<div><label class="f" for="browse-type">카드 유형</label><select id="browse-type"><option value="">전체</option>' + types.map(function (t) { return '<option' + (browse.type === t ? ' selected' : '') + '>' + esc(t) + '</option>'; }).join('') + '</select></div></div></div>';
     h += '<div id="browse-results">' + browseResults() + '</div>';
     return h;
@@ -1351,9 +1869,10 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     h += '<h2>카드 ' + r.cards.length + '건</h2>';
     h += r.cards.length ? '<div class="grid2">' + r.cards.map(cardItem).join('') + '</div>' : '';
     if (browse.q) {
+      if (r.docs.length > 30) h += '<p class="small muted">상위 30건만 표시합니다. 물어보기로 조건을 좁혀 보세요.</p>';
       h += '<h2>문헌 ' + r.docs.length + '건 <span class="small muted">(기준선 ' + esc(state.currentBaseline) + ')</span></h2>';
-      h += r.docs.length ? '<div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>분류</th><th>수단</th><th>연도</th></tr></thead><tbody>' + r.docs.slice(0, 30).map(function (d) {
-        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td>' + esc(D.SUBS[d.sub]) + '</td><td>' + esc(d.mech) + '</td><td>' + d.year + '</td></tr>';
+      h += r.docs.length ? '<div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>제품군</th><th>결합방식</th><th>상태</th><th>출원</th></tr></thead><tbody>' + r.docs.slice(0, 30).map(function (d) {
+        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td>' + esc(D.SUB_SHORT[d.sub]) + '</td><td class="small">' + esc(d.mechs.join(', ')) + '</td><td class="small">' + esc(d.status) + '</td><td>' + d.year + '</td></tr>';
       }).join('') + '</tbody></table></div>' : '';
     }
     if (!r.cards.length && !r.docs.length) {
@@ -1366,7 +1885,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
   function viewTasks() {
     let h = '<h1>내 개발과제</h1><p class="lead">컨설턴트가 킥오프에서 만든 초안이 들어 있습니다. 빈 칸을 채우는 대신 고치기만 하면 됩니다.</p>';
     state.tasks.forEach(function (t) {
-      const docs = F.docsInBaseline(state).filter(function (d) { return d.sub === t.sub && t.mechs.indexOf(d.mech) >= 0; });
+      const docs = F.docsInBaseline(state).filter(function (d) { return d.sub === t.sub && d.mechs.some(function (m) { return t.mechs.indexOf(m) >= 0; }); });
       const cards = state.cards.filter(function (c) { return c.tasks.indexOf(t.id) >= 0; });
       const imps = state.impacts.filter(function (i) { return i.taskId === t.id; });
       h += '<div class="panel" id="task-' + t.id + '"><div class="row"><h3 style="margin:0">' + esc(t.title) + '</h3><span class="badge ' + (t.editedBy === 'FDE 초안' ? 'b-neutral' : 'b-info') + '">' + esc(t.editedBy) + '</span>' +
@@ -1379,7 +1898,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
           '<div class="row" style="margin-top:10px"><button class="btn primary small" type="submit">저장</button><button class="btn small" type="button" data-act="task-cancel">취소</button></div></form>';
       } else {
         h += '<dl class="kv"><dt>해결하려는 문제</dt><dd>' + esc(t.problem) + '</dd><dt>관심 구성</dt><dd>' + t.components.map(esc).join(', ') + '</dd>' +
-          '<dt>관심 분류·수단</dt><dd>' + esc(D.SUBS[t.sub]) + ' · ' + t.mechs.map(esc).join(', ') + '</dd><dt>제약</dt><dd>' + t.constraints.map(esc).join(' · ') + '</dd>' +
+          '<dt>관심 제품군·결합방식</dt><dd>' + esc(D.SUBS[t.sub]) + ' · ' + t.mechs.map(esc).join(', ') + '</dd><dt>제약</dt><dd>' + t.constraints.map(esc).join(' · ') + '</dd>' +
           '<dt>의사결정 시점</dt><dd>' + esc(t.decisionDate) + '</dd><dt>연결 카드</dt><dd>' + cards.map(function (c) { return '<button class="link" data-act="card" data-id="' + c.id + '">' + esc(c.title) + '</button>'; }).join('<br>') + '</dd>' +
           '<dt>관련 문헌</dt><dd>' + docs.length + '건 (기준선 ' + esc(state.currentBaseline) + ')</dd></dl>' +
           '<div class="row"><button class="btn small" data-act="task-edit" data-id="' + t.id + '">고치기</button>' + (t.history.length ? '<span class="small muted">수정 이력 ' + t.history.length + '회 · 마지막 ' + esc(t.history[t.history.length - 1].at.slice(0, 16).replace('T', ' ')) + '</span>' : '') + '</div>';
@@ -1410,11 +1929,11 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     h += '<div class="panel"><h3>V1 → V2 변화</h3><div class="grid3"><div><div class="muted small">문헌</div><b style="font-size:20px">' + v1.length + ' → ' + v2.length + '</b> <span class="diff-up">+' + (v2.length - v1.length) + '</span></div>' +
       '<div><div class="muted small">고유 패밀리</div><b style="font-size:20px">' + F.uniqueFamilies(v1) + ' → ' + F.uniqueFamilies(v2) + '</b> <span class="diff-up">+' + (F.uniqueFamilies(v2) - F.uniqueFamilies(v1)) + '</span></div>' +
       '<div><div class="muted small">과제 영향 확인</div><b style="font-size:20px">' + state.impacts.length + '건</b></div></div>';
-    if (state.gapChanges.length) h += '<div class="note warn">이전에 관측되지 않던 조합에 문헌이 생겼습니다: ' + state.gapChanges.map(function (g) { return esc(g.cell) + '(' + g.families + '개 패밀리)'; }).join(', ') + '. 공백 카드(CARD-05)를 최신 기준선으로 다시 계산해 보세요.</div>';
-    h += '<table style="margin-top:10px"><thead><tr><th>신규 문헌</th><th>구분</th><th>분류 · 수단</th><th>왜 중요한가</th></tr></thead><tbody>' + state.candidates.map(function (c) {
+    if (state.gapChanges.length) h += '<div class="note warn">이전에 관측되지 않던 조합에 문헌이 생겼습니다: ' + state.gapChanges.map(function (g) { return esc(g.cell) + '(' + g.count + '건)'; }).join(', ') + '. 공백 카드(CARD-10)를 최신 기준선으로 다시 계산해 보세요.</div>';
+    h += '<table style="margin-top:10px"><thead><tr><th>신규 문헌</th><th>구분</th><th>제품군 · 결합방식</th><th>왜 중요한가</th></tr></thead><tbody>' + state.candidates.map(function (c) {
       const d = F.getDoc(c.docId);
-      const why = d.rights === 'H' ? '권리검토 필요도 높음(가상 등급)' : d.rel === 'H' ? '개발 관련성 높음(가상 등급)' : '참고';
-      return '<tr><td>' + docChip(d.id) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</td><td class="small">' + esc(why) + '</td></tr>';
+      const why = d.rights === 'H' ? (d.country === 'KR' ? '국내 Core · 권리검토 필요도 높음 — 과제 C와 구성이 가까움(가상 등급)' : '권리검토 필요도 높음(가상 등급)') : d.relG === 'H' ? '개발 관련성 높음(가상 등급)' : d.mechs.indexOf('자석') >= 0 || d.mechs.indexOf('회전·캠') >= 0 ? '이전 공백 조합에 가까움' : '참고';
+      return '<tr><td>' + docChip(d.id) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUB_SHORT[d.sub]) + ' · ' + esc(d.mechs.join(', ')) + '</td><td class="small">' + esc(why) + '</td></tr>';
     }).join('') + '</tbody></table></div>';
     h += '<h2>영향받은 개발과제</h2>';
     state.impacts.forEach(function (i) {
@@ -1459,7 +1978,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (state.role !== 'fde') return '<h1>컨설턴트 작업대</h1><div class="note warn">컨설턴트(FDE) 역할에서만 보이는 화면입니다. <button class="link" data-act="role" data-id="fde">컨설턴트 화면으로 전환</button></div>';
     let h = '<h1>컨설턴트 작업대</h1><p class="lead">역할 선택은 시연용 화면 전환이며 실제 인증이나 기관 접근 통제가 아닙니다.</p>';
     h += '<h2>1. 전문 검토 요청</h2>';
-    if (!state.requests.length) h += '<div class="note">접수된 요청이 없습니다. 연구자 화면에서 “쐐기 구조가 특허에 걸리나요?”를 물어 요청을 만들어 보세요.</div>';
+    if (!state.requests.length) h += '<div class="note">접수된 요청이 없습니다. 연구자 화면에서 “레버 클램프가 특허에 걸리나요?”를 물어 요청을 만들어 보세요.</div>';
     state.requests.forEach(function (r) {
       h += '<div class="panel"><div class="row"><b>' + esc(r.id) + '</b><span class="badge ' + (r.status === '답변 공개' ? 'b-info' : 'b-pending') + '">' + esc(r.status) + '</span><span class="small muted">과제 ' + esc(task(r.taskId).title) + ' · 기준선 ' + esc(r.baseline) + '</span></div>' +
         '<p style="margin:6px 0">“' + esc(r.question) + '”</p><div class="row small">관련 문헌: ' + r.docIds.map(docChip).join('') + '</div>' +
@@ -1468,10 +1987,10 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     });
     h += '<h2>2. 신규 자료 후보 영역</h2>';
     const pub = F.canPublish(state);
-    h += '<div class="panel"><p class="small muted" style="margin-top:0">후보는 승인 전까지 연구자 화면의 검색·집계에 포함되지 않습니다. 분류·등급은 컨설턴트 확인용 초안(가상)입니다.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>구분</th><th>분류 · 수단</th><th>등급 초안(벤치·관련·권리)</th><th>검토</th></tr></thead><tbody>' +
+    h += '<div class="panel"><p class="small muted" style="margin-top:0">후보는 승인 전까지 연구자 화면의 검색·집계에 포함되지 않습니다. 분류·등급은 컨설턴트 확인용 초안(가상)입니다.</p><div class="tablewrap"><table><thead><tr><th>ID</th><th>제목</th><th>구분</th><th>제품군 · 결합방식</th><th>관련도</th><th>등급 초안(벤치·관련·권리)</th><th>검토</th></tr></thead><tbody>' +
       state.candidates.map(function (c) {
         const d = F.getDoc(c.docId);
-        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.mech) + '</td><td class="small">' + lvl(d.bench) + ' · ' + lvl(d.rel) + ' · ' + lvl(d.rights) + '</td><td>' +
+        return '<tr><td>' + docChip(d.id) + '</td><td>' + esc(d.title) + '</td><td class="small">' + esc(c.kind) + '</td><td class="small">' + esc(D.SUB_SHORT[d.sub]) + ' · ' + esc(d.mechs.join(', ')) + '</td><td class="small">' + esc(d.rel) + '</td><td class="small">' + lvl(d.bench) + ' · ' + lvl(d.relG) + ' · ' + lvl(d.rights) + '</td><td>' +
           (c.reviewed ? '<span class="badge b-calc">검토 완료</span>' : '<button class="btn small" data-act="review-cand" data-id="' + esc(d.id) + '">검토 완료</button>') + '</td></tr>';
       }).join('') + '</tbody></table></div>' +
       '<div class="row" style="margin-top:10px">' + (F.baselineOf(state, 'V2') ? '<span class="badge b-calc">V2 공개됨 · 문헌 ' + F.docsInBaseline(state, 'V2').length + '건</span>' :
@@ -1482,6 +2001,106 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       h += '<div class="panel"><div class="row"><b>' + esc(task(i.taskId).title) + '</b><span class="badge ' + (i.status === '승인된 설명' ? 'b-calc' : 'b-pending') + '">' + esc(i.status) + '</span><span class="small muted">' + esc(i.id) + '</span><span class="spacer"></span>' +
         (i.status !== '승인된 설명' ? '<button class="btn small primary" data-act="advance-impact" data-id="' + esc(i.id) + '">' + (i.status === '확인 필요' ? '검토 시작' : '설명 승인·공개') + '</button>' : '') + '</div>' +
         '<div class="small" style="margin-top:6px">' + i.docIds.map(docChip).join(' ') + '</div></div>';
+    });
+    h += '<h2>4. 국내 핵심 특허 대조표 공개</h2><div class="panel"><p class="small muted" style="margin-top:0">청구항 구성요소별 대조와 예비 분류는 컨설턴트 작업용 초안입니다. 공개해야 연구자 화면에 위험도가 보입니다. 실제 서비스에서는 변리사 검수 후 공개합니다.</p><div class="tablewrap"><table><thead><tr><th>문헌</th><th>제목</th><th>예비 분류</th><th>상태</th><th></th></tr></thead><tbody>' +
+      F.riskRows(state).map(function (r) {
+        const d = F.getDoc(r.docId);
+        return '<tr><td>' + docChip(d.id) + '</td><td class="small">' + esc(d.title) + '</td><td>' + riskBadge(r.prelim) + '</td><td class="small">' + esc(r.status) + '</td><td>' +
+          (r.status === '의견 공개' ? '' : '<button class="btn small" data-act="publish-risk" data-id="' + esc(d.id) + '">가상 의견 공개</button>') + '</td></tr>';
+      }).join('') + '</tbody></table></div></div>';
+    h += '<h2>5. 발명 후보 단계</h2>';
+    state.ipCandidates.forEach(function (c) {
+      h += '<div class="panel"><div class="row"><b>' + esc(c.id) + '</b> ' + esc(c.title) + '<span class="spacer"></span>' + icFlow(c.status) +
+        (c.status !== '채택' ? '<button class="btn small primary" data-act="advance-ic" data-id="' + esc(c.id) + '">다음 단계로</button>' : '') + '</div><div class="small muted" style="margin-top:4px">' + esc(c.basis) + '</div></div>';
+    });
+    return h;
+  }
+
+  function riskBadge(g) { return '<span class="badge ' + (g === '상' ? 'b-review' : g === '중' ? 'b-pending' : 'b-calc') + '">' + esc(g) + '</span>'; }
+  function icFlow(status) {
+    const i = F.IC_FLOW.indexOf(status);
+    return '<span class="flow-pills">' + F.IC_FLOW.map(function (s, k) { return '<i class="' + (k < i ? 'done' : k === i ? 'on' : '') + '">' + esc(s) + '</i>'; }).join('') + '</span>';
+  }
+
+  // ---------- 화면: 분석 리포트 ----------
+  function viewReport() {
+    const s = F.projectStats(state), P = D.PROJECT.pipeline;
+    const searched = Object.keys(P.search).reduce(function (a, k) { return a + P.search[k]; }, 0), refined = s.docs + P.excluded;
+    let h = '<h1>분석 리포트</h1><p class="lead">가상 중간보고의 정량분석을 한 화면에 모았습니다. 검색·정제 건수(가상 구축 기록)를 뺀 모든 수치는 기준선 ' + esc(state.currentBaseline) + ' 배열에서 계산합니다.</p>';
+    h += '<div class="kpis kpis6">' + [
+      ['관련 문헌', s.docs + '건', '4개국 · ' + s.yearMin + '~' + s.yearMax + '년 출원'], ['미국 문헌 비중', s.usPct + '%', '국가별 구성은 CARD-11'],
+      ['기간만료 추정', s.expiredPct + '%', s.expired + '건 — 누구나 참고 가능한 구조'], ['서로 다른 출원인', s.applicants + '명', s.singlePct + '%는 1건만 보유'],
+      ['Core 문헌', s.core + '건', 'C 테이블 ' + s.coreBy.C + ' · D 커넥터 ' + s.coreBy.D + ' · A·B ' + (s.coreBy.A + s.coreBy.B)], ['문헌당 결합방식', s.avgMechs + '개', '한 가지 방식만 쓰는 제품은 드묾']
+    ].map(function (k) { return '<div class="kpi"><div class="k">' + esc(k[0]) + '</div><div class="v">' + esc(k[1]) + '</div><div class="small muted">' + esc(k[2]) + '</div></div>'; }).join('') + '</div>';
+    h += '<h2>검색에서 분류까지</h2><div class="panel"><div class="pipe">' + [
+      ['검색', searched, Object.keys(P.search).map(function (k) { return k + ' ' + P.search[k]; }).join(' · '), true],
+      ['정제', refined, '중복·패밀리 통합, 관련성 1차 선별', true], ['관련 문헌', s.docs, '독립청구항 기준 판정 · 제외 ' + P.excluded + '건', false], ['Core', s.core, '개발 컨셉의 필수요건을 모두 갖춘 문헌', false]
+    ].map(function (p) { return '<div class="pipe-step"><div class="pipe-bar" style="width:' + Math.max(8, Math.round(100 * p[1] / searched)) + '%"></div><div class="row"><b>' + esc(p[0]) + '</b><span class="pipe-n">' + p[1].toLocaleString() + '건</span>' + (p[3] ? '<span class="badge b-neutral">가상 구축 기록</span>' : '<span class="badge b-calc">배열에서 계산</span>') + '</div><div class="small muted">' + esc(p[2]) + '</div></div>'; }).join('') + '</div></div>';
+    h += '<h2>시사점 여섯 가지</h2><div class="grid3">' + F.insights(state).map(function (x, i) {
+      return '<div class="insight"><div class="no">' + (i + 1) + '</div><div class="big">' + esc(x.big) + '</div><div class="small muted">' + esc(x.label) + '</div><h3 style="margin-top:8px">' + esc(x.title) + '</h3><div class="small">' + esc(x.text) + '</div></div>';
+    }).join('') + '</div><p class="small muted">시사점 문장은 계산된 수치를 끼워 넣는 고정 문장이며, 가상 데이터 기준입니다.</p>';
+    h += '<h2>질문형 카드 ' + state.cards.length + '개</h2><div class="grid2">' + state.cards.map(function (c) {
+      const run = state.runs[c.runIds[c.runIds.length - 1]];
+      return '<div class="panel mini"><div class="row"><span class="badge b-neutral">' + esc(c.type) + '</span><span class="small muted">' + esc(c.id) + ' · ' + esc(run.baseline) + '</span></div><button class="link q" data-act="card" data-id="' + c.id + '">' + esc(c.title) + '</button>' +
+        (run.spec.groupBy === 'matrix' ? resultTable(run) : chartCard(run)) + '<div class="small muted">' + esc(F.describeRun(run)[1] || '') + '</div></div>';
+    }).join('') + '</div>';
+    return h;
+  }
+
+  // ---------- 화면: 신규 IP 창출 ----------
+  function lvlBadge(v) { return '<span class="badge ' + (v === 'H' ? 'b-calc' : v === 'M' ? 'b-pending' : 'b-neutral') + '">' + lvl(v) + '</span>'; }
+  function viewIP() {
+    const IP = D.IP, fde = state.role === 'fde';
+    const benchDocs = D.DOCS.filter(function (d) { return d.key === 'bench' && curBase().docIds.indexOf(d.id) >= 0; });
+    let h = '<h1>신규 IP 창출</h1><p class="lead">팔리는 구조를 벤치마킹해 약점을 찾고, 그 약점을 푸는 구조로 권리 후보를 만듭니다.</p>' +
+      '<div class="note warn">가상 예시입니다. 특허성·상업성 평가는 설명용 가상값이며, 실제 시험·심사 결과나 변리사 의견이 아닙니다. 등록 가능성과 권리 귀속은 자동으로 확정하지 않습니다.</div>';
+    h += '<div class="flow">' + [['1', '벤치마킹 대상 선정', IP.target.name], ['2', '4개국 시장·특허 조사', '같은 방식 제품과 살아 있는 권리 확인'], ['3', '권리 지형 판단', '등록 장벽이 어디에 있는가'], ['4', '약점 도출', IP.weaknesses.length + '가지 약점'], ['5', '개선안 제안', '개선 설계 ' + IP.options.length + '안 + 보강 기술 ' + IP.addons.length + '개']]
+      .map(function (x) { return '<div class="flow-step"><span class="n">' + x[0] + '</span><b>' + esc(x[1]) + '</b><div class="small muted">' + esc(x[2]) + '</div></div>'; }).join('') + '</div>';
+    h += '<h2>벤치마킹 대상과 권리 지형</h2><div class="grid2"><div class="panel"><h3>' + esc(IP.target.name) + '</h3><ul class="small" style="margin:6px 0 10px;padding-left:18px">' + IP.target.how.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' +
+      '<div class="sec-title">관련 가상 문헌</div><div class="row">' + benchDocs.map(function (d) { return docChip(d.id); }).join('') + '</div></div>' +
+      '<div class="kpis" style="grid-template-columns:repeat(2,minmax(0,1fr))">' + IP.landscape.map(function (l) { return '<div class="kpi"><div class="k">' + esc(l[0]) + '</div><div class="v">' + esc(l[1]) + '</div><div class="small muted">' + esc(l[2]) + '</div></div>'; }).join('') + '</div></div>';
+    h += '<div class="note">결론(가상): 만들 수는 있지만 지금 구조 그대로는 권리를 받기 어렵습니다. 남의 권리에 걸릴 위험이 낮은 대신, 약점을 푸는 새 구성을 더해야 우리 권리가 됩니다.</div>';
+    h += '<h2>개선 설계 5안</h2><div class="tablewrap"><table><thead><tr><th>안</th><th>해결하는 약점</th><th>핵심 구조</th><th>특허성</th><th>상업성</th></tr></thead><tbody>' +
+      IP.options.map(function (o) { return '<tr' + (o.pick ? ' class="hl"' : '') + '><td><b>' + esc(o.no + ' ' + o.name) + '</b>' + (o.pick ? ' <span class="badge b-info">기업 선호</span>' : '') + '</td><td>' + esc(o.weak) + '</td><td>' + esc(o.core) + '</td><td>' + lvlBadge(o.pat) + '</td><td>' + lvlBadge(o.com) + '</td></tr>'; }).join('') + '</tbody></table></div>';
+    // 특허성 × 상업성 3x3
+    const cell = function (p, c) {
+      return IP.options.filter(function (o) { return o.pat === p && o.com === c; }).map(function (o) { return '<span class="pchip opt' + (o.pick ? ' pick' : '') + '" title="' + esc(o.name) + '">' + esc(o.no) + '</span>'; })
+        .concat(IP.addons.filter(function (a) { return a.pat === p && a.com === c; }).map(function (a) { return '<span class="pchip add' + (a.rec ? ' rec' : '') + '" title="' + esc(a.name) + '">' + esc(a.k) + '</span>'; })).join('');
+    };
+    h += '<h2>특허성 × 상업성 지도</h2><div class="panel"><div class="pgrid"><div class="axis-y">특허성 ↑</div>' + ['H', 'M', 'L'].map(function (p) {
+      return '<div class="plabel">' + lvl(p) + '</div>' + ['L', 'M', 'H'].map(function (c) { return '<div class="pcell' + (p === 'H' && c === 'H' ? ' best' : '') + '">' + cell(p, c) + '</div>'; }).join('');
+    }).join('') + '<div></div>' + ['L', 'M', 'H'].map(function (c) { return '<div class="plabel x">' + lvl(c) + '</div>'; }).join('') + '<div class="axis-x">상업성 →</div></div>' +
+      '<div class="heat-legend"><span class="pchip opt">①</span>개선안 <span class="pchip opt pick">④</span>기업 선호 <span class="pchip add">A</span>보강 기술 <span class="pchip add rec">A</span>1차 출원 추천</div>' +
+      '<p class="small muted">④ 원터치 레버는 상업성이 가장 높지만 “레버로 잠그는 클램프”는 공구 분야에서 오래 알려져 단독으로는 진보성 부정 위험이 큽니다(가상 판단). 그래서 특허성은 ④에 얹는 가구 전용 보강 기술로 확보합니다.</p></div>';
+    h += '<h2>보강 기술 8가지</h2><div class="grid4">' + IP.addons.map(function (a) {
+      return '<div class="addon' + (a.rec ? ' rec' : '') + '"><div class="row"><span class="ak">' + esc(a.k) + '</span><b>' + esc(a.name) + '</b></div><div class="small" style="margin:6px 0">' + esc(a.how) + '</div><div class="row small">특허성 ' + lvlBadge(a.pat) + ' 상업성 ' + lvlBadge(a.com) + (a.rec ? '<span class="badge b-info">추천</span>' : '') + '</div></div>';
+    }).join('') + '</div>';
+    const steps = function (arr) { return '<div class="flow">' + arr.map(function (x, i) { return '<div class="flow-step"><span class="n">' + (i + 1) + '</span><b>' + esc(x[0]) + '</b>' + (x[1] ? ' <span class="badge b-info">' + esc(x[1]) + '</span>' : '') + '<div class="small muted">' + esc(x[2]) + '</div></div>'; }).join('') + '</div>'; };
+    h += '<h2>통합 사용 순서</h2><div class="panel"><div class="sec-title">설치</div>' + steps(IP.install) + '<div class="sec-title" style="margin-top:12px">해제 — 순서가 강제됨</div>' + steps(IP.release) +
+      '<p class="small muted">사용 순서 자체가 청구항의 결합 관계 — 각 기술이 함께 작동하는 점이 진보성의 근거(가상 설명).</p></div>';
+    h += '<h2>1차 출원안 청구항 초안</h2><div class="panel"><div class="quote">“' + esc(IP.claim.concept) + '”</div><div class="grid2"><div><div class="sec-title">독립항 구성요소</div><ol class="claim">' +
+      IP.claim.independent.map(function (e) { return '<li>' + esc(e) + '</li>'; }).join('') + '</ol></div><div><div class="sec-title">종속항으로 쌓기</div><table><tbody>' +
+      IP.claim.dependents.map(function (d, i) { return '<tr><td class="num">' + (i + 2) + '</td><td>' + (d[0] !== '–' ? '<span class="ak sm">' + esc(d[0]) + '</span>' : '') + '</td><td class="small">' + esc(d[1]) + '</td></tr>'; }).join('') + '</tbody></table></div></div>' +
+      '<p class="small muted">초안(가상) — 국내 핵심 특허 대조 결과를 반영해 확정합니다.</p></div>';
+    h += '<h2>회피·차별 점검</h2><div class="tablewrap"><table><thead><tr><th>선행 권리(가상)</th><th>그 권리의 핵심 구성</th><th>1차 출원안</th><th>판단</th></tr></thead><tbody>' +
+      IP.diff.map(function (r) { return '<tr><td>' + esc(r[0]) + '</td><td class="small">' + esc(r[1]) + '</td><td class="small">' + esc(r[2]) + '</td><td><span class="badge ' + (r[3] === '확인 중' ? 'b-pending' : 'b-explain') + '">' + esc(r[3]) + '</span></td></tr>'; }).join('') +
+      '</tbody></table></div><p class="small muted">판단 칸은 가상 설명이며 전문 검토 전입니다.</p>';
+    // 국내 핵심 특허 대조표
+    h += '<h2>국내 핵심 특허 대조표</h2><div class="panel"><p class="small" style="margin-top:0">한국 Core·존속 특허의 독립항을 구성요소로 나눠 과제 「' + esc(task('TASK-C').title) + '」 설계안과 대조합니다. 판정 기준: <b>상</b> 모든 요소 해당 → 설계 변경 필수 · <b>중</b> 1~2개 요소 차이 → 균등 검토 · <b>하</b> 핵심 요소 비해당 → 자유 실시 검토.</p>' +
+      '<p class="small muted">위험도는 전문 검토 후에만 공개됩니다(가상 예시). ' + (fde ? '컨설턴트 화면에서는 예비 분류가 보입니다.' : '') + '</p>';
+    F.riskRows(state).forEach(function (r) {
+      const d = F.getDoc(r.docId), pub = r.status === '의견 공개';
+      h += '<details class="riskrow"' + (pub ? ' open' : '') + '><summary><span class="row">' + docChip(d.id) + '<span class="small">' + esc(d.title) + '</span><span class="spacer"></span>' +
+        (pub ? riskBadge(state.risk[d.id].grade) + ' <span class="small muted">가상 검토 의견</span>' : fde ? '<span class="small muted">예비</span> ' + riskBadge(r.prelim) : '<span class="badge b-neutral">전문 검토 대기</span>') + '</span></summary>' +
+        '<table><thead><tr><th>청구항 구성요소(가상)</th><th>핵심</th><th>설계안 대비</th></tr></thead><tbody>' + r.elements.map(function (e) {
+          return '<tr><td class="small">' + esc(e[0]) + '</td><td>' + (e[2] ? '●' : '') + '</td><td>' + (pub || fde ? '<span class="badge ' + (e[1] === '해당' ? 'b-review' : e[1] === '비해당' ? 'b-calc' : 'b-pending') + '">' + esc(e[1]) + '</span>' : '<span class="small muted">검토 중</span>') + '</td></tr>';
+        }).join('') + '</tbody></table></details>';
+    });
+    h += '</div>';
+    h += '<h2>발명 후보</h2>';
+    state.ipCandidates.forEach(function (c) {
+      h += '<div class="panel"><div class="row"><b>' + esc(c.id) + '</b><span>' + esc(c.title) + '</span><span class="spacer"></span><span class="small muted">과제 ' + esc(task(c.task).title) + '</span></div>' +
+        '<div style="margin:8px 0">' + icFlow(c.status) + '</div><div class="small muted">근거: ' + esc(c.basis) + ' · 가설 단계 — 성능·제조 가능성은 시제품 시험으로 확인해야 합니다.</div></div>';
     });
     return h;
   }
@@ -1495,13 +2114,19 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       const inBase = curBase().docIds.indexOf(d.id) >= 0;
       const citing = state.cards.filter(function (c) { return c.evidence.indexOf(d.id) >= 0; });
       const fam = D.DOCS.filter(function (x) { return x.familyId === d.familyId && x.id !== d.id; });
-      h += '<h2 id="drawer-title" style="margin-top:4px">' + esc(d.id) + '</h2><div class="row">' + (inBase ? '<span class="badge b-calc">기준선 ' + esc(state.currentBaseline) + ' 포함</span>' : '<span class="badge b-pending">정리 중 · 집계 제외</span>') + '<span class="badge b-neutral">가상 문헌</span></div>' +
-        '<p><b>' + esc(d.title) + '</b></p><dl class="kv"><dt>가상 출원인</dt><dd>' + esc(d.applicant) + '</dd><dt>국가 · 공개연도</dt><dd>' + esc(D.COUNTRIES[d.country]) + ' · ' + d.year + '</dd>' +
-        '<dt>가상 패밀리</dt><dd>' + esc(d.familyId) + (fam.length ? ' (함께: ' + fam.map(function (x) { return esc(x.id); }).join(', ') + ')' : '') + '</dd>' +
-        '<dt>세부 분류</dt><dd>' + esc(D.SUBS[d.sub]) + '</dd><dt>결합 수단</dt><dd>' + esc(d.mech) + '</dd></dl>' +
-        '<h3>세 축 등급 ' + (inBase ? '(가상값)' : '(초안 · 미확정)') + '</h3><table><tbody><tr><td>벤치마킹 가치</td><td>' + lvl(d.bench) + '</td></tr><tr><td>개발방향 관련성</td><td>' + lvl(d.rel) + '</td></tr><tr><td>권리검토 필요도</td><td>' + lvl(d.rights) + '</td></tr></tbody></table>' +
+      const alive = F.isAlive(d);
+      h += '<h2 id="drawer-title" style="margin-top:4px">' + esc(d.id) + '</h2><div class="row">' + (inBase ? '<span class="badge b-calc">기준선 ' + esc(state.currentBaseline) + ' 포함</span>' : '<span class="badge b-pending">정리 중 · 집계 제외</span>') + '<span class="badge b-neutral">가상 문헌</span><span class="badge ' + (d.rel === 'Core' ? 'b-info' : 'b-neutral') + '">' + esc(d.rel) + '</span><span class="badge ' + (alive ? 'b-pending' : 'b-neutral') + '">' + esc(d.status) + '</span></div>' +
+        '<p><b>' + esc(d.title) + '</b></p><dl class="kv"><dt>가상 출원인</dt><dd>' + esc(d.applicant) + ' (' + esc(d.appType) + ')</dd><dt>국가 · 종류</dt><dd>' + esc(D.COUNTRIES[d.country]) + ' · ' + esc(d.kind) + '</dd><dt>출원 · 공개</dt><dd>' + d.year + '년 · ' + d.pubYear + '년</dd>' +
+        '<dt>만료(추정)</dt><dd>' + d.expiryYear + '년 <span class="small muted">출원 + 법정 존속기간</span></dd>' +
+        '<dt>가상 패밀리</dt><dd>' + esc(d.familyId) + (fam.length ? ' (함께: ' + fam.map(function (x) { return esc(x.id); }).join(', ') + ')' : '') + (d.country !== 'KR' ? (d.krFamily ? ' <span class="badge b-pending">한국 가족특허 있음</span>' : ' <span class="small muted">한국 가족특허 미확인</span>') : '') + '</dd>' +
+        '<dt>제품군 · 코드</dt><dd>' + esc(D.SUBS[d.sub]) + ' · ' + esc(d.code + ' ' + D.CODES[d.code]) + '</dd>' +
+        '<dt>결합 K</dt><dd>' + d.mechs.map(function (m) { return '<span class="tag k">' + esc(m) + '</span>'; }).join('') + '</dd>' +
+        '<dt>성능 P · 사용 U</dt><dd>' + d.perf.map(function (m) { return '<span class="tag p">' + esc(m) + '</span>'; }).join('') + d.use.map(function (m) { return '<span class="tag u">' + esc(m) + '</span>'; }).join('') + '</dd></dl>' +
+        '<h3>해결과제 · 구성 · 효과 (가상 정리)</h3><dl class="kv"><dt>과제</dt><dd>' + esc(d.problem) + '</dd><dt>구성</dt><dd>' + esc(d.solution) + '</dd><dt>효과</dt><dd>' + esc(d.effect) + '</dd></dl>' +
+        '<h3>세 축 등급 ' + (inBase ? '(가상값)' : '(초안 · 미확정)') + '</h3><table><tbody><tr><td>벤치마킹 가치</td><td>' + lvl(d.bench) + '</td></tr><tr><td>개발방향 관련성</td><td>' + lvl(d.relG) + '</td></tr><tr><td>권리검토 필요도</td><td>' + lvl(d.rights) + '</td></tr></tbody></table>' +
         '<p class="small muted">세 축은 서로 다른 뜻입니다. 벤치마킹 가치가 높다고 침해 위험이 크다는 뜻이 아니며, 실제 전문가 평가가 아닙니다.</p>' +
         '<h3>가상 원문</h3><div class="quote">' + esc(d.claim) + '</div><div class="quote">' + esc(d.paragraph) + '</div>' +
+        (d.elements ? '<h3>청구항 구성요소 (대조용 · 가상)</h3><ol class="claim">' + d.elements.map(function (e) { return '<li>' + esc(e[0]) + (e[2] ? ' <span class="small muted">(핵심)</span>' : '') + '</li>'; }).join('') + '</ol><button class="btn small" data-act="nav" data-id="ip">국내 핵심 특허 대조표 보기</button>' : '') +
         '<h3>이 문헌을 근거로 쓴 카드</h3>' + (citing.length ? citing.map(function (c) { return '<div><button class="link" data-act="card" data-id="' + c.id + '">' + esc(c.title) + '</button><div class="small muted">' + esc(c.report) + '</div></div>'; }).join('') : '<p class="small muted">없음</p>');
     } else {
       const c = state.cards.find(function (x) { return x.id === drawer.id; });
@@ -1520,7 +2145,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       h += '<div class="sec"><div class="sec-title">카드 근거 문헌 (보고서 작성 당시 인용)</div><div class="row">' + c.evidence.map(docChip).join('') + '</div></div>' +
         '<div class="sec"><div class="sec-title">원본 보고서 위치</div>' + esc(c.report) + '</div>' +
         '<div class="sec"><div class="sec-title">재검토 조건</div>' + esc(c.recheck) + '</div>' +
-        '<div class="sec"><div class="sec-title">연결 개발과제</div>' + c.tasks.map(function (t) { return esc(task(t).title); }).join(', ') + '</div>';
+        '<div class="sec"><div class="sec-title">연결 개발과제</div>' + c.tasks.map(function (t) { return esc(task(t).title); }).join(', ') + '</div>' +
+        (c.link === 'ip' ? '<div class="row" style="margin-top:12px"><button class="btn small primary" data-act="nav" data-id="ip">신규 IP 창출에서 개선안 보기</button></div>' : '');
     }
     return h + '</aside>';
   }
@@ -1530,7 +2156,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     if (!state.guideOpen) return '';
     const g = GUIDE[state.guideStep];
     return '<section class="guide" aria-label="시연 가이드"><div class="row"><span class="steps">시연 가이드 ' + (state.guideStep + 1) + ' / ' + GUIDE.length + '</span><span class="spacer"></span><button class="btn small" data-act="guide-close" aria-label="가이드 닫기">✕</button></div>' +
-      '<div class="pips" aria-hidden="true">' + GUIDE.map(function (_, i) { return '<i' + (i <= state.guideStep ? ' class="on"' : '') + '></i>'; }).join('') + '</div><h3>' + esc(g.t) + '</h3><p>' + esc(g.b) + '</p><div class="row"><button class="btn small" data-act="guide-prev"' + (state.guideStep === 0 ? ' disabled' : '') + '>이전</button>' +
+      '<div class="pips" aria-hidden="true">' + GUIDE.map(function (_, i) { return '<i' + (i <= state.guideStep ? ' class="on"' : '') + '></i>'; }).join('') + '</div><h3>' + esc(g.t) + '</h3><p>' + esc(g.b()) + '</p><div class="row"><button class="btn small" data-act="guide-prev"' + (state.guideStep === 0 ? ' disabled' : '') + '>이전</button>' +
       '<button class="btn small primary" data-act="guide-go">이 단계 화면 열기</button><button class="btn small" data-act="guide-next"' + (state.guideStep === GUIDE.length - 1 ? ' disabled' : '') + '>다음</button></div></section>';
   }
 
@@ -1541,6 +2167,8 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     tasks: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/>',
     updates: '<path d="M6 16v-5a6 6 0 0 1 12 0v5l2 2H4z"/><path d="M10 20a2 2 0 0 0 4 0"/>',
     saved: '<path d="M6 3h12v18l-6-4-6 4z"/>',
+    report: '<path d="M4 20V11M10 20V5M16 20v-7M21 20H3"/>',
+    ip: '<path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9V16h7v-2.1A6 6 0 0 0 12 3z"/>',
     workbench: '<rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/>'
   };
   function icon(k) { return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[k] + '</svg>'; }
@@ -1552,7 +2180,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
     const bDocs = F.docsInBaseline(state);
     const pendingReq = state.requests.filter(function (r) { return r.status !== '답변 공개'; }).length;
     const views = VIEWS.slice();
-    const top = '<header class="top"><div class="top-row"><div class="brand"><span class="logo" aria-hidden="true">FDE</span><div>FDE 특허·연구 작업공간<small>' + esc(D.PROJECT.name) + ' · ' + esc(D.PROJECT.group) + '</small></div></div>' +
+    const top = '<header class="top"><div class="top-row"><div class="brand"><span class="logo" aria-hidden="true">FDE</span><div>FDE 특허·연구 작업공간<small>' + esc(D.PROJECT.name) + ' · ' + esc(D.PROJECT.client) + '</small></div></div>' +
       '<span class="baseline-badge" id="baseline-badge" title="모든 수치는 이 기준선에서 계산됩니다">기준선 ' + esc(b.id) + ' · ' + esc(b.approvedAt) + ' 승인 · 문헌 ' + bDocs.length + '건</span>' +
       '<div class="role-switch" role="group" aria-label="시연 역할 전환"><button data-act="role" data-id="researcher" aria-pressed="' + (state.role === 'researcher') + '">연구자</button><button data-act="role" data-id="fde" aria-pressed="' + (state.role === 'fde') + '">컨설턴트(FDE)</button></div>' +
       '<button class="btn small" data-act="guide-open">시연 가이드</button><button class="btn small" data-act="reset">초기화</button></div>' +
@@ -1564,7 +2192,7 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       return '<button data-act="nav" data-id="' + v[0] + '"' + (state.view === v[0] ? ' aria-current="page"' : '') + '>' + icon(v[0]) + '<span class="lbl">' + esc(v[1]) + '</span>' + badge + '</button>';
     }).join('');
     nav += '<div class="fde-only"><div class="nav-label">CONSULTANT</div><button data-act="nav" data-id="workbench"' + (state.view === 'workbench' ? ' aria-current="page"' : '') + '>' + icon('workbench') + '<span class="lbl">컨설턴트 작업대</span>' + (pendingReq ? '<span class="count">' + pendingReq + '</span>' : '') + '</button></div></nav>';
-    const V = { today: viewToday, ask: viewAsk, browse: viewBrowse, tasks: viewTasks, updates: viewUpdates, saved: viewSaved, workbench: viewWorkbench };
+    const V = { today: viewToday, ask: viewAsk, report: viewReport, ip: viewIP, browse: viewBrowse, tasks: viewTasks, updates: viewUpdates, saved: viewSaved, workbench: viewWorkbench };
     const body = (V[state.view] || viewToday)();
     document.getElementById('app').innerHTML = top + '<div class="layout">' + nav + '<main id="main">' + body + '</main></div>';
     document.getElementById('overlay').innerHTML = drawerHtml() + guideHtml();
@@ -1624,7 +2252,9 @@ label.f{display:block;font-size:12.5px;font-weight:600;color:var(--muted);margin
       case 'publish-answer':
         r = F.publishAnswer(state, id); commit(r.ok ? '가상 답변을 공개했습니다. 연구자 화면에 도착 표시가 됩니다.' : r.reason); break;
       case 'review-cand': F.reviewCandidate(state, id); commit(); break;
-      case 'review-all': state.candidates.forEach(function (c) { F.reviewCandidate(state, c.docId); }); commit('후보 6건을 모두 검토 완료로 표시했습니다.'); break;
+      case 'review-all': state.candidates.forEach(function (c) { F.reviewCandidate(state, c.docId); }); commit('후보 ' + state.candidates.length + '건을 모두 검토 완료로 표시했습니다.'); break;
+      case 'publish-risk': r = F.publishRisk(state, id); commit(r.ok ? id + ' 가상 검토 의견을 공개했습니다.' : r.reason); break;
+      case 'advance-ic': r = F.advanceCandidate(state, id); commit(r.ok ? r.candidate.id + ' → ' + r.candidate.status : r.reason); break;
       case 'publish-v2':
         r = F.publishBaseline(state); commit(r.ok ? 'V2 기준선을 공개했습니다. 과제 영향은 “확인 필요”로 표시됩니다.' : r.reason); break;
       case 'advance-impact': r = F.advanceImpact(state, id); commit(r.ok ? r.impact.id + ' → ' + r.impact.status : r.reason); break;
